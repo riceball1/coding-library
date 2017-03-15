@@ -1,0 +1,21 @@
+Data Models for App (MongoDB):
+
+Collections:
+- Users
+- CodeSnippets
+- ** collection based on programming language?
+
+
+Document:
+- User:
+-- id
+-- name (first/last)
+-- email address
+-- collection - code snippets
+
+- CodeSnippet:
+-- language
+-- description
+-- code
+-- tags (keywords?)
+-- id
