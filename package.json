@@ -1,0 +1,26 @@
+{
+  "name": "simple-code",
+  "version": "1.0.0",
+  "description": "A simple coding notebook to store all your programming code snippets",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riceball1/coding-library.git"
+  },
+  "keywords": [
+    "node",
+    "react",
+    "redux",
+    "full-stack"
+  ],
+  "author": "Dana Ng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riceball1/coding-library/issues"
+  },
+  "homepage": "https://github.com/riceball1/coding-library#readme"
+}
