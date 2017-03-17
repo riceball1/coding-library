@@ -18,6 +18,10 @@ app.use('/public', express.static('public'));
 
 // routes
 
+app.get('/', (req, res) => {
+	res.send('./index.html');
+});
+
 app.get('/snippets', (req, res) => {
 	// fetch all snippets
 	res.send('get snippets');
