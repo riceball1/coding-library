@@ -1,4 +1,4 @@
-# coding-library
+# coding-library (alternative name: 'Simple Code' or 'Coding Notes')
 
 <b>Description:</b>
 <br/> A place to store, search, and aggregate all your coding snippets into your own library.

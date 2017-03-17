@@ -11,7 +11,8 @@ Document:
 -- id
 -- name (first/last)
 -- email address
--- collection - code snippets
+-- array of codesnippet ids
+-- password (bcrypt)
 
 - CodeSnippet:
 -- language
@@ -19,3 +20,25 @@ Document:
 -- code
 -- tags (keywords?)
 -- id
+-- user id
+
+API diagram:
+- GET /fetch-all-codes
+- DELETE /delete-code
+- PUT /update-code
+- POST /add-code
+
+React-Routes:
+- Home 
+- User Dashboard
+- Code Snippet
+- Sidebar (main app?)
+
+
+TODOs:
+
+- Set up Webpack
+- Node
+- API
+- mlab - MongoDB
+- React/Redux
