@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const morgan = require('morgan');
-const index = require('./index.html')
 
 const {PORT, DATABASE_URL} = require('./config.js');
 
@@ -19,7 +18,7 @@ app.use('/public', express.static('public'));
 // routes
 
 app.get('/', (req, res) => {
-	res.send(index);
+	res.send('Simple Code');
 });
 
 app.get('/snippets', (req, res) => {
