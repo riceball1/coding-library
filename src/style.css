@@ -1,0 +1,14 @@
+* {
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+
+h1 {
+	color: blue;
+}
+
+div {
+	background-color: lightgray;
+	width: 50%;
+}
