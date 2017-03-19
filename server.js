@@ -3,8 +3,10 @@ const dotenv = require('dotenv');
 dotenv.load();
 
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const expressHandlebars = require('express-handlebars'); // template
 const app = express();
 const morgan = require('morgan');
 
@@ -14,9 +16,9 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
-const morgan = require('morgan');
 mongoose.Promise = global.Promise;
 
+// const index = require('./index.html');
 
 const {PORT, DATABASE_URL} = require('./config.js');
 
@@ -44,6 +46,12 @@ app.use(expressValidator({
 // provides logging
 app.use(morgan('common'));
 
+// View Engine
+app.set('views','./views');
+app.engine('handlebars', expressHandlebars({defaultLayout: 'layout'}));
+app.set('view engine', 'handlebars');
+
+
 app.use('/public', express.static('public'));
 
 // express-session 
@@ -55,14 +63,13 @@ app.use(session({
 }));
 
 // passport.js init
-app.use(passport.initalize());
+app.use(passport.initialize());
 app.use(passport.session());
-
 
 // routes
 
 app.get('/', (req, res) => {
-	res.send('Simple Code');
+	res.render('index');
 });
 
 app.get('/snippets', (req, res) => {

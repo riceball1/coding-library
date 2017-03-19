@@ -42,3 +42,7 @@ TODOs:
 - API
 - mlab - MongoDB
 - React/Redux
+
+
+Resources:
+- Server Rendering with React and Node Express: (https://www.smashingmagazine.com/2016/03/server-side-rendering-react-node-express/)
