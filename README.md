@@ -28,3 +28,10 @@ Export Code Snippets into File:
 <br/>
 Add Code Snippets:
 <img src="http://i.imgur.com/VtLqxJd.png" width="600"/>
+
+
+<br/>
+<b>Mockups:</b>
+<br/>
+<img src="http://i.imgur.com/DRqaad7.png" />
+<img src="http://i.imgur.com/pO4IVeX.png"/>
