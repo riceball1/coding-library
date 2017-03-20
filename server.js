@@ -172,7 +172,7 @@ app.get('/users', (req, res) => {
 		})
 		.catch(err => {
 			console.error(err);
-			res.status(500).json({message: "Issue finding users"});
+			res.sendStatus(500).json({message: "Issue finding users"});
 		});
 
 });
@@ -187,7 +187,7 @@ app.get('/snippets', (req, res) => {
 		})
 		.catch(err => {
 			console.error(err);
-			res.status(500).json({message: "Issue finding snippets"});
+			res.sendStatus(500).json({message: "Issue finding snippets"});
 		});
 });
 
@@ -200,34 +200,37 @@ app.get('/snippets/:snippetid', ensureAuthenticated, (req, res) => {
 		})
 		.catch(err => {
 			console.error(err);
-			res.status(500).json({message: "Issue finding snippet"});
+			res.sendStatus(500).json({message: "Issue finding snippet"});
 		});
 });
 
 app.post('/add-snippet', (req, res) => {
+	const {title, description, code} = req.body;
+	console.log(req.user);
+	const newSnippet = new Snippet({
+			title,
+			description,
+			code,
+			userId: "58cf78ddb1c6af803dae26cc",
+			userName: "janedoe"
+	});
 	// add new snippet
-	Snippet
-		.create({
-			title: req.body.title,
-			description: req.body.description,
-			code: req.body.code,
-			userId: req.user._id,
-			userName: req.user._id
-		})
-		.then(snippets => res.status(201).json(snippets))
-		.catch(err => {
+	newSnippet.save( (err, snippet) => {
+		if(err) {
 			console.error(err);
-			res.status(500).json({message: "Error adding snippet"});
-		});
+			res.sendStatus(500).json({message: "Error adding snippet"});
+		}
+		console.log("New Snippet Added!");
+		res.sendStatus(201).json({snippet});
+	});
 });
 
-app.put('/update-snippet/:snippetid', ensureAuthenticated, (req, res) => {
-	// ensure that id in request path and request body match
-	if(!(req.params.snippetid && req.body.snippetid && req.params.snippetid === req.body.snippetid)) {
-		console.error(error);
-		res.status(400).json({message: `Request path id (${req.params.id}) and request body id ` +
-      `(${req.body.id}) must match`});
-	}
+app.put('/update-snippet/:snippetid', (req, res) => {
+	// ensure that snippetid in request path and request body match
+	// if(!(req.params.snippetid && req.body.snippetid && req.params.snippetid === req.body.snippetid)) {
+	// 	res.sendStatus(400).json({message: `Request path id (${req.params.id}) and request body id ` +
+ //      `(${req.body.id}) must match`});
+	// }
 
 	// updatable fields
 	const toUpdate = {};
@@ -241,22 +244,25 @@ app.put('/update-snippet/:snippetid', ensureAuthenticated, (req, res) => {
 	Snippet
 		.findByIdAndUpdate(req.params.snippetid, {$set: toUpdate})
 		.exec()
-		.then(snippet => res.status(201).json(snippet))
+		.then(snippet => res.sendStatus(201).json(snippet))
+		// should send back snippet -- but only showing "created"
 		.catch(err => {
 			console.error(err);
-			return res.status(500).json({message: "Issue updating snippet"});
+			res.sendStatus(500).json({message: "Issue updating snippet"});
 		});
 
 });
 
+// not working at the moment
 app.delete('/delete-snippet/:snippetid', (req, res) => {
+	const snippetid = mongoose.Types.ObjectId(req.params.snippetid);
 	Snippet
-		.findByIdAndRemove(req.params.id)
+		.findByIdAndRemove(snippetid)
 		.exec()
-		.then(snippet => res.status(204).end())
+		.then(snippet => res.sendStatus(204).end())
 		.catch(err=> {
 			console.error(err);
-			return res.status(500).json({message: "Issue with deleting snippet"});
+			res.sendStatus(500).json({message: "Issue with deleting snippet"});
 		})
 	
 });
@@ -264,7 +270,7 @@ app.delete('/delete-snippet/:snippetid', (req, res) => {
 
 // add catch all route for pages that don't have routes
 app.use('*', function(req, res) {
-  return res.status(404).json({message: 'Not Found'});
+  return res.sendStatus(404).json({message: 'Not Found'});
 });
 
 // functions to ensure authenticated
@@ -276,7 +282,7 @@ function ensureAuthenticated (req, res, next) {
     // // req.flash('error_msg', 'You are not logged in');
     // // res.render('home', {layout: "main"});
     // res.redirect('/login');
-    return res.status(500).json({message: 'Issue authenticating'});
+    return res.sendStatus(500).json({message: 'Issue authenticating'});
   }
 }
 
