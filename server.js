@@ -227,10 +227,10 @@ app.post('/add-snippet', (req, res) => {
 
 app.put('/update-snippet/:snippetid', (req, res) => {
 	// ensure that snippetid in request path and request body match
-	// if(!(req.params.snippetid && req.body.snippetid && req.params.snippetid === req.body.snippetid)) {
-	// 	res.sendStatus(400).json({message: `Request path id (${req.params.id}) and request body id ` +
- //      `(${req.body.id}) must match`});
-	// }
+	if(!(req.params.snippetid && req.body.id && req.params.snippetid === req.body.id)) {
+		return res.json({message: `Request path id (${req.params.snippetid}) and request body id ` +
+      `(${req.body.id}) must match`});
+	}
 
 	// updatable fields
 	const toUpdate = {};
@@ -241,14 +241,15 @@ app.put('/update-snippet/:snippetid', (req, res) => {
 		}
 	});
 
+	//{$set: toUpdate}
 	Snippet
 		.findByIdAndUpdate(req.params.snippetid, {$set: toUpdate})
 		.exec()
-		.then(snippet => res.sendStatus(201).json(snippet))
+		.then(snippet => res.json(snippet))
 		// should send back snippet -- but only showing "created"
 		.catch(err => {
 			console.error(err);
-			res.sendStatus(500).json({message: "Issue updating snippet"});
+			return res.sendStatus(500).json({message: "Issue updating snippet"});
 		});
 
 });
