@@ -30,22 +30,22 @@ const {PORT, DATABASE_URL} = require('./config.js');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 // // express validator - immediately after bodyParser
-// app.use(expressValidator({
-// 	errorFormater: (param, msg, value) => {
-//       var namespace = param.split('.')
-//       , root    = namespace.shift()
-//       , formParam = root;
+app.use(expressValidator({
+	errorFormater: (param, msg, value) => {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
 
-//     while(namespace.length) {
-//       formParam += '[' + namespace.shift() + ']';
-//     }
-//     return {
-//       param : formParam,
-//       msg   : msg,
-//       value : value
-//     };
-//   }
-// }));
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
 
 // provides logging
 app.use(morgan('common'));
@@ -140,9 +140,8 @@ app.post('/signup', (req, res) => {
 		const errors = req.validationErrors();
 
 	if(errors) {
-	  res.render('register', {
-	    errors: errors
-	  });
+	  console.error(errors);
+	  res.send({message: `There was an error: ${errors}`});
 	} else {
 	  const newUser = new User({
 	    name: name,
@@ -164,7 +163,7 @@ app.post('/signup', (req, res) => {
 });
 
 
-app.get('/users', ensureAuthenticated, (req, res) => {
+app.get('/users', (req, res) => {
 	User
 		.find()
 		.exec()
@@ -179,7 +178,7 @@ app.get('/users', ensureAuthenticated, (req, res) => {
 });
 
 
-app.get('/snippets', ensureAuthenticated, (req, res) => {
+app.get('/snippets', (req, res) => {
 	Snippet
 		.find()
 		.exec()
@@ -205,7 +204,7 @@ app.get('/snippets/:snippetid', ensureAuthenticated, (req, res) => {
 		});
 });
 
-app.post('/add-snippet', ensureAuthenticated, (req, res) => {
+app.post('/add-snippet', (req, res) => {
 	// add new snippet
 	Snippet
 		.create({
@@ -250,7 +249,7 @@ app.put('/update-snippet/:snippetid', ensureAuthenticated, (req, res) => {
 
 });
 
-app.delete('/delete-snippet/:snippetid', ensureAuthenticated, (req, res) => {
+app.delete('/delete-snippet/:snippetid', (req, res) => {
 	Snippet
 		.findByIdAndRemove(req.params.id)
 		.exec()
