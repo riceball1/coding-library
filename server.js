@@ -255,9 +255,8 @@ app.put('/update-snippet/:snippetid', (req, res) => {
 
 // not working at the moment
 app.delete('/delete-snippet/:snippetid', (req, res) => {
-	const snippetid = mongoose.Types.ObjectId(req.params.snippetid);
 	Snippet
-		.findByIdAndRemove(snippetid)
+		.findByIdAndRemove(req.params.snippetid)
 		.exec()
 		.then(snippet => res.sendStatus(204).end())
 		.catch(err=> {
