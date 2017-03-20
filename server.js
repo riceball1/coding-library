@@ -29,23 +29,23 @@ const {PORT, DATABASE_URL} = require('./config.js');
 // parse json and params in urls
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-// express validator - immediately after bodyParser
-app.use(expressValidator({
-	errorFormater: (param, msg, value) => {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
+// // express validator - immediately after bodyParser
+// app.use(expressValidator({
+// 	errorFormater: (param, msg, value) => {
+//       var namespace = param.split('.')
+//       , root    = namespace.shift()
+//       , formParam = root;
 
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']';
-    }
-    return {
-      param : formParam,
-      msg   : msg,
-      value : value
-    };
-  }
-}));
+//     while(namespace.length) {
+//       formParam += '[' + namespace.shift() + ']';
+//     }
+//     return {
+//       param : formParam,
+//       msg   : msg,
+//       value : value
+//     };
+//   }
+// }));
 
 // provides logging
 app.use(morgan('common'));
