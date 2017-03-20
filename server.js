@@ -5,6 +5,7 @@ dotenv.load();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const expressHandlebars = require('express-handlebars'); // template
 const app = express();
@@ -162,24 +163,103 @@ app.post('/signup', (req, res) => {
 
 });
 
-app.get('/snippets', (req, res) => {
-	// fetch all snippets
-	res.send('get snippets');
+
+app.get('/users', ensureAuthenticated, (req, res) => {
+	User
+		.find()
+		.exec()
+		.then(users => {
+			res.json(users);
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({message: "Issue finding users"});
+		});
+
 });
 
-app.post('/add-snippet', (req, res) => {
+
+app.get('/snippets', ensureAuthenticated, (req, res) => {
+	Snippet
+		.find()
+		.exec()
+		.then(snippets => {
+			res.json(snippets);
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({message: "Issue finding snippets"});
+		});
+});
+
+app.get('/snippets/:snippetid', ensureAuthenticated, (req, res) => {
+	Snippet
+		.findById(req.params.id)
+		.exec()
+		.then(snippet => {
+			res.json(snippet);
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({message: "Issue finding snippet"});
+		});
+});
+
+app.post('/add-snippet', ensureAuthenticated, (req, res) => {
 	// add new snippet
-	res.send('add snippet');
+	Snippet
+		.create({
+			title: req.body.title,
+			description: req.body.description,
+			code: req.body.code,
+			userId: req.user._id,
+			userName: req.user._id
+		})
+		.then(snippets => res.status(201).json(snippets))
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({message: "Error adding snippet"});
+		});
 });
 
-app.put('/update-snippet/:snippetid', (req, res) => {
-	// update one snippet
-	res.send('update a snippet');
+app.put('/update-snippet/:snippetid', ensureAuthenticated, (req, res) => {
+	// ensure that id in request path and request body match
+	if(!(req.params.snippetid && req.body.snippetid && req.params.snippetid === req.body.snippetid)) {
+		console.error(error);
+		res.status(400).json({message: `Request path id (${req.params.id}) and request body id ` +
+      `(${req.body.id}) must match`});
+	}
+
+	// updatable fields
+	const toUpdate = {};
+	const updatableFields = ['title', 'code'];
+	updatableFields.forEach(field => {
+		if(field in req.body) {
+			toUpdate[field] = req.body[field];
+		}
+	});
+
+	Snippet
+		.findByIdAndUpdate(req.params.snippetid, {$set: toUpdate})
+		.exec()
+		.then(snippet => res.status(201).json(snippet))
+		.catch(err => {
+			console.error(err);
+			return res.status(500).json({message: "Issue updating snippet"});
+		});
+
 });
 
-app.delete('/delete-snippet/:snippetid', (req, res) => {
-	// delete one snippet
-	res.send('delete a snippet');
+app.delete('/delete-snippet/:snippetid', ensureAuthenticated, (req, res) => {
+	Snippet
+		.findByIdAndRemove(req.params.id)
+		.exec()
+		.then(snippet => res.status(204).end())
+		.catch(err=> {
+			console.error(err);
+			return res.status(500).json({message: "Issue with deleting snippet"});
+		})
+	
 });
 
 
@@ -190,7 +270,7 @@ app.use('*', function(req, res) {
 
 // functions to ensure authenticated
 
-const ensureAuthenticated = (req, res, next) => {
+function ensureAuthenticated (req, res, next) {
 	if(req.isAuthenticated()) {
     return next();
   } else {
@@ -200,22 +280,6 @@ const ensureAuthenticated = (req, res, next) => {
     return res.status(500).json({message: 'Issue authenticating'});
   }
 }
-
-// // create a new user manually
-
-// const newUser = new User({
-//   name: 'Jane Doe',
-//   email: 'janedoe@gmail.com',
-//   username: 'janedoe',
-//   password: 'test123'
-// });
-
-// User.createUser(newUser, (err, user) => {
-//   if(err) {
-//     console.log("There was an error creating a user");
-//   }
-//   console.log("User created!");
-// });
 
 // set up server for listening
 // closeServer needs access to a server object, but that only
