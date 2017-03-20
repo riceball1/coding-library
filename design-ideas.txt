@@ -51,8 +51,17 @@ Resources:
 // Create New User
 
 {
-	name: 'Jane Doe',
-	email: 'janedoe@gmail.com',
-	username: 'janedoe',
-	password: 'test123'
+	"name": "Jane Doe",
+	"email": "janedoe@gmail.com",
+	"username": "janedoe",
+	"password": "test123",
+	"password2": "test123"
+}
+
+// Create a New Snippet
+
+{
+	"title": "Example Title",
+	"description": "Example Description",
+	"code": "//Example <code></code>"
 }
