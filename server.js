@@ -191,16 +191,16 @@ app.get('/snippets', (req, res) => {
 		});
 });
 
-app.get('/snippets/:snippetid', ensureAuthenticated, (req, res) => {
+app.get('/snippets/:snippetid', (req, res) => {
 	Snippet
-		.findById(req.params.id)
+		.findById(req.params.snippetid)
 		.exec()
 		.then(snippet => {
 			res.json(snippet);
 		})
 		.catch(err => {
 			console.error(err);
-			res.sendStatus(500).json({message: "Issue finding snippet"});
+			return res.sendStatus(500).json({message: "Issue finding snippet"});
 		});
 });
 
