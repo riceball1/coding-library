@@ -46,3 +46,4 @@ TODOs:
 
 Resources:
 - Server Rendering with React and Node Express: (https://www.smashingmagazine.com/2016/03/server-side-rendering-react-node-express/)
+- Setting up a Reactjs Environment: https://www.codementor.io/tamizhvendan/beginner-guide-setup-reactjs-environment-npm-babel-6-webpack-du107r9zr

@@ -30,4 +30,4 @@ const snippetSchema = mongoose.Schema({
 
 // I need to take the "code" and syntax highlight it? do I do this in the server-side or the client side with Prims.js?
 
-const Snippet = modules.exports = mongoose.model('Snippet', snippetSchema);
+const Snippet = module.exports = mongoose.model('Snippet', snippetSchema);

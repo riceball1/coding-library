@@ -18,8 +18,11 @@ const mongo = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-// const index = require('./index.html');
+// models
+const User = require('./models/user');
+const Snippet = require('./models/snippet');
 
+// config 
 const {PORT, DATABASE_URL} = require('./config.js');
 
 // parse json and params in urls
@@ -51,7 +54,7 @@ app.set('views','./views');
 app.engine('handlebars', expressHandlebars({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
 
-
+// set static folder for assets
 app.use('/public', express.static('public'));
 
 // express-session 
@@ -103,8 +106,6 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-
-
 // routes
 
 app.get('/', (req, res) => {
@@ -113,13 +114,14 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
 	// render login page
+	console.log("login");
 });
 
-app.post('/login', passport.authenticate('local'), {
-	// redirect for failure and success
+app.post('/login', passport.authenticate('local'), (req, res) => {
+	res.json({message: "successfully logged in"});
 });
 
-app.get('/signup', (req, res) => {
+app.post('/signup', (req, res) => {
 	const name = req.body.name;
 	const email = req.body.email;
 	const username = req.body.username;
@@ -150,15 +152,12 @@ app.get('/signup', (req, res) => {
 
 	  User.createUser(newUser, (err, user) => {
 	    if(err) {
-	      res.render('register', {error: 'There was an error creating user'} );
+	      res.send(500).json({message: "Issue creating user"});
 	    }
 	    console.log("User created!");
 	  });
 	 
-	 res.redirect('/login');
-	  // res.render('login', {
-	  //   success_msg: "You are registered and may now login."
-	  // });
+	 	res.send("User created");
 	}
 
 });
@@ -191,20 +190,80 @@ app.use('*', function(req, res) {
 
 // functions to ensure authenticated
 
-const ensureauthenticated = (req, res, next) => {
+const ensureAuthenticated = (req, res, next) => {
 	if(req.isAuthenticated()) {
     return next();
   } else {
-    // req.flash('error_msg', 'You are not logged in');
-    // res.render('home', {layout: "main"});
-    res.redirect('/login');
+    // // req.flash('error_msg', 'You are not logged in');
+    // // res.render('home', {layout: "main"});
+    // res.redirect('/login');
+    return res.status(500).json({message: 'Issue authenticating'});
   }
 }
 
+// // create a new user manually
+
+// const newUser = new User({
+//   name: 'Jane Doe',
+//   email: 'janedoe@gmail.com',
+//   username: 'janedoe',
+//   password: 'test123'
+// });
+
+// User.createUser(newUser, (err, user) => {
+//   if(err) {
+//     console.log("There was an error creating a user");
+//   }
+//   console.log("User created!");
+// });
+
 // set up server for listening
+// closeServer needs access to a server object, but that only
+// gets created when `runServer` runs, so we declare `server` here
+// and then assign a value to it in run
+let server;
 
-app.listen(PORT, () => {
-	console.log(`Listening on port ${PORT}`);
-});
+// this function connects to our database, then starts the server
+function runServer(databaseUrl=DATABASE_URL, port=PORT) {
 
+  return new Promise((resolve, reject) => {
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+        return reject(err);
+      }
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      })
+      .on('error', err => {
+        mongoose.disconnect();
+        reject(err);
+      });
+    });
+  });
+}
+
+// this function closes the server, and returns a promise. we'll
+// use it in our integration tests later.
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+     return new Promise((resolve, reject) => {
+       console.log('Closing server');
+       server.close(err => {
+           if (err) {
+               return reject(err);
+           }
+           resolve();
+       });
+     });
+  });
+}
+
+// if server.js is called directly (aka, with `node server.js`), this block
+// runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
+if (require.main === module) {
+  runServer().catch(err => console.error(err));
+};
+
+module.exports = {app, runServer, closeServer};
 
