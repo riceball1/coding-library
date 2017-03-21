@@ -4,7 +4,16 @@
 const jwt = require('jsonwebtoken');
 
 function getCleanUser(user) {
-	// stuff stuff
+	if(!user) return {};
+
+	const u = user.toJSON();
+	return {
+		// kept only info used for user 
+		_id: u._id,
+		name: u.name,
+		username: u.username,
+		email: u.email
+	}
 }
 
 

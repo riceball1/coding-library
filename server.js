@@ -128,22 +128,39 @@ app.get('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
 	// find user
-	// compare passwords
-	// if everything aok then return token
-	const token = utils.generateToken(user);
-	user = utils.getCleanUser(user);
-	res.json({
-		user: user,
-		token: token
-	});
+	User
+		.findOne({username: req.body.username})
+		.exec((err, user) => {
+			if (err) throw err;
 
-	// res.json({message: "successfully logged in"});
+			if (!user) {
+				return res.sendStatus(404).json({error: true, message: 'Username or Password invalid'});
+			}
+			// check password
+			bcrypt.compare(req.body.password, user.password, (err, valid) => {
+				if (!valid) {
+					return res.sendStatus(404).json({
+						error: true,
+						message: 'Username or password incorrect'
+					});
+				}
+			
+			// if everything aok then return token
+			const token = utils.generateToken(user);
+			user = utils.getCleanUser(user);
+			res.json({
+				user: user,
+				token: token
+			});
+		});
+	}) // end of execu
 });
+	
 
+/** 
+  signup hash password, create new user; generate token and get clean user; 
 
-
-
-
+**/
 
 app.post('/signup', (req, res) => {
 	const name = req.body.name;
@@ -173,14 +190,22 @@ app.post('/signup', (req, res) => {
 	    password: password
 	  });
 
+	  // createUser handles hashing password;
 	  User.createUser(newUser, (err, user) => {
 	    if(err) {
 	      res.send(500).json({message: "Issue creating user"});
 	    }
 	    console.log("User created!");
+	    //generate token and get clean user
+	    const token = utils.generateToken(newUser);
+	    newUser = utils.getCleanUser(newUser);
+
+	    res.json({
+	    	user: user,
+	    	token: token
+	    })
+
 	  });
-	 
-	 	res.send("User created");
 	}
 
 });
