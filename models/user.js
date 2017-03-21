@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+
 const userSchema = mongoose.Schema({
   username: {
     type: String,
@@ -37,6 +38,8 @@ const userSchema = mongoose.Schema({
 const User = module.exports = mongoose.model('User', userSchema);
 
 /* export functions */
+
+
 module.exports.createUser = function(newUser, callback){
 	bcrypt.genSalt(10, function(err, salt) {
 	    bcrypt.hash(newUser.password, salt, function(err, hash) {
@@ -49,10 +52,6 @@ module.exports.createUser = function(newUser, callback){
 module.exports.getUserByUsername = function(username, callback){
 	let query = {username: username.toLowerCase()};
 	User.findOne(query, callback);
-}
-
-module.exports.getUserById = function(id, callback){
-	User.findById(id, callback);
 }
 
 module.exports.comparePassword = function(candidatePassword, hash, callback){

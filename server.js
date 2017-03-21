@@ -118,9 +118,17 @@ app.get('/login', (req, res) => {
 	console.log("login");
 });
 
-app.post('/login', passport.authenticate('local'), (req, res) => {
+
+// Use JWT to authenticate
+
+app.post('/login', (req, res) => {
 	res.json({message: "successfully logged in"});
 });
+
+
+
+
+
 
 app.post('/signup', (req, res) => {
 	const name = req.body.name;
@@ -273,18 +281,7 @@ app.use('*', function(req, res) {
   return res.sendStatus(404).json({message: 'Not Found'});
 });
 
-// functions to ensure authenticated
 
-function ensureAuthenticated (req, res, next) {
-	if(req.isAuthenticated()) {
-    return next();
-  } else {
-    // // req.flash('error_msg', 'You are not logged in');
-    // // res.render('home', {layout: "main"});
-    // res.redirect('/login');
-    return res.sendStatus(500).json({message: 'Issue authenticating'});
-  }
-}
 
 // set up server for listening
 // closeServer needs access to a server object, but that only
