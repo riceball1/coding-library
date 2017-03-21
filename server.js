@@ -12,12 +12,17 @@ const app = express();
 const morgan = require('morgan');
 
 // database & login
-const session = require('express-session');
+// const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+
+// get stuff for jwt
+const utils = require('./utils/index');
+
+
 
 // models
 const User = require('./models/user');
@@ -122,7 +127,17 @@ app.get('/login', (req, res) => {
 // Use JWT to authenticate
 
 app.post('/login', (req, res) => {
-	res.json({message: "successfully logged in"});
+	// find user
+	// compare passwords
+	// if everything aok then return token
+	const token = utils.generateToken(user);
+	user = utils.getCleanUser(user);
+	res.json({
+		user: user,
+		token: token
+	});
+
+	// res.json({message: "successfully logged in"});
 });
 
 

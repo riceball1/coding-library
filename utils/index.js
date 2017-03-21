@@ -3,6 +3,11 @@
 // or use passportJWT = require('passport-jwt');
 const jwt = require('jsonwebtoken');
 
+function getCleanUser(user) {
+	// stuff stuff
+}
+
+
 function generateToken(user) {
 	//1. Don't use password and other sentitive fields
 	//2. Use fields that are useful in other parts of the app
@@ -21,7 +26,8 @@ return token = jwt.sign(userInfo, process.env.JWT_SECRET, {
 });
 
 module.exports = {
-	generateToken: generateToken
+	generateToken: generateToken,
+	getCleanUser: getCleanUser
 }
 
 /* 
