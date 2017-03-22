@@ -112,6 +112,30 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+// middleware to check if JWT token exists and verifies if it does exist
+app.use((req,res,next) => {
+	// check header or url parameters for token
+	const token = req.headers['authorization'];
+	if(!token) return next(); // if no token continue
+
+	token = token.replace('Bearer ', '');
+
+	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+		if (err) {
+			return res.sendStatus(401).json({
+				success: false,
+				message: 'Please register Log in using a valid email to submit posts'
+			});
+		} else {
+			req.user = user; // set so other routes can use it
+			next();
+		}
+	})
+
+
+});
+
+
 // routes
 
 app.get('/', (req, res) => {
@@ -209,6 +233,40 @@ app.post('/signup', (req, res) => {
 	}
 
 });
+
+// Get current user from token
+app.get('/me/from/token', (req, res, next) => {
+
+	// check header or url parameters or post parameters for token 
+	const token = req.body.token || req.query.token;
+	if(!token) {
+		return res.sendStatus(401).json({message: 'Must pass token'});
+	}
+
+	// check token that was passed by decoding token using secret
+	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+		if(err) throw err;
+
+		// return user using the id from w/in JWTToken
+		User.findById({
+			'_id': user._id
+		}, (err, user) => {
+			if(err) throw err;
+			user = utils.getCleanUser(user);
+
+			// either create new token or pass the old token back
+
+			res.json({
+				user: user,
+				token: token
+			});
+		});
+	});
+});
+
+
+
+
 
 
 app.get('/users', (req, res) => {
