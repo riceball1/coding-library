@@ -12,8 +12,6 @@ const app = express();
 const morgan = require('morgan');
 
 // database & login
-// const session = require('express-session');
-const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
@@ -21,6 +19,7 @@ mongoose.Promise = global.Promise;
 
 // get stuff for jwt
 const utils = require('./utils/index');
+const jwt = require('jsonwebtoken');
 
 
 
@@ -56,90 +55,17 @@ app.use(expressValidator({
 app.use(morgan('common'));
 
 // View Engine
-app.set('views','./views');
-app.engine('handlebars', expressHandlebars({defaultLayout: 'layout'}));
-app.set('view engine', 'handlebars');
+// app.set('views','./views');
+// app.engine('handlebars', expressHandlebars({defaultLayout: 'layout'}));
+// app.set('view engine', 'handlebars');
 
 // set static folder for assets
 app.use('/public', express.static('public'));
 
-// express-session 
-app.use(session({
-  secret: 'keyboard cat',
-  resave: true, // check what this is for?
-  saveUninitialized: true,
-  cookie: { secure: true }
-}));
-
-// passport.js init
-app.use(passport.initialize());
-app.use(passport.session());
-
-// setup passport local strategy
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-   User.getUserByUsername(username, function(err, user){
-   	if(err) {
-      return done(null, false);
-    }
-
-   	if(!user){
-   		return done(null, false, {message: 'No user found.' });
-      }
-  
-   	User.comparePassword(password, user.password, function(err, isMatch){
-   		 if (err) {
-        return done(err);
-      }
-                
-     		if(isMatch){
-          return done(null, user);
-        } else {
-     			return done(null, false, {message: 'Oops! Wrong password.'});
-        }
-   	});
-    });
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-passport.deserializeUser(function(id, done) {
-  User.getUserById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-// middleware to check if JWT token exists and verifies if it does exist
-app.use((req,res,next) => {
-	// check header or url parameters for token
-	const token = req.headers['authorization'];
-	if(!token) return next(); // if no token continue
-
-	token = token.replace('Bearer ', '');
-
-	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-		if (err) {
-			return res.sendStatus(401).json({
-				success: false,
-				message: 'Please register Log in using a valid email to submit posts'
-			});
-		} else {
-			req.user = user; // set so other routes can use it
-			next();
-		}
-	})
-
-
-});
-
-
 // routes
 
 app.get('/', (req, res) => {
-	res.render('index');
+	res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
 app.get('/login', (req, res) => {
@@ -170,6 +96,7 @@ app.post('/login', (req, res) => {
 				}
 			
 			// if everything aok then return token
+			// token is generated again and resent back
 			const token = utils.generateToken(user);
 			user = utils.getCleanUser(user);
 			res.json({
@@ -177,7 +104,7 @@ app.post('/login', (req, res) => {
 				token: token
 			});
 		});
-	}) // end of execu
+	}) // end of exec
 });
 	
 
@@ -207,7 +134,7 @@ app.post('/signup', (req, res) => {
 	  console.error(errors);
 	  res.send({message: `There was an error: ${errors}`});
 	} else {
-	  const newUser = new User({
+	  let newUser = new User({
 	    name: name,
 	    email: email,
 	    username: username,
@@ -225,7 +152,7 @@ app.post('/signup', (req, res) => {
 	    newUser = utils.getCleanUser(newUser);
 
 	    res.json({
-	    	user: user,
+	    	user: newUser,
 	    	token: token
 	    })
 
@@ -235,6 +162,7 @@ app.post('/signup', (req, res) => {
 });
 
 // Get current user from token
+// used for refresh or browser crashing
 app.get('/me/from/token', (req, res, next) => {
 
 	// check header or url parameters or post parameters for token 
@@ -266,7 +194,27 @@ app.get('/me/from/token', (req, res, next) => {
 
 
 
+// middleware to check if JWT token exists and verifies if it does exist
+app.use((req,res,next) => {
+	console.log('hello');
+	// check header or url parameters for token
+	let token = req.headers['authorization'];
+	if(!token) return res.send('not authorized'); // if no token continue
+	console.log('hello2');
+	token = token.replace('Bearer ', '');
 
+	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+		if (err) {
+			return res.sendStatus(401).json({
+				success: false,
+				message: 'Please register Log in using a valid email to submit posts'
+			});
+		} else {
+			req.user = user; // set so other routes can use it
+			next();
+		}
+	})
+});
 
 
 app.get('/users', (req, res) => {
@@ -280,7 +228,6 @@ app.get('/users', (req, res) => {
 			console.error(err);
 			res.sendStatus(500).json({message: "Issue finding users"});
 		});
-
 });
 
 

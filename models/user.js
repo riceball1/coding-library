@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema({
     required: true
   },
   email: {
+    // TODO: make unique - FIX!
     type: String,
     lowercase: true,
     required: true

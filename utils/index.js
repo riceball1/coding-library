@@ -16,23 +16,20 @@ function getCleanUser(user) {
 	}
 }
 
-
 function generateToken(user) {
 	//1. Don't use password and other sentitive fields
 	//2. Use fields that are useful in other parts of the app
 
-	var userInfo = {
+	const userInfo = {
 		name: user.name,
 		username: user.username,
-		admin: user.admin,
-		_id: user._id.toString(),
-		image: user.image
+		_id: user._id.toString()
 	};
-}
 
-return token = jwt.sign(userInfo, process.env.JWT_SECRET, {
-	expiresIn: 60 * 60 * 24 // expires in 24 hours
-});
+	return token = jwt.sign(userInfo, process.env.JWT_SECRET, {
+		expiresIn: 60 * 60 * 24 // expires in 24 hours
+	});
+}
 
 module.exports = {
 	generateToken: generateToken,
