@@ -1,44 +1,23 @@
-/** authenticate middleware 
+// middleware to check if JWT token exists and verifies if it does exist
 
-tutorial code: https://www.youtube.com/watch?v=mtkQEwp0mIA
+function authenticateMiddleware(req,res,next){
+	// check header or url parameters for token
+	let token = req.headers['authorization'];
+	if(!token) return res.send('not authorized'); // if no token continue
+	token = token.replace('Bearer ', '');
 
-**/
-
-export default (req, res, next) => {
-	const authorizationHeader = req.headers['authorization'];
-	let token;
-
-
-	if(authorizationHeader) {
-		// if there is a token
-		// parase token if there is 'bearer' in the token
-		token = authorizationHeader.split(' ')[1];
-	}
-
-	if (token) {
-		jwt.verify(token, config.jwtSecret, (err, decoded) => {
-			// if error
-			if(err) {
-				res.sendStatus(401).json({error: 'Failed to authenticate'});
-			} else {
-				/* 
-				new User({id: decoded.id}).fetch().then(user => {
-					if(!user) {
-						//status error
-					}
-
-					req.currentUser = user;
-					next();
-				});
-
-				*/
-			}
-		})
-	} else {
-		// send error if there is no token
-		res.sendStatus(403).json({error: 'No token provided'});
-	}
-
-
-
+	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+		if (err) {
+			return res.sendStatus(401).json({
+				success: false,
+				message: 'Please register Log in using a valid email to submit posts'
+			});
+		} else {
+			req.user = user; // set so other routes can use it
+			next();
+		}
+	})
 }
+
+
+export default authenticateMiddleware;
