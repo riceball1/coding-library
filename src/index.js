@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-require('./style.css');
+require('./style.scss');
 
 class App extends React.Component {
 	render() {
