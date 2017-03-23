@@ -1,35 +1,30 @@
 //init
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 // get stuff for jwt
-const utils = require('./utils/index');
+const utils = require('../utils/index');
 const jwt = require('jsonwebtoken');
 
 // database & models
 const mongo = require('mongodb');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const User = require('./models/user');
-const Snippet = require('./models/snippet');
+const User = require('../models/user');
+const Snippet = require('../models/snippet');
 
-// set static folder for assets
-router.use('/public', express.static('public'));
 
 // routes
-
 router.get('/', (req, res) => {
-	res.sendFile(path.resolve(__dirname, 'index.html'));
+	res.sendFile(path.resolve('index.html'));
 });
 
 router.get('/login', (req, res) => {
-	// render login page
-	console.log("login");
+	res.sendFile(path.resolve('public','login.html'));
 });
 
-
 // Use JWT to authenticate
-
 router.post('/login', (req, res) => {
 	// find user
 	User
@@ -146,3 +141,4 @@ router.get('/me/from/token', (req, res, next) => {
 	});
 });
 
+module.exports = router; 

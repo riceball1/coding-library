@@ -1,4 +1,4 @@
-// middleware to check if JWT token exists and verifies if it does exist
+// middleware to check if JWT token exists and verifies if it does exist 
 
 function authenticateMiddleware(req,res,next){
 	// check header or url parameters for token
@@ -16,8 +16,10 @@ function authenticateMiddleware(req,res,next){
 			req.user = user; // set so other routes can use it
 			next();
 		}
-	})
+	});
 }
 
 
-export default authenticateMiddleware;
+module.exports = {
+	authenticateMiddleware: authenticateMiddleware
+}

@@ -1,5 +1,21 @@
+//init
+const express = require('express');
+const router = express.Router();
+const path = require('path');
 
-app.get('/users', (req, res) => {
+// get stuff for jwt
+const utils = require('../utils/index');
+const jwt = require('jsonwebtoken');
+
+// database & models
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+const User = require('../models/user');
+const Snippet = require('../models/snippet');
+
+
+router.get('/users', (req, res) => {
 	User
 		.find()
 		.exec()
@@ -13,7 +29,7 @@ app.get('/users', (req, res) => {
 });
 
 
-app.get('/snippets', (req, res) => {
+router.get('/snippets', (req, res) => {
 	Snippet
 		.find()
 		.exec()
@@ -26,7 +42,7 @@ app.get('/snippets', (req, res) => {
 		});
 });
 
-app.get('/snippets/:snippetid', (req, res) => {
+router.get('/snippets/:snippetid', (req, res) => {
 	Snippet
 		.findById(req.params.snippetid)
 		.exec()
@@ -39,7 +55,7 @@ app.get('/snippets/:snippetid', (req, res) => {
 		});
 });
 
-app.post('/add-snippet', (req, res) => {
+router.post('/add-snippet', (req, res) => {
 	const {title, description, code} = req.body;
 	console.log(req.user);
 	const newSnippet = new Snippet({
@@ -60,7 +76,7 @@ app.post('/add-snippet', (req, res) => {
 	});
 });
 
-app.put('/update-snippet/:snippetid', (req, res) => {
+router.put('/update-snippet/:snippetid', (req, res) => {
 	// ensure that snippetid in request path and request body match
 	if(!(req.params.snippetid && req.body.id && req.params.snippetid === req.body.id)) {
 		return res.json({message: `Request path id (${req.params.snippetid}) and request body id ` +
@@ -90,7 +106,7 @@ app.put('/update-snippet/:snippetid', (req, res) => {
 });
 
 // not working at the moment
-app.delete('/delete-snippet/:snippetid', (req, res) => {
+router.delete('/delete-snippet/:snippetid', (req, res) => {
 	Snippet
 		.findByIdAndRemove(req.params.snippetid)
 		.exec()
@@ -101,3 +117,5 @@ app.delete('/delete-snippet/:snippetid', (req, res) => {
 		})
 	
 });
+
+module.exports = router;

@@ -11,12 +11,18 @@ const expressValidator = require('express-validator');
 const app = express();
 const morgan = require('morgan');
 
+// database & models
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+
 // authentication middleware for jwt
-const authenticateMiddleware = require('./middlewares/authenticate');
+const { authenticateMiddleware } = require('./middlewares/authenticate');
 
 // imported routes
-const index = require('./routes/index');
-const user = require('./routes/user');
+const index = require('./routes/index.js');
+const user = require('./routes/user.js');
 
 // config 
 const {PORT, DATABASE_URL} = require('./config.js');
@@ -24,6 +30,7 @@ const {PORT, DATABASE_URL} = require('./config.js');
 // parse json and params in urls
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
 // // express validator - immediately after bodyParser
 app.use(expressValidator({
 	errorFormater: (param, msg, value) => {
@@ -45,16 +52,15 @@ app.use(expressValidator({
 // provides logging
 app.use(morgan('common'));
 
+// set static folder for assets
+app.use('/public', express.static('public'));
+
 // endpoints
 app.use('/', index);
 app.use(authenticateMiddleware);
 app.use('/user', user);
-
-
 // add catch all route for pages that don't have routes
-app.use('*', function(req, res) {
-  return res.sendStatus(404).json({message: 'Not Found'});
-});
+app.use('*', (req, res) => res.sendStatus(404).json({message: 'Not Found'}));
 
 // set up server for listening
 // closeServer needs access to a server object, but that only
