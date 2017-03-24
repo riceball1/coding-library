@@ -26,6 +26,7 @@
   "homepage": "https://github.com/riceball1/simple-code#readme",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-polyfill": "^6.23.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",

@@ -1,15 +1,13 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+require('babel-polyfill');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import store from './store';
+import App from './components/App';
 require('./style.scss');
 
-class App extends React.Component {
-	render() {
-		return (
-			<div>
-				<h1>{this.props.message}</h1>
-			</div>
-		)
-	}
-}
 
-ReactDOM.render(<App message="Simple Code" />, document.getElementById('root'));
+
+ReactDOM.render(<Provider store={store} >
+	<App message="Simple Code" />
+	</Provider>, document.getElementById('root'));
