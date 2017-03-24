@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const User = require('../models/user');
 const Snippet = require('../models/snippet');
-
+const bcrypt = require('bcryptjs');
 
 // routes
 router.get('/', (req, res) => {
@@ -30,15 +30,17 @@ router.post('/login', (req, res) => {
 	User
 		.findOne({username: req.body.username})
 		.exec((err, user) => {
-			if (err) throw err;
+			if (err) {
+				console.log(err);
+			};
 
 			if (!user) {
-				return res.sendStatus(404).json({error: true, message: 'Username or Password invalid'});
+				return res.send(404).json({error: true, message: 'Username or Password invalid'});
 			}
 			// check password
 			bcrypt.compare(req.body.password, user.password, (err, valid) => {
 				if (!valid) {
-					return res.sendStatus(404).json({
+					return res.send(404).json({
 						error: true,
 						message: 'Username or password incorrect'
 					});

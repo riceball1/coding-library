@@ -2,15 +2,11 @@ require('babel-polyfill');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import App from './containers/App';
+import Root from './components/Root';
 import store from './store';
 
 require('./css/style.scss');
 
-
-
 ReactDOM.render(
-	<Provider store={store} >
-		<App />
-	</ Provider>, 
+	<Root store={store}/>, 
 	document.getElementById('root'));

@@ -15,14 +15,23 @@ a {
 	text-decoration: none;
 }
 
+h1 {
+	text-align: center;
+}
+
 main {
 	// background-color: $lGray;
 	width: 50%;
 	margin: 0 auto;
 	padding: 20px;
-	.main-title {
-		text-align: center;
-	}
+}
+
+.slogan {
+	font-size: 1.5em;
+	text-align: center;
+	color: $lGray;
+	padding: 10px;
+	width: 50%;
 }
 
 .btn {

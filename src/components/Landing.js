@@ -1,11 +1,13 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 export const Landing = () => {
 	return (
 		<div>
-			<a href="/login">
+			<div className="slogan">Create code cnippets to keep yourself organized</div>
+			<Link to="/login">
 				<button className="btn">Login</button>
-			</a>
+			</Link>
 			<a href="/signup">
 				<button className="btn">Sign Up</button>
 			</a>
