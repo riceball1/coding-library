@@ -1,7 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-
-class App extends React.Component {
+class Sidebar extends React.Component {
 	openNav() {
 		console.log('open menu');
 	}
@@ -18,9 +18,16 @@ class App extends React.Component {
 				<p>Code Snippets Here</p>
 
 				<div>Logout | Settings</div>
+				<p>This is the state: {this.props.data}</p>
 			</div>
 		)
 	}
 }
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		data: state.message
+	}
+}
+
+export default connect(mapStateToProps)(Sidebar);

@@ -48,6 +48,8 @@ Resources:
 - Server Rendering with React and Node Express: (https://www.smashingmagazine.com/2016/03/server-side-rendering-react-node-express/)
 - Setting up a Reactjs Environment: https://www.codementor.io/tamizhvendan/beginner-guide-setup-reactjs-environment-npm-babel-6-webpack-du107r9zr
 - React/Express/JWT: https://medium.com/@rajaraodv/securing-react-redux-apps-with-jwt-tokens-fcfe81356ea0#.z95r8xsqz
+- Forms in React/Redux: https://x-team.com/blog/tutorial-forms-in-react-and-redux/
+- React Router - using Redux: http://redux.js.org/docs/advanced/UsageWithReactRouter.html; https://egghead.io/lessons/javascript-redux-adding-react-router-to-the-project
 
 // Create New User
 
