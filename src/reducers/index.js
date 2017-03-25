@@ -1,8 +1,18 @@
-import * as actions from '../actions/index';
-import {combineReducers} from 'redux';
+// import {combineReducers} from 'redux';
+// import UserReducer from './user';
+// import GeneralReducer
 
-// combineReducers
+import * as actions from '../actions/user';
 
-export const reducer = (state={message: "hello"}, action) => {
-	return state;
+const initialState = {user: null, status: null, error: null, loading: false};
+
+export default (state=initialState, action) => {
+	if(action.type === actions.SIGNUP_SUCCESS) {
+		console.log('signup');
+	}
+
+	if(action.type === actions.LOGIN_SUCCESS) {
+		console.log('login');
+	}
+	
 }

@@ -17,7 +17,7 @@ const bcrypt = require('bcryptjs');
 
 // routes
 router.get('/', (req, res) => {
-	res.sendFile(path.resolve('index.html'));
+	res.sendFile(path.resolve('public', 'index.html'));
 });
 
 router.get('/login', (req, res) => {

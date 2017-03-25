@@ -7,6 +7,4 @@ import store from './store';
 
 require('./css/style.scss');
 
-ReactDOM.render(
-	<Root store={store}/>, 
-	document.getElementById('root'));
+ReactDOM.render(<Root store={store}/>, document.getElementById('root'));

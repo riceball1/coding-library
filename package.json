@@ -1,12 +1,12 @@
+
 {
   "name": "simple-code",
   "version": "1.0.0",
   "description": "A simple coding notebook to store all your programming code snippets",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "build": "webpack --config webpack.config.js"
+    "start": "nodemon server.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -63,6 +63,7 @@
     "sinon": "^1.4.0",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.14.1",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
   }
 }

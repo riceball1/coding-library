@@ -1,7 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import * as actions from '../actions';
+import * as actions from '../actions/user';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -14,8 +13,6 @@ class Login extends React.Component {
 		const username = this.usernameInput.value;
 		const password = this.passwordInput.value;
 		this.props.dispatch(actions.login(username, password));
-		// resets the field to empty
-		// this.guessNumberInput.value = "";
 	}
 
 	render() {
