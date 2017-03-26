@@ -7098,11 +7098,7 @@ module.exports = setInnerHTML;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.login = exports.loginError = exports.LOGIN_ERROR = exports.loginSuccess = exports.LOGIN_SUCCESS = exports.signup = exports.signupError = exports.SIGNUP_ERROR = exports.signupSuccess = exports.SIGNUP_SUCCESS = exports.RESET_TOKEN = exports.ME_FROM_TOKEN_FAILURE = exports.ME_FROM_TOKEN_SUCCESS = exports.ME_FROM_TOKEN = undefined;
-exports.meFromToken = meFromToken;
-exports.meFromTokenSuccess = meFromTokenSuccess;
-exports.meFromTokenFailure = meFromTokenFailure;
-exports.resetToken = resetToken;
+exports.login = exports.loginError = exports.LOGIN_ERROR = exports.loginSuccess = exports.LOGIN_SUCCESS = exports.signup = exports.signupError = exports.SIGNUP_ERROR = exports.signupSuccess = exports.SIGNUP_SUCCESS = exports.resetToken = exports.meFromTokenFailure = exports.meFromTokenSuccess = exports.meFromToken = exports.RESET_TOKEN = exports.ME_FROM_TOKEN_FAILURE = exports.ME_FROM_TOKEN_SUCCESS = exports.ME_FROM_TOKEN = undefined;
 
 __webpack_require__(163);
 
@@ -7116,56 +7112,58 @@ var ME_FROM_TOKEN_SUCCESS = exports.ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCE
 var ME_FROM_TOKEN_FAILURE = exports.ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
 var RESET_TOKEN = exports.RESET_TOKEN = 'RESET_TOKEN';
 
-function meFromToken(tokenFromStorage) {
-    //check if the token is still valid, if so, get me from the server
+var meFromToken = exports.meFromToken = function meFromToken(tokenFromStorage) {
+    return function (dispatch) {
+        //check if the token is still valid, if so, get me from the server
 
-    var url = ROOT_URL + '/login';
-    var postRequest = new Request(url, {
-        method: 'GET',
-        headers: new Headers({
-            'Authorization': 'Bearer ' + tokenFromStorage
-        })
-    });
+        var url = ROOT_URL + '/login';
+        var postRequest = new Request(url, {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization': 'Bearer ' + tokenFromStorage
+            })
+        });
 
-    return fetch(postRequest).then(function (response) {
-        if (!response.ok) {
-            var error = new Error(response.statusText);
-            error.response = response;
-            throw error; // should replace throw errors
-        }
-        return response;
-    }).then(function (response) {
-        return response.json();
-    }) // to get the json
-    .then(function (data) {
-        console.log(data);
-        dispatch(meFromTokenSuccess(data.user));
-    }).catch(function (error) {
-        console.error("error: ", error);
-        dispatch(meFromTokenFailure(error));
-    });
-}
+        return fetch(postRequest).then(function (response) {
+            if (!response.ok) {
+                var error = new Error(response.statusText);
+                error.response = response;
+                throw error; // should replace throw errors
+            }
+            return response;
+        }).then(function (response) {
+            return response.json();
+        }) // to get the json
+        .then(function (data) {
+            console.log(data);
+            dispatch(meFromTokenSuccess(data.user));
+        }).catch(function (error) {
+            console.error("error: ", error);
+            dispatch(meFromTokenFailure(error));
+        });
+    };
+};
 
-function meFromTokenSuccess(currentUser) {
+var meFromTokenSuccess = exports.meFromTokenSuccess = function meFromTokenSuccess(currentUser) {
     return {
         type: ME_FROM_TOKEN_SUCCESS,
         payload: currentUser
     };
-}
+};
 
-function meFromTokenFailure(error) {
+var meFromTokenFailure = exports.meFromTokenFailure = function meFromTokenFailure(error) {
     return {
         type: ME_FROM_TOKEN_FAILURE,
         payload: error
     };
-}
+};
 
-function resetToken() {
+var resetToken = exports.resetToken = function resetToken() {
     //used for logout
     return {
         type: RESET_TOKEN
     };
-}
+};
 
 var SIGNUP_SUCCESS = exports.SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 var signupSuccess = exports.signupSuccess = function signupSuccess(user) {

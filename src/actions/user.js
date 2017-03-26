@@ -8,7 +8,7 @@ export const ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCESS';
 export const ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
 export const RESET_TOKEN = 'RESET_TOKEN';
 
-export function meFromToken(tokenFromStorage) {
+export const meFromToken = (tokenFromStorage) => dispatch => {
   //check if the token is still valid, if so, get me from the server
 
   const url = `${ROOT_URL}/login`;
@@ -39,26 +39,25 @@ export function meFromToken(tokenFromStorage) {
         });
 }
 
-export function meFromTokenSuccess(currentUser) {
+export const meFromTokenSuccess = (currentUser) => {
   return {
     type: ME_FROM_TOKEN_SUCCESS,
     payload: currentUser
   };
 }
 
-export function meFromTokenFailure(error) {
+export const meFromTokenFailure = (error) => {
   return {
     type: ME_FROM_TOKEN_FAILURE,
     payload: error
   };
 }
 
-export function resetToken() {//used for logout
+export const resetToken = () =>  {//used for logout
   return {
     type: RESET_TOKEN
   };
 }
-
 
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const signupSuccess = ((user) => ({
