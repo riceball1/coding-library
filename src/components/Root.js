@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import App from './App';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
+import Dashboard from '../containers/Dashboard';
 
 const Root = ({store}) =>(
 	<Provider store={store} >
@@ -11,6 +12,7 @@ const Root = ({store}) =>(
 			<Route path="/" component={App} />
 				<Route path="/login" component={Login} />
 				<Route path="/signup" component={Signup} />
+				<Route path="/dashboard" component={Dashboard} />
 		</Router>
 	</Provider>
 )

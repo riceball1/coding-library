@@ -37,10 +37,10 @@ export const meFromToken = (tokenFromStorage) => dispatch => {
         });
 }
 
-export const meFromTokenSuccess = (currentUser) => {
+export const meFromTokenSuccess = (user) => {
   return {
     type: ME_FROM_TOKEN_SUCCESS,
-    payload: currentUser
+    payload: user
   };
 }
 
