@@ -7169,7 +7169,7 @@ var loginError = exports.loginError = function loginError(error) {
 
 var login = exports.login = function login(username, password) {
     return function (dispatch) {
-        var url = 'https://simple-code-app.herokuapp.com//login';
+        var url = 'https://simple-code-app.herokuapp.com/login';
         var postRequest = new Request(url, {
             method: 'POST',
             headers: new Headers({

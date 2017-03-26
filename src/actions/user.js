@@ -57,7 +57,7 @@ export const loginError = ((error) => ({
 }))
 
 export const login = (username, password) => dispatch => {
-    const url = 'https://simple-code-app.herokuapp.com//login';
+    const url = 'https://simple-code-app.herokuapp.com/login';
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
