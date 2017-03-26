@@ -7135,7 +7135,6 @@ var meFromToken = exports.meFromToken = function meFromToken(tokenFromStorage) {
             return response.json();
         }) // to get the json
         .then(function (data) {
-            console.log(data);
             dispatch(meFromTokenSuccess(data.user));
         }).catch(function (error) {
             dispatch(meFromTokenFailure(error));
@@ -17313,7 +17312,7 @@ exports.default = function () {
 	}
 
 	if (action.type === actions.ME_FROM_TOKEN_FAILURE) {
-		error = action.payload.error || { message: action.payload.message }; //2nd one is network or server down errors   
+		var error = action.payload.error || { message: action.payload.message }; //2nd one is network or server down errors   
 		var _updated2 = {
 			user: null,
 			status: 'storage',
