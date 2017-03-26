@@ -7116,7 +7116,7 @@ var meFromToken = exports.meFromToken = function meFromToken(tokenFromStorage) {
     return function (dispatch) {
         //check if the token is still valid, if so, get me from the server
 
-        var url = ROOT_URL + '/login';
+        var url = ROOT_URL + '/me/from/token?token=' + tokenFromStorage;
         var postRequest = new Request(url, {
             method: 'GET',
             headers: new Headers({

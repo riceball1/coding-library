@@ -11,7 +11,7 @@ export const RESET_TOKEN = 'RESET_TOKEN';
 export const meFromToken = (tokenFromStorage) => dispatch => {
   //check if the token is still valid, if so, get me from the server
 
-  const url = `${ROOT_URL}/login`;
+  const url = `${ROOT_URL}/me/from/token?token=${tokenFromStorage}`;
     const postRequest = new Request(url, {
         method: 'GET',
         headers: new Headers({
