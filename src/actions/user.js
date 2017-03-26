@@ -34,8 +34,7 @@ export const meFromToken = (tokenFromStorage) => dispatch => {
             dispatch(meFromTokenSuccess(data.user))
         })
         .catch(error => {
-            console.error("error: ", error);
-            dispatch(meFromTokenFailure(error))
+          dispatch(meFromTokenFailure(error))
         });
 }
 
