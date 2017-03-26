@@ -15,7 +15,7 @@ export const signupError = ((error) => ({
 }))
 
 export const signup = (username, fullname, password, password2, email) => dispatch => {
-    const url = `https://simple-code-app.herokuapp.com/signup`;
+    const url = 'https://simple-code-app.herokuapp.com/signup';
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
@@ -57,7 +57,7 @@ export const loginError = ((error) => ({
 }))
 
 export const login = (username, password) => dispatch => {
-    const url = `https://simple-code-app.herokuapp.com//login`;
+    const url = 'https://simple-code-app.herokuapp.com//login';
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({

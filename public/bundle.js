@@ -7122,7 +7122,7 @@ var signupError = exports.signupError = function signupError(error) {
 
 var signup = exports.signup = function signup(username, fullname, password, password2, email) {
     return function (dispatch) {
-        var url = 'http://localhost:3000/signup';
+        var url = 'https://simple-code-app.herokuapp.com/signup';
         var postRequest = new Request(url, {
             method: 'POST',
             headers: new Headers({
@@ -7169,7 +7169,7 @@ var loginError = exports.loginError = function loginError(error) {
 
 var login = exports.login = function login(username, password) {
     return function (dispatch) {
-        var url = 'http://localhost:3000/login';
+        var url = 'https://simple-code-app.herokuapp.com//login';
         var postRequest = new Request(url, {
             method: 'POST',
             headers: new Headers({
