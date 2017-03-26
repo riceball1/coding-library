@@ -14,7 +14,6 @@ mongoose.Promise = global.Promise;
 const User = require('../models/user');
 const Snippet = require('../models/snippet');
 
-
 router.get('/users', (req, res) => {
 	User
 		.find()
@@ -27,7 +26,6 @@ router.get('/users', (req, res) => {
 			res.sendStatus(500).json({message: "Issue finding users"});
 		});
 });
-
 
 router.get('/snippets', (req, res) => {
 	Snippet

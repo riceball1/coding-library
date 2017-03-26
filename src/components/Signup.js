@@ -33,7 +33,7 @@ class Signup extends React.Component {
 					<label>email</label>
 					<input type="email" name="email" ref={ref => this.emailInput = ref}/>
 					<label>password</label>
-					<input type="password" name="password" ref={ref => this.passwordInput = ref}/>Ï
+					<input type="password" name="password" ref={ref => this.passwordInput = ref}/>
 					<label>confirm password</label>
 					<input type="password" name="password2" ref={ref => this.password2Input = ref}/>
 					<button type="button" onClick={this.submitForm}>submit</button>
