@@ -7108,7 +7108,7 @@ var SIGNUP_SUCCESS = exports.SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 var signupSuccess = exports.signupSuccess = function signupSuccess(user) {
     return {
         type: SIGNUP_SUCCESS,
-        user: user
+        payload: user
     };
 };
 
@@ -7116,19 +7116,19 @@ var SIGNUP_ERROR = exports.SIGNUP_ERROR = 'SIGNUP_ERROR';
 var signupError = exports.signupError = function signupError(error) {
     return {
         type: SIGNUP_ERROR,
-        error: error
+        payload: error
     };
 };
 
-var signup = exports.signup = function signup(username, password) {
+var signup = exports.signup = function signup(username, fullname, password, password2, email) {
     return function (dispatch) {
-        var url = 'http://localhost:3000/login';
+        var url = 'http://localhost:3000/signup';
         var postRequest = new Request(url, {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
-            body: JSON.stringify({ username: username, password: password })
+            body: JSON.stringify({ username: username, fullname: fullname, password: password, password2: password2, email: email })
         });
 
         return fetch(postRequest).then(function (response) {
@@ -7145,7 +7145,7 @@ var signup = exports.signup = function signup(username, password) {
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user));
         }).catch(function (error) {
-            console.error(error);
+            console.error("error: ", error);
             dispatch(signupError(error));
         });
     };
@@ -7155,7 +7155,7 @@ var LOGIN_SUCCESS = exports.LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 var loginSuccess = exports.loginSuccess = function loginSuccess(user) {
     return {
         type: LOGIN_SUCCESS,
-        user: user
+        payload: user
     };
 };
 
@@ -7163,7 +7163,7 @@ var LOGIN_ERROR = exports.LOGIN_ERROR = 'LOGIN_ERROR';
 var loginError = exports.loginError = function loginError(error) {
     return {
         type: LOGIN_ERROR,
-        error: error
+        payload: error
     };
 };
 
@@ -7179,6 +7179,7 @@ var login = exports.login = function login(username, password) {
         });
 
         return fetch(postRequest).then(function (response) {
+            console.log(response);
             if (!response.ok) {
                 var error = new Error(response.statusText);
                 error.response = response;
@@ -7189,8 +7190,7 @@ var login = exports.login = function login(username, password) {
             return response.json();
         }) // to get the json
         .then(function (data) {
-            console.log('hello');
-            // sessionStorage.setItem('jwtToken', data.token);
+            sessionStorage.setItem('jwtToken', data.token);
             dispatch(loginSuccess(data.user));
         }).catch(function (error) {
             console.error(error);
@@ -11228,7 +11228,8 @@ define(String.prototype, "padRight", "".padEnd);
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.default = Nav;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(10);
 
@@ -11238,43 +11239,70 @@ var _reactRouter = __webpack_require__(156);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Nav() {
-	return _react2.default.createElement(
-		'nav',
-		{ className: 'navbar' },
-		_react2.default.createElement(
-			'ul',
-			null,
-			_react2.default.createElement(
-				'li',
-				null,
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Nav = function (_React$Component) {
+	_inherits(Nav, _React$Component);
+
+	function Nav() {
+		_classCallCheck(this, Nav);
+
+		return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+	}
+
+	_createClass(Nav, [{
+		key: 'render',
+
+
+		// logout should post to logout api
+
+		value: function render() {
+			return _react2.default.createElement(
+				'nav',
+				{ className: 'navbar' },
 				_react2.default.createElement(
-					_reactRouter.Link,
-					{ to: '/' },
-					'Home'
+					'ul',
+					null,
+					_react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/' },
+							'Home'
+						)
+					),
+					_react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/signup' },
+							'Signup'
+						)
+					),
+					_react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(
+							_reactRouter.Link,
+							{ to: '/login' },
+							'Login'
+						)
+					)
 				)
-			),
-			_react2.default.createElement(
-				'li',
-				null,
-				_react2.default.createElement(
-					_reactRouter.Link,
-					{ to: '/signup' },
-					'Signup'
-				)
-			),
-			_react2.default.createElement(
-				'li',
-				null,
-				_react2.default.createElement(
-					_reactRouter.Link,
-					{ to: '/login' },
-					'Login'
-				)
-			)
-		)
-	);
-}
+			);
+		}
+	}]);
+
+	return Nav;
+}(_react2.default.Component);
+
+exports.default = Nav;
 
 /***/ }),
 /* 165 */
@@ -16774,6 +16802,7 @@ var App = function (_React$Component) {
 							'Sign Up'
 						)
 					),
+					_react2.default.createElement('img', { src: 'http://i.imgur.com/dlRrvfT.png', alt: 'code image', className: 'main-image' }),
 					_react2.default.createElement(
 						'p',
 						{ className: 'slogan' },
@@ -16876,7 +16905,7 @@ var Login = function (_React$Component) {
 						null,
 						'password'
 					),
-					_react2.default.createElement('input', { type: 'text', name: 'password', ref: function ref(_ref2) {
+					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref2) {
 							return _this2.passwordInput = _ref2;
 						} }),
 					_react2.default.createElement(
@@ -16992,7 +17021,7 @@ var Signup = function (_React$Component) {
 						null,
 						'email'
 					),
-					_react2.default.createElement('input', { type: 'text', name: 'email', ref: function ref(_ref3) {
+					_react2.default.createElement('input', { type: 'email', name: 'email', ref: function ref(_ref3) {
 							return _this2.emailInput = _ref3;
 						} }),
 					_react2.default.createElement(
@@ -17000,15 +17029,16 @@ var Signup = function (_React$Component) {
 						null,
 						'password'
 					),
-					_react2.default.createElement('input', { type: 'text', name: 'password', ref: function ref(_ref4) {
+					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref4) {
 							return _this2.passwordInput = _ref4;
 						} }),
+					'\xCF',
 					_react2.default.createElement(
 						'label',
 						null,
 						'confirm password'
 					),
-					_react2.default.createElement('input', { type: 'text', name: 'password2', ref: function ref(_ref5) {
+					_react2.default.createElement('input', { type: 'password', name: 'password2', ref: function ref(_ref5) {
 							return _this2.password2Input = _ref5;
 						} }),
 					_react2.default.createElement(
@@ -17141,6 +17171,7 @@ exports.default = function () {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	var action = arguments[1];
 
+	/** success **/
 	if (action.type === actions.SIGNUP_SUCCESS) {
 		console.log('signup');
 	}
@@ -17149,6 +17180,16 @@ exports.default = function () {
 		console.log('login');
 	}
 
+	/** errors **/
+	if (action.type === actions.LOGIN_ERROR) {
+		console.log(action);
+		console.log('login error');
+	}
+
+	if (action.type === actions.SIGNUP_ERROR) {
+		console.log(action);
+		console.log('signup error');
+	}
 	return state;
 };
 
@@ -23175,7 +23216,7 @@ exports = module.exports = __webpack_require__(436)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Open+Sans|Roboto);", ""]);
 
 // module
-exports.push([module.i, "/** color variables **/\n/** font **/\n* {\n  box-sizing: border-box;\n  font-family: 'Open Sans', sans-serif; }\n\na {\n  text-decoration: none; }\n\nh1 {\n  text-align: center; }\n\nform label, form input {\n  margin: 5px auto;\n  display: block; }\n\nform input {\n  width: 80%;\n  line-height: 30px;\n  font-size: 1.5em;\n  border-radius: 5px;\n  border: 1px solid lightblue;\n  padding: 5px; }\n\nform button {\n  font-size: 1.2em;\n  padding: 10px;\n  width: 30%;\n  background-color: #00b3b3;\n  border: none;\n  border-radius: 5px;\n  margin: 10px auto;\n  line-height: 30px; }\n\nmain {\n  width: 50%;\n  margin: 0 auto;\n  padding: 20px; }\n\np, div {\n  text-align: center; }\n  p .slogan, div .slogan {\n    font-size: 1.5em;\n    margin: 10px auto;\n    color: #ddd;\n    padding: 10px;\n    width: 50%;\n    line-height: 30px; }\n\n.btn {\n  display: block;\n  width: 200px;\n  background-color: #00b3b3;\n  padding: 5px;\n  font-size: 1.2em;\n  margin: 10px auto;\n  border: none;\n  border-radius: 2px; }\n", ""]);
+exports.push([module.i, "/** color variables **/\n/** font **/\n* {\n  box-sizing: border-box;\n  font-family: 'Open Sans', sans-serif; }\n\na {\n  text-decoration: none; }\n\nh1 {\n  text-align: center; }\n\nform label, form input {\n  margin: 5px auto;\n  display: block; }\n\nform input {\n  width: 80%;\n  line-height: 30px;\n  font-size: 1.5em;\n  border-radius: 5px;\n  border: 1px solid lightblue;\n  padding: 5px; }\n\nform button {\n  font-size: 1.2em;\n  padding: 10px;\n  width: 30%;\n  background-color: #00b3b3;\n  border: none;\n  border-radius: 5px;\n  margin: 10px auto;\n  line-height: 30px; }\n\n.navbar ul {\n  list-style-type: none; }\n  .navbar ul li {\n    display: inline-block;\n    padding: 5px;\n    margin: 20px; }\n\nimg.main-image {\n  width: 70%;\n  margin: 20px auto;\n  border-radius: 5px; }\n\nmain {\n  width: 50%;\n  margin: 0 auto;\n  padding: 20px; }\n\np, div {\n  text-align: center; }\n  p .slogan, div .slogan {\n    font-size: 1.5em;\n    margin: 10px auto;\n    color: #ddd;\n    padding: 10px;\n    width: 50%;\n    line-height: 30px; }\n\n.btn {\n  display: block;\n  width: 200px;\n  background-color: #00b3b3;\n  padding: 5px;\n  font-size: 1.2em;\n  margin: 10px auto;\n  border: none;\n  border-radius: 2px; }\n", ""]);
 
 // exports
 

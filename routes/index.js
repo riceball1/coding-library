@@ -35,7 +35,7 @@ router.post('/login', (req, res) => {
 			};
 
 			if (!user) {
-				return res.send(404).json({error: true, message: 'Username or Password invalid'});
+				return res.sendStatus(404).json({error: true, message: 'Username or Password invalid'});
 			}
 			// check password
 			bcrypt.compare(req.body.password, user.password, (err, valid) => {
@@ -65,14 +65,10 @@ router.post('/login', (req, res) => {
 **/
 
 router.post('/signup', (req, res) => {
-	const name = req.body.name;
-	const email = req.body.email;
-	const username = req.body.username;
-	const password = req.body.password;
-	const password2 = req.body.password2;
+	const {username, fullname, password, password2, email} = req.body;
 
 	// Validation from expressValidator
-	req.checkBody('name', 'Name is required').notEmpty();
+	req.checkBody('fullname', 'Name is required').notEmpty();
 		req.checkBody('email', 'Email is required').notEmpty();
 		req.checkBody('email', 'Email is not valid').isEmail();
 		req.checkBody('username', 'Username is required').notEmpty();
@@ -86,10 +82,10 @@ router.post('/signup', (req, res) => {
 	  res.send({message: `There was an error: ${errors}`});
 	} else {
 	  let newUser = new User({
-	    name: name,
-	    email: email,
-	    username: username,
-	    password: password
+	    fullname,
+	    email,
+	    username,
+	    password
 	  });
 
 	  // createUser handles hashing password;

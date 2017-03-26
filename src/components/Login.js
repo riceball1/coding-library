@@ -25,7 +25,7 @@ class Login extends React.Component {
 				<label>username</label>
 				<input type="text" name="username" ref={ref => this.usernameInput = ref}/>
 				<label>password</label>
-				<input type="text" name="password" ref={ref => this.passwordInput = ref}/>
+				<input type="password" name="password" ref={ref => this.passwordInput = ref}/>
 					<button type="button" onClick={this.submitForm}>submit</button>
 				</form>
 			</div>

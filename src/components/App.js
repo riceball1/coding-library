@@ -18,6 +18,7 @@ class App extends React.Component {
 				<Link to="/signup">
 					<button className="btn">Sign Up</button>
 				</Link>
+				<img src="http://i.imgur.com/dlRrvfT.png" alt="code image" className="main-image" />
 				<p className="slogan">Make Snippets. Save. Search. </p>
 			</div>
 			</div>
