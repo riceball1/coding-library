@@ -1,5 +1,6 @@
 /** color variables **/
 $lGray: #ddd;
+$dGray: #888;
 $teal: #00b3b3;
 
 /** font **/
@@ -28,7 +29,7 @@ form {
 		line-height: 30px;
 		font-size: 1.5em;
 		border-radius: 5px;
-		border: 1px solid lightblue;
+		border: 1px solid $teal;
 		padding: 5px;
 	}
 	button {
@@ -61,7 +62,6 @@ img.main-image {
 }
 
 main {
-	// background-color: $lGray;
 	width: 50%;
 	margin: 0 auto;
 	padding: 20px;
@@ -72,7 +72,7 @@ p, div {
 	.slogan {
 		font-size: 1.5em;
 		margin: 10px auto;
-		color: $lGray;
+		color: $dGray;
 		padding: 10px;
 		width: 50%;
 		line-height: 30px;
