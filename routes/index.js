@@ -13,11 +13,11 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const User = require('../models/user');
 const Snippet = require('../models/snippet');
-
+const bcrypt = require('bcryptjs');
 
 // routes
 router.get('/', (req, res) => {
-	res.sendFile(path.resolve('index.html'));
+	res.sendFile(path.resolve('public', 'index.html'));
 });
 
 router.get('/login', (req, res) => {
@@ -30,7 +30,9 @@ router.post('/login', (req, res) => {
 	User
 		.findOne({username: req.body.username})
 		.exec((err, user) => {
-			if (err) throw err;
+			if (err) {
+				console.log(err);
+			};
 
 			if (!user) {
 				return res.sendStatus(404).json({error: true, message: 'Username or Password invalid'});
@@ -38,7 +40,7 @@ router.post('/login', (req, res) => {
 			// check password
 			bcrypt.compare(req.body.password, user.password, (err, valid) => {
 				if (!valid) {
-					return res.sendStatus(404).json({
+					return res.send(404).json({
 						error: true,
 						message: 'Username or password incorrect'
 					});
@@ -63,14 +65,10 @@ router.post('/login', (req, res) => {
 **/
 
 router.post('/signup', (req, res) => {
-	const name = req.body.name;
-	const email = req.body.email;
-	const username = req.body.username;
-	const password = req.body.password;
-	const password2 = req.body.password2;
+	const {username, fullname, password, password2, email} = req.body;
 
 	// Validation from expressValidator
-	req.checkBody('name', 'Name is required').notEmpty();
+	req.checkBody('fullname', 'Name is required').notEmpty();
 		req.checkBody('email', 'Email is required').notEmpty();
 		req.checkBody('email', 'Email is not valid').isEmail();
 		req.checkBody('username', 'Username is required').notEmpty();
@@ -84,10 +82,10 @@ router.post('/signup', (req, res) => {
 	  res.send({message: `There was an error: ${errors}`});
 	} else {
 	  let newUser = new User({
-	    name: name,
-	    email: email,
-	    username: username,
-	    password: password
+	    fullname,
+	    email,
+	    username,
+	    password
 	  });
 
 	  // createUser handles hashing password;

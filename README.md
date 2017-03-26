@@ -15,6 +15,17 @@
 - Can export specific code into one large file
 
 
+<b>Use Prismjs:</b>
+- Markup
+- CSS
+- C-like
+- JavaScript
+- JSON
+- ReactJSX
+- Python
+- Java
+- SQL
+
 <b>Wireframes:</b>
 - landing page, search page, export code, add codes
 <br/>
