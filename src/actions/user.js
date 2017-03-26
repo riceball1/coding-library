@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import 'isomorphic-fetch';
-// meFromToken, meFromTokenSuccess, meFromTokenFailure, resetToken
+const ROOT_URL = location.origin;
 
 //Get current user(me) from token in localStorage
 export const ME_FROM_TOKEN = 'ME_FROM_TOKEN';
@@ -11,18 +11,32 @@ export const RESET_TOKEN = 'RESET_TOKEN';
 export function meFromToken(tokenFromStorage) {
   //check if the token is still valid, if so, get me from the server
 
-  const request = axios({
-    method: 'get',
-    url: `${ROOT_URL}/me/from/token?token=${tokenFromStorage}`,
-    headers: {
-      'Authorization': `Bearer ${tokenFromStorage}`
-    }
-  });
+  const url = `${ROOT_URL}/login`;
+    const postRequest = new Request(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Authorization': `Bearer ${tokenFromStorage}`
+        })
+    });
 
-  return {
-    type: ME_FROM_TOKEN,
-    payload: request
-  };
+    return fetch(postRequest)
+        .then(response => {
+            if (!response.ok) {
+                const error = new Error(response.statusText)
+                error.response = response
+                throw error; // should replace throw errors
+            }
+            return response;
+        })
+        .then(response => response.json()) // to get the json
+        .then(data => {
+            console.log(data);
+            dispatch(meFromTokenSuccess(data.user))
+        })
+        .catch(error => {
+            console.error("error: ", error);
+            dispatch(meFromTokenFailure(error))
+        });
 }
 
 export function meFromTokenSuccess(currentUser) {
@@ -59,7 +73,7 @@ export const signupError = ((error) => ({
 }))
 
 export const signup = (username, fullname, password, password2, email) => dispatch => {
-    const url = 'https://simple-code-app.herokuapp.com/signup';
+    const url = `${ROOT_URL}/signup`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
@@ -101,7 +115,7 @@ export const loginError = ((error) => ({
 }))
 
 export const login = (username, password) => dispatch => {
-    const url = 'https://simple-code-app.herokuapp.com/login';
+    const url = `${ROOT_URL}/login`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({

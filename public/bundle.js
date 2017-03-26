@@ -7108,7 +7108,7 @@ __webpack_require__(163);
 
 __webpack_require__(459);
 
-// meFromToken, meFromTokenSuccess, meFromTokenFailure, resetToken
+var ROOT_URL = location.origin;
 
 //Get current user(me) from token in localStorage
 var ME_FROM_TOKEN = exports.ME_FROM_TOKEN = 'ME_FROM_TOKEN';
@@ -7119,18 +7119,31 @@ var RESET_TOKEN = exports.RESET_TOKEN = 'RESET_TOKEN';
 function meFromToken(tokenFromStorage) {
     //check if the token is still valid, if so, get me from the server
 
-    var request = axios({
-        method: 'get',
-        url: ROOT_URL + '/me/from/token?token=' + tokenFromStorage,
-        headers: {
+    var url = ROOT_URL + '/login';
+    var postRequest = new Request(url, {
+        method: 'GET',
+        headers: new Headers({
             'Authorization': 'Bearer ' + tokenFromStorage
-        }
+        })
     });
 
-    return {
-        type: ME_FROM_TOKEN,
-        payload: request
-    };
+    return fetch(postRequest).then(function (response) {
+        if (!response.ok) {
+            var error = new Error(response.statusText);
+            error.response = response;
+            throw error; // should replace throw errors
+        }
+        return response;
+    }).then(function (response) {
+        return response.json();
+    }) // to get the json
+    .then(function (data) {
+        console.log(data);
+        dispatch(meFromTokenSuccess(data.user));
+    }).catch(function (error) {
+        console.error("error: ", error);
+        dispatch(meFromTokenFailure(error));
+    });
 }
 
 function meFromTokenSuccess(currentUser) {
@@ -7172,7 +7185,7 @@ var signupError = exports.signupError = function signupError(error) {
 
 var signup = exports.signup = function signup(username, fullname, password, password2, email) {
     return function (dispatch) {
-        var url = 'https://simple-code-app.herokuapp.com/signup';
+        var url = ROOT_URL + '/signup';
         var postRequest = new Request(url, {
             method: 'POST',
             headers: new Headers({
@@ -7219,7 +7232,7 @@ var loginError = exports.loginError = function loginError(error) {
 
 var login = exports.login = function login(username, password) {
     return function (dispatch) {
-        var url = 'https://simple-code-app.herokuapp.com/login';
+        var url = ROOT_URL + '/login';
         var postRequest = new Request(url, {
             method: 'POST',
             headers: new Headers({
