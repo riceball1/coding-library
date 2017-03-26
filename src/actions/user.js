@@ -30,7 +30,6 @@ export const meFromToken = (tokenFromStorage) => dispatch => {
         })
         .then(response => response.json()) // to get the json
         .then(data => {
-            console.log(data);
             dispatch(meFromTokenSuccess(data.user))
         })
         .catch(error => {
