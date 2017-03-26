@@ -40,7 +40,7 @@ export default (state=initialState, action) => {
 
 	if(action.type === actions.ME_FROM_TOKEN_SUCCESS) {
 		const updated = { 
-			user: action.payload.data.user, 
+			user: action.payload.user, 
 			status: 'authenticated', 
 			error: null, 
 			loading: false
