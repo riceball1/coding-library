@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import {Router, Route, browserHistory } from 'react-router';
 import {Provider} from 'react-redux';
-import App from '../containers/App';
+import App from './App';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
 

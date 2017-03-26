@@ -1,18 +1,10 @@
-// import {combineReducers} from 'redux';
-// import UserReducer from './user';
-// import GeneralReducer
+import {combineReducers} from 'redux';
+import userReducer from './userReducer';
+import snippetReducer from './snippetReducer';
 
-import * as actions from '../actions/user';
 
-const initialState = {user: null, status: null, error: null, loading: false};
+const reducer = combineReducers({userReducer, snippetReducer});
 
-export default (state=initialState, action) => {
-	if(action.type === actions.SIGNUP_SUCCESS) {
-		console.log('signup');
-	}
+export default reducer;
 
-	if(action.type === actions.LOGIN_SUCCESS) {
-		console.log('login');
-	}
-	
-}
+

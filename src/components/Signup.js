@@ -1,7 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import * as actions from '../actions/user';
+import Nav from './Nav';
+
 
 class Signup extends React.Component {
 	constructor(props) {
@@ -22,12 +23,18 @@ class Signup extends React.Component {
 	render() {
 		return (
 			<div>
-			Signup
+			<Nav />
+			<h1>Signup</h1>
 				<form >
+					<label>username</label>
 					<input type="text" name="username" ref={ref => this.usernameInput = ref}/>
+					<label>full name</label>
 					<input type="text" name="fullname" ref={ref => this.fullnameInput = ref}/>
+					<label>email</label>
 					<input type="text" name="email" ref={ref => this.emailInput = ref}/>
+					<label>password</label>
 					<input type="text" name="password" ref={ref => this.passwordInput = ref}/>
+					<label>confirm password</label>
 					<input type="text" name="password2" ref={ref => this.password2Input = ref}/>
 					<button type="button" onClick={this.submitForm}>submit</button>
 				</form>
