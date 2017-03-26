@@ -16887,7 +16887,7 @@ exports.default = App;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -16917,103 +16917,106 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Login = function (_React$Component) {
-  _inherits(Login, _React$Component);
+	_inherits(Login, _React$Component);
 
-  function Login(props) {
-    _classCallCheck(this, Login);
+	function Login(props) {
+		_classCallCheck(this, Login);
 
-    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
-    _this.submitForm = _this.submitForm.bind(_this);
-    return _this;
-  }
+		_this.submitForm = _this.submitForm.bind(_this);
+		return _this;
+	}
 
-  _createClass(Login, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      this.props.loadUserFromToken();
-    }
-  }, {
-    key: 'submitForm',
-    value: function submitForm(e) {
-      e.preventDefault();
-      var username = this.usernameInput.value;
-      var password = this.passwordInput.value;
-      this.props.dispatch(actions.login(username, password));
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
+	_createClass(Login, [{
+		key: 'componentWillMount',
+		value: function componentWillMount() {
+			this.props.loadUserFromToken();
+		}
+	}, {
+		key: 'submitForm',
+		value: function submitForm(e) {
+			e.preventDefault();
+			var username = this.usernameInput.value;
+			var password = this.passwordInput.value;
+			this.props.submitLogin(username, password);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Nav2.default, null),
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Login'
-        ),
-        _react2.default.createElement(
-          'form',
-          null,
-          _react2.default.createElement(
-            'label',
-            null,
-            'username'
-          ),
-          _react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
-              return _this2.usernameInput = _ref;
-            } }),
-          _react2.default.createElement(
-            'label',
-            null,
-            'password'
-          ),
-          _react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref2) {
-              return _this2.passwordInput = _ref2;
-            } }),
-          _react2.default.createElement(
-            'button',
-            { type: 'button', onClick: this.submitForm },
-            'submit'
-          )
-        )
-      );
-    }
-  }]);
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_Nav2.default, null),
+				_react2.default.createElement(
+					'h1',
+					null,
+					'Login'
+				),
+				_react2.default.createElement(
+					'form',
+					null,
+					_react2.default.createElement(
+						'label',
+						null,
+						'username'
+					),
+					_react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
+							return _this2.usernameInput = _ref;
+						} }),
+					_react2.default.createElement(
+						'label',
+						null,
+						'password'
+					),
+					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref2) {
+							return _this2.passwordInput = _ref2;
+						} }),
+					_react2.default.createElement(
+						'button',
+						{ type: 'button', onClick: this.submitForm },
+						'submit'
+					)
+				)
+			);
+		}
+	}]);
 
-  return Login;
+	return Login;
 }(_react2.default.Component);
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    loadUserFromToken: function loadUserFromToken() {
-      var token = sessionStorage.getItem('jwtToken');
-      if (!token || token === '') {
-        //if there is no token, dont bother
-        return;
-      }
+	return {
+		submitLogin: function submitLogin(username, password) {
+			dispatch(actions.login(username, password));
+		},
+		loadUserFromToken: function loadUserFromToken() {
+			var token = sessionStorage.getItem('jwtToken');
+			if (!token || token === '') {
+				//if there is no token, dont bother
+				return;
+			}
 
-      //fetch user from token (if server deems it's valid token)
-      dispatch(actions.meFromToken(token)).then(function (response) {
-        console.log(response, response.payload);
-        if (!response.error) {
-          //reset token (possibly new token that was regenerated by the server)
-          sessionStorage.setItem('jwtToken', response.payload.data.token);
-          dispatch(actions.meFromTokenSuccess(response.payload));
-        } else {
-          sessionStorage.removeItem('jwtToken'); //remove token from storage
-          dispatch(actions.meFromTokenFailure(response.payload));
-        }
-      });
-    },
-    resetMe: function resetMe() {
-      sessionStorage.removeItem('jwtToken'); //remove token from storage
-      dispatch(actions.resetToken());
-    }
-  };
+			//fetch user from token (if server deems it's valid token)
+			dispatch(actions.meFromToken(token)).then(function (response) {
+				console.log(response, response.payload);
+				if (!response.error) {
+					//reset token (possibly new token that was regenerated by the server)
+					sessionStorage.setItem('jwtToken', response.payload.data.token);
+					dispatch(actions.meFromTokenSuccess(response.payload));
+				} else {
+					sessionStorage.removeItem('jwtToken'); //remove token from storage
+					dispatch(actions.meFromTokenFailure(response.payload));
+				}
+			});
+		},
+		resetMe: function resetMe() {
+			sessionStorage.removeItem('jwtToken'); //remove token from storage
+			dispatch(actions.resetToken());
+		}
+	};
 };
 
 exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Login);
