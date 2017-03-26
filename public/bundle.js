@@ -7098,11 +7098,61 @@ module.exports = setInnerHTML;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.login = exports.loginError = exports.LOGIN_ERROR = exports.loginSuccess = exports.LOGIN_SUCCESS = exports.signup = exports.signupError = exports.SIGNUP_ERROR = exports.signupSuccess = exports.SIGNUP_SUCCESS = undefined;
+exports.login = exports.loginError = exports.LOGIN_ERROR = exports.loginSuccess = exports.LOGIN_SUCCESS = exports.signup = exports.signupError = exports.SIGNUP_ERROR = exports.signupSuccess = exports.SIGNUP_SUCCESS = exports.RESET_TOKEN = exports.ME_FROM_TOKEN_FAILURE = exports.ME_FROM_TOKEN_SUCCESS = exports.ME_FROM_TOKEN = undefined;
+exports.meFromToken = meFromToken;
+exports.meFromTokenSuccess = meFromTokenSuccess;
+exports.meFromTokenFailure = meFromTokenFailure;
+exports.resetToken = resetToken;
 
 __webpack_require__(163);
 
 __webpack_require__(459);
+
+// meFromToken, meFromTokenSuccess, meFromTokenFailure, resetToken
+
+//Get current user(me) from token in localStorage
+var ME_FROM_TOKEN = exports.ME_FROM_TOKEN = 'ME_FROM_TOKEN';
+var ME_FROM_TOKEN_SUCCESS = exports.ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCESS';
+var ME_FROM_TOKEN_FAILURE = exports.ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
+var RESET_TOKEN = exports.RESET_TOKEN = 'RESET_TOKEN';
+
+function meFromToken(tokenFromStorage) {
+    //check if the token is still valid, if so, get me from the server
+
+    var request = axios({
+        method: 'get',
+        url: ROOT_URL + '/me/from/token?token=' + tokenFromStorage,
+        headers: {
+            'Authorization': 'Bearer ' + tokenFromStorage
+        }
+    });
+
+    return {
+        type: ME_FROM_TOKEN,
+        payload: request
+    };
+}
+
+function meFromTokenSuccess(currentUser) {
+    return {
+        type: ME_FROM_TOKEN_SUCCESS,
+        payload: currentUser
+    };
+}
+
+function meFromTokenFailure(error) {
+    return {
+        type: ME_FROM_TOKEN_FAILURE,
+        payload: error
+    };
+}
+
+function resetToken() {
+    //used for logout
+    return {
+        type: RESET_TOKEN
+    };
+}
 
 var SIGNUP_SUCCESS = exports.SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 var signupSuccess = exports.signupSuccess = function signupSuccess(user) {
@@ -16826,7 +16876,7 @@ exports.default = App;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -16856,72 +16906,106 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Login = function (_React$Component) {
-	_inherits(Login, _React$Component);
+  _inherits(Login, _React$Component);
 
-	function Login(props) {
-		_classCallCheck(this, Login);
+  function Login(props) {
+    _classCallCheck(this, Login);
 
-		var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
-		_this.submitForm = _this.submitForm.bind(_this);
-		return _this;
-	}
+    _this.submitForm = _this.submitForm.bind(_this);
+    return _this;
+  }
 
-	_createClass(Login, [{
-		key: 'submitForm',
-		value: function submitForm(e) {
-			e.preventDefault();
-			var username = this.usernameInput.value;
-			var password = this.passwordInput.value;
-			this.props.dispatch(actions.login(username, password));
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
+  _createClass(Login, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      this.props.loadUserFromToken();
+    }
+  }, {
+    key: 'submitForm',
+    value: function submitForm(e) {
+      e.preventDefault();
+      var username = this.usernameInput.value;
+      var password = this.passwordInput.value;
+      this.props.dispatch(actions.login(username, password));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(_Nav2.default, null),
-				_react2.default.createElement(
-					'h1',
-					null,
-					'Login'
-				),
-				_react2.default.createElement(
-					'form',
-					null,
-					_react2.default.createElement(
-						'label',
-						null,
-						'username'
-					),
-					_react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
-							return _this2.usernameInput = _ref;
-						} }),
-					_react2.default.createElement(
-						'label',
-						null,
-						'password'
-					),
-					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref2) {
-							return _this2.passwordInput = _ref2;
-						} }),
-					_react2.default.createElement(
-						'button',
-						{ type: 'button', onClick: this.submitForm },
-						'submit'
-					)
-				)
-			);
-		}
-	}]);
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_Nav2.default, null),
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Login'
+        ),
+        _react2.default.createElement(
+          'form',
+          null,
+          _react2.default.createElement(
+            'label',
+            null,
+            'username'
+          ),
+          _react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
+              return _this2.usernameInput = _ref;
+            } }),
+          _react2.default.createElement(
+            'label',
+            null,
+            'password'
+          ),
+          _react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref2) {
+              return _this2.passwordInput = _ref2;
+            } }),
+          _react2.default.createElement(
+            'button',
+            { type: 'button', onClick: this.submitForm },
+            'submit'
+          )
+        )
+      );
+    }
+  }]);
 
-	return Login;
+  return Login;
 }(_react2.default.Component);
 
-exports.default = (0, _reactRedux.connect)()(Login);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    loadUserFromToken: function loadUserFromToken() {
+      var token = sessionStorage.getItem('jwtToken');
+      if (!token || token === '') {
+        //if there is no token, dont bother
+        return;
+      }
+
+      //fetch user from token (if server deems it's valid token)
+      dispatch(meFromToken(token)).then(function (response) {
+        console.log(response, response.payload);
+        if (!response.error) {
+          //reset token (possibly new token that was regenerated by the server)
+          sessionStorage.setItem('jwtToken', response.payload.data.token);
+          dispatch(meFromTokenSuccess(response.payload));
+        } else {
+          sessionStorage.removeItem('jwtToken'); //remove token from storage
+          dispatch(meFromTokenFailure(response.payload));
+        }
+      });
+    },
+    resetMe: function resetMe() {
+      sessionStorage.removeItem('jwtToken'); //remove token from storage
+      dispatch(resetToken());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(null, mapStateToProps)(Login);
 
 /***/ }),
 /* 247 */
@@ -17032,7 +17116,6 @@ var Signup = function (_React$Component) {
 					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref4) {
 							return _this2.passwordInput = _ref4;
 						} }),
-					'\xCF',
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17174,22 +17257,71 @@ exports.default = function () {
 	/** success **/
 	if (action.type === actions.SIGNUP_SUCCESS) {
 		console.log('signup');
+		return Object.assign({}, state);
 	}
 
 	if (action.type === actions.LOGIN_SUCCESS) {
 		console.log('login');
+		return Object.assign({}, state);
 	}
 
 	/** errors **/
 	if (action.type === actions.LOGIN_ERROR) {
 		console.log(action);
 		console.log('login error');
+		return Object.assign({}, state);
 	}
 
 	if (action.type === actions.SIGNUP_ERROR) {
 		console.log(action);
 		console.log('signup error');
+		return Object.assign({}, state);
 	}
+
+	if (action.type === actions.ME_FROM_TOKEN) {
+		var updated = {
+			user: null,
+			status: 'storage',
+			error: null,
+			loading: true
+		};
+		return Object.assign({}, state, updated);
+	}
+
+	if (action.type === actions.ME_FROM_TOKEN_SUCCESS) {
+		var _updated = {
+			user: action.payload.data.user,
+			status: 'authenticated',
+			error: null,
+			loading: false
+		};
+
+		return Object.assign({}, state, _updated);
+	}
+
+	if (action.type === actions.ME_FROM_TOKEN_FAILURE) {
+		error = action.payload.data || { message: action.payload.message }; //2nd one is network or server down errors   
+		var _updated2 = {
+			user: null,
+			status: 'storage',
+			error: error,
+			loading: false
+		};
+
+		return Object.assign({}, state, _updated2);
+	}
+
+	if (action.type === actions.RESET_TOKEN) {
+		var _updated3 = {
+			user: null,
+			status: 'storage',
+			error: null,
+			loading: false
+		};
+
+		return Object.assign({}, state, _updated3);
+	}
+
 	return state;
 };
 
