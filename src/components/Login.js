@@ -66,4 +66,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapStateToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);
