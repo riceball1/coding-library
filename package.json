@@ -5,7 +5,7 @@
   "description": "A simple coding notebook to store all your programming code snippets",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "build": "webpack"
   },
   "repository": {
