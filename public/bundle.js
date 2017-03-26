@@ -17005,7 +17005,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(null, mapStateToProps)(Login);
+exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Login);
 
 /***/ }),
 /* 247 */
