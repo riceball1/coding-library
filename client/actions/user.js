@@ -26,6 +26,7 @@ export const meFromToken = (tokenFromStorage) => dispatch => {
                 error.response = response
                 console.log(error.response)
             }
+            console.log("meFromToken response", response);
             return response;
         })
         .then(response => response.json()) // to get the json

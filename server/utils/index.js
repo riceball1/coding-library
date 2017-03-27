@@ -21,7 +21,7 @@ function generateToken(user) {
 	//2. Use fields that are useful in other parts of the app
 
 	const userInfo = {
-		name: user.name,
+		fullname: user.fullname,
 		username: user.username,
 		_id: user._id.toString()
 	};
