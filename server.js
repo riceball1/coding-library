@@ -57,7 +57,7 @@ app.use('/public', express.static('public'));
 
 // endpoints
 app.use('/', index);
-app.use(authenticateMiddleware);
+// app.use(authenticateMiddleware);
 app.use('/user', user);
 // add catch all route for pages that don't have routes
 app.use('*', (req, res) => res.sendStatus(404).json({message: 'Not Found'}));

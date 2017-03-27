@@ -24,7 +24,7 @@ export const meFromToken = (tokenFromStorage) => dispatch => {
             if (!response.ok) {
                 const error = new Error(response.statusText)
                 error.response = response
-                throw error; // should replace throw errors
+                console.log(error.response)
             }
             return response;
         })
@@ -84,7 +84,7 @@ export const signup = (username, fullname, password, password2, email) => dispat
             if (!response.ok) {
                 const error = new Error(response.statusText)
                 error.response = response
-                throw error;
+                console.log(error.response);
             }
             return response;
         })
@@ -94,7 +94,7 @@ export const signup = (username, fullname, password, password2, email) => dispat
             dispatch(signupSuccess(data.user))
         })
         .catch(error => {
-            console.error("error: ", error);
+            console.log("error: ", error);
             dispatch(signupError(error))
         });
 };
@@ -123,11 +123,10 @@ export const login = (username, password) => dispatch => {
     
     return fetch(postRequest)
         .then(response => {
-            console.log(response);
             if (!response.ok) {
                 const error = new Error(response.statusText)
                 error.response = response
-                throw error;
+                console.log(error.response);
             }
             return response;
         })
@@ -137,7 +136,7 @@ export const login = (username, password) => dispatch => {
             dispatch(loginSuccess(data.user))
         })
         .catch(error => {
-            console.error(error);
+            console.log(error);
             dispatch(loginError(error))
         });
 };

@@ -120,13 +120,16 @@ router.get('/me/from/token', (req, res, next) => {
 
 	// check token that was passed by decoding token using secret
 	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-		if(err) throw err;
+		if(err) {
+			console.log(err);
+
+		};
 
 		// return user using the id from w/in JWTToken
 		User.findById({
 			'_id': user._id
 		}, (err, user) => {
-			if(err) throw err;
+			if(err) {console.log(err)};
 			user = utils.getCleanUser(user);
 
 			// either create new token or pass the old token back
