@@ -7182,6 +7182,7 @@ var signupError = exports.signupError = function signupError(error) {
 var signup = exports.signup = function signup(userData) {
     return function (dispatch) {
         var newUser = Object.assign({}, userData);
+
         var url = ROOT_URL + '/signup';
         var postRequest = new Request(url, {
             method: 'POST',
@@ -7192,6 +7193,7 @@ var signup = exports.signup = function signup(userData) {
         });
 
         return fetch(postRequest).then(function (response) {
+            console.log("Signup Response ", response);
             if (!response.ok) {
                 var error = new Error(response.statusText);
                 error.response = response;
@@ -7202,6 +7204,7 @@ var signup = exports.signup = function signup(userData) {
             return response.json();
         }) // to get the json
         .then(function (data) {
+            // console.log("Signup Async Action", data);
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user));
         }).catch(function (error) {
@@ -17142,6 +17145,7 @@ var Signup = function (_React$Component) {
 	_createClass(Signup, [{
 		key: 'submitForm',
 		value: function submitForm(e) {
+			this.setState({ errors: {} });
 			e.preventDefault();
 			var userData = {
 				username: this.usernameInput.value,
@@ -17150,6 +17154,7 @@ var Signup = function (_React$Component) {
 				password: this.passwordInput.value,
 				password2: this.password2Input.value
 			};
+			// this returns a promise - can display errors
 			this.props.dispatch(actions.signup(userData));
 		}
 	}, {
@@ -17176,7 +17181,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
 							return _this2.usernameInput = _ref;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17184,7 +17189,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'fullname', ref: function ref(_ref2) {
 							return _this2.fullnameInput = _ref2;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17192,7 +17197,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'email', name: 'email', ref: function ref(_ref3) {
 							return _this2.emailInput = _ref3;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17200,7 +17205,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref4) {
 							return _this2.passwordInput = _ref4;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17208,7 +17213,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password2', ref: function ref(_ref5) {
 							return _this2.password2Input = _ref5;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'button',
 						{ type: 'button', onClick: this.submitForm },
@@ -17538,12 +17543,12 @@ exports.default = function () {
 
 	/** success **/
 	if (action.type === actions.SIGNUP_SUCCESS) {
-		console.log('signup');
+		console.log('signup success');
 		return Object.assign({}, state);
 	}
 
 	if (action.type === actions.LOGIN_SUCCESS) {
-		console.log('login');
+		console.log('login success');
 		return Object.assign({}, state);
 	}
 

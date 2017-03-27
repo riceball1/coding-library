@@ -71,6 +71,7 @@ export const signupError = ((error) => ({
 
 export const signup = (userData) => dispatch => {
     const newUser = Object.assign({}, userData);
+        
     const url = `${ROOT_URL}/signup`;
     const postRequest = new Request(url, {
         method: 'POST',
@@ -82,6 +83,7 @@ export const signup = (userData) => dispatch => {
     
     return fetch(postRequest)
         .then(response => {
+            console.log("Signup Response ", response);
             if (!response.ok) {
                 const error = new Error(response.statusText)
                 error.response = response
@@ -91,6 +93,7 @@ export const signup = (userData) => dispatch => {
         })
         .then(response => response.json()) // to get the json
         .then(data => {
+            // console.log("Signup Async Action", data);
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user))
         })

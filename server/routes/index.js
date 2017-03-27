@@ -67,10 +67,11 @@ router.post('/login', (req, res) => {
 router.post('/signup', (req, res) => {
 	const {username, fullname, password, password2, email} = req.body;
 
+	console.log("signup req body ", req.body);
 	/** Add unique username and unique email **/
 
 	// Validation from expressValidator
-	req.checkBody('fullname', 'Name is required').notEmpty();
+		req.checkBody('fullname', 'Name is required').notEmpty();
 		req.checkBody('email', 'Email is required').notEmpty();
 		req.checkBody('email', 'Email is not valid').isEmail();
 		req.checkBody('username', 'Username is required').notEmpty();
