@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
 		.findOne({username: req.body.username})
 		.exec((err, user) => {
 			if (err) {
-				console.log(err);
+				console.log("This is the error from login ", err);
 			};
 
 			if (!user) {
@@ -41,7 +41,7 @@ router.post('/login', (req, res) => {
 			bcrypt.compare(req.body.password, user.password, (err, valid) => {
 				// valid is a boolean
 				if (!valid) {
-					return res.sendStatus(401).json({
+					return res.json({
 						error: 'Username or password incorrect'
 					});
 				} else {
