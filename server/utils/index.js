@@ -10,7 +10,7 @@ function getCleanUser(user) {
 	return {
 		// kept only info used for user 
 		_id: u._id,
-		name: u.name,
+		fullname: u.fullname,
 		username: u.username,
 		email: u.email
 	}
