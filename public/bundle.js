@@ -7179,18 +7179,21 @@ var signupError = exports.signupError = function signupError(error) {
     };
 };
 
-var signup = exports.signup = function signup(username, fullname, password, password2, email) {
+var signup = exports.signup = function signup(userData) {
     return function (dispatch) {
+        var newUser = Object.assign({}, userData);
+
         var url = ROOT_URL + '/signup';
         var postRequest = new Request(url, {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
-            body: JSON.stringify({ username: username, fullname: fullname, password: password, password2: password2, email: email })
+            body: JSON.stringify(newUser)
         });
 
         return fetch(postRequest).then(function (response) {
+            console.log("Signup Response ", response);
             if (!response.ok) {
                 var error = new Error(response.statusText);
                 error.response = response;
@@ -7201,6 +7204,7 @@ var signup = exports.signup = function signup(username, fullname, password, pass
             return response.json();
         }) // to get the json
         .then(function (data) {
+            // console.log("Signup Async Action", data);
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user));
         }).catch(function (error) {
@@ -16950,9 +16954,7 @@ var Login = function (_React$Component) {
 			e.preventDefault();
 			var username = this.usernameInput.value;
 			var password = this.passwordInput.value;
-			this.props.submitLogin(username, password).then(function () {
-				browserHistory.push('/dashboard');
-			});
+			this.props.submitLogin(username, password);
 		}
 	}, {
 		key: 'render',
@@ -17143,13 +17145,17 @@ var Signup = function (_React$Component) {
 	_createClass(Signup, [{
 		key: 'submitForm',
 		value: function submitForm(e) {
+			this.setState({ errors: {} });
 			e.preventDefault();
-			var username = this.usernameInput.value;
-			var fullname = this.fullnameInput.value;
-			var email = this.emailInput.value;
-			var password = this.passwordInput.value;
-			var password2 = this.password2Input.value;
-			this.props.dispatch(actions.signup(username, fullname, password, password2, email));
+			var userData = {
+				username: this.usernameInput.value,
+				fullname: this.fullnameInput.value,
+				email: this.emailInput.value,
+				password: this.passwordInput.value,
+				password2: this.password2Input.value
+			};
+			// this returns a promise - can display errors
+			this.props.dispatch(actions.signup(userData));
 		}
 	}, {
 		key: 'render',
@@ -17175,7 +17181,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
 							return _this2.usernameInput = _ref;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17183,7 +17189,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'fullname', ref: function ref(_ref2) {
 							return _this2.fullnameInput = _ref2;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17191,7 +17197,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'email', name: 'email', ref: function ref(_ref3) {
 							return _this2.emailInput = _ref3;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17199,7 +17205,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref4) {
 							return _this2.passwordInput = _ref4;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
 						null,
@@ -17207,7 +17213,7 @@ var Signup = function (_React$Component) {
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password2', ref: function ref(_ref5) {
 							return _this2.password2Input = _ref5;
-						} }),
+						}, required: 'required' }),
 					_react2.default.createElement(
 						'button',
 						{ type: 'button', onClick: this.submitForm },
@@ -17537,12 +17543,12 @@ exports.default = function () {
 
 	/** success **/
 	if (action.type === actions.SIGNUP_SUCCESS) {
-		console.log('signup');
+		console.log('signup success');
 		return Object.assign({}, state);
 	}
 
 	if (action.type === actions.LOGIN_SUCCESS) {
-		console.log('login');
+		console.log('login success');
 		return Object.assign({}, state);
 	}
 

@@ -6,12 +6,12 @@ const initialState = {user: null, status: null, error: null, loading: false};
 export default (state=initialState, action) => {
 	/** success **/
 	if(action.type === actions.SIGNUP_SUCCESS) {
-		console.log('signup');
+		console.log('signup success');
 		return Object.assign({}, state);
 	}
 
 	if(action.type === actions.LOGIN_SUCCESS) {
-		console.log('login');
+		console.log('login success');
 		return Object.assign({}, state);
 	}
 	

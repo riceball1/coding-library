@@ -21,11 +21,11 @@ mongoose.Promise = global.Promise;
 const { authenticateMiddleware } = require('./middlewares/authenticate');
 
 // imported routes
-const index = require('./routes/index.js');
-const user = require('./routes/user.js');
+const index = require('./server/routes/index.js');
+const user = require('./server/routes/user.js');
 
 // config 
-const {PORT, DATABASE_URL} = require('./config.js');
+const {PORT, DATABASE_URL} = require('./server/config.js');
 
 // parse json and params in urls
 app.use(bodyParser.json());

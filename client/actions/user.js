@@ -69,18 +69,21 @@ export const signupError = ((error) => ({
     payload: error
 }))
 
-export const signup = (username, fullname, password, password2, email) => dispatch => {
+export const signup = (userData) => dispatch => {
+    const newUser = Object.assign({}, userData);
+        
     const url = `${ROOT_URL}/signup`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json',
         }),
-        body: JSON.stringify({username, fullname, password, password2, email}),
+        body: JSON.stringify(newUser),
     });
     
     return fetch(postRequest)
         .then(response => {
+            console.log("Signup Response ", response);
             if (!response.ok) {
                 const error = new Error(response.statusText)
                 error.response = response
@@ -90,6 +93,7 @@ export const signup = (username, fullname, password, password2, email) => dispat
         })
         .then(response => response.json()) // to get the json
         .then(data => {
+            // console.log("Signup Async Action", data);
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user))
         })
