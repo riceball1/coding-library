@@ -16,6 +16,7 @@ class Login extends React.Component {
 
 	submitForm(e) {
 		e.preventDefault();
+		// validate the username/password
 		const username = this.usernameInput.value;
 		const password = this.passwordInput.value;
 		this.props.submitLogin(username, password);

@@ -7258,16 +7258,16 @@ var meFromToken = exports.meFromToken = function meFromToken(tokenFromStorage) {
         return fetch(postRequest).then(function (response) {
             if (!response.ok) {
                 var error = new Error(response.statusText);
-                error.response = response;
-                console.log(error.response);
+                error = response;
+                console.log(error);
             }
-            console.log("meFromToken response", response);
             return response;
         }).then(function (response) {
             return response.json();
-        }) // to get the json
+        }) // not giving back correct data
         .then(function (data) {
-            dispatch(meFromTokenSuccess(data.user));
+            // data.user doesn't exist
+            dispatch(meFromTokenSuccess(data));
         }).catch(function (error) {
             dispatch(meFromTokenFailure(error));
         });
@@ -7325,7 +7325,6 @@ var signup = exports.signup = function signup(userData) {
         });
 
         return fetch(postRequest).then(function (response) {
-            console.log("Signup Response ", response);
             if (!response.ok) {
                 var error = new Error(response.statusText);
                 error.response = response;
@@ -7376,18 +7375,18 @@ var login = exports.login = function login(username, password) {
         return fetch(postRequest).then(function (response) {
             if (!response.ok) {
                 var error = new Error(response.statusText);
-                error.response = response;
-                console.log(error.response);
+                error = response;
+                console.log(error);
             }
             return response;
         }).then(function (response) {
-            return response.json();
+            console.log("response ", response);
+            response.text();
         }) // to get the json
         .then(function (data) {
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(loginSuccess(data.user));
         }).catch(function (error) {
-            console.log(error);
             dispatch(loginError(error));
         });
     };
@@ -17009,6 +17008,7 @@ var Login = function (_React$Component) {
 		key: 'submitForm',
 		value: function submitForm(e) {
 			e.preventDefault();
+			// validate the username/password
 			var username = this.usernameInput.value;
 			var password = this.passwordInput.value;
 			this.props.submitLogin(username, password);

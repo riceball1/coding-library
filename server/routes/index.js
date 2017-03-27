@@ -35,26 +35,26 @@ router.post('/login', (req, res) => {
 			};
 
 			if (!user) {
-				return res.sendStatus(404).json({error: true, message: 'Username or Password invalid'});
+				return res.sendStatus(401).json({error: 'Username or Password invalid'});
 			}
 			// check password
 			bcrypt.compare(req.body.password, user.password, (err, valid) => {
+				// valid is a boolean
 				if (!valid) {
-					return res.send(404).json({
-						error: true,
-						message: 'Username or password incorrect'
+					return res.sendStatus(401).json({
+						error: 'Username or password incorrect'
+					});
+				} else {
+					// if everything aok then return token
+					// token is generated again and resent back
+					const token = utils.generateToken(user);
+					user = utils.getCleanUser(user);
+					res.json({
+						user: user,
+						token: token
 					});
 				}
-			
-			// if everything aok then return token
-			// token is generated again and resent back
-			const token = utils.generateToken(user);
-			user = utils.getCleanUser(user);
-			res.json({
-				user: user,
-				token: token
-			});
-		});
+		}); // end of bcrypt
 	}) // end of exec
 });
 	
@@ -135,7 +135,7 @@ router.get('/me/from/token', (req, res, next) => {
 			user = utils.getCleanUser(user);
 
 			// either create new token or pass the old token back
-			console.log("after finding user ", user);
+			console.log("after finding user ", user);+
 			res.json({
 				user: user,
 				token: token
