@@ -12,12 +12,14 @@ class Signup extends React.Component {
 
 	submitForm(e) {
 		e.preventDefault();
-		const username = this.usernameInput.value;
-		const fullname = this.fullnameInput.value;
-		const email = this.emailInput.value;
-		const password = this.passwordInput.value;
-		const password2 = this.password2Input.value;
-		this.props.dispatch(actions.signup(username, fullname, password, password2, email));
+		const userData = {
+			username: this.usernameInput.value,
+			fullname: this.fullnameInput.value,
+			email: this.emailInput.value,
+			password: this.passwordInput.value,
+			password2: this.password2Input.value
+		};
+		this.props.dispatch(actions.signup(userData));
 	}
 
 	render() {

@@ -17,9 +17,7 @@ class Login extends React.Component {
 		e.preventDefault();
 		const username = this.usernameInput.value;
 		const password = this.passwordInput.value;
-		this.props.submitLogin(username, password).then(() => {
-			browserHistory.push('/dashboard');
-		});	
+		this.props.submitLogin(username, password);
 	}
 
 	render() {

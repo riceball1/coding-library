@@ -7179,15 +7179,16 @@ var signupError = exports.signupError = function signupError(error) {
     };
 };
 
-var signup = exports.signup = function signup(username, fullname, password, password2, email) {
+var signup = exports.signup = function signup(userData) {
     return function (dispatch) {
+        var newUser = Object.assign({}, userData);
         var url = ROOT_URL + '/signup';
         var postRequest = new Request(url, {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json'
             }),
-            body: JSON.stringify({ username: username, fullname: fullname, password: password, password2: password2, email: email })
+            body: JSON.stringify(newUser)
         });
 
         return fetch(postRequest).then(function (response) {
@@ -16950,9 +16951,7 @@ var Login = function (_React$Component) {
 			e.preventDefault();
 			var username = this.usernameInput.value;
 			var password = this.passwordInput.value;
-			this.props.submitLogin(username, password).then(function () {
-				browserHistory.push('/dashboard');
-			});
+			this.props.submitLogin(username, password);
 		}
 	}, {
 		key: 'render',
@@ -17144,12 +17143,14 @@ var Signup = function (_React$Component) {
 		key: 'submitForm',
 		value: function submitForm(e) {
 			e.preventDefault();
-			var username = this.usernameInput.value;
-			var fullname = this.fullnameInput.value;
-			var email = this.emailInput.value;
-			var password = this.passwordInput.value;
-			var password2 = this.password2Input.value;
-			this.props.dispatch(actions.signup(username, fullname, password, password2, email));
+			var userData = {
+				username: this.usernameInput.value,
+				fullname: this.fullnameInput.value,
+				email: this.emailInput.value,
+				password: this.passwordInput.value,
+				password2: this.password2Input.value
+			};
+			this.props.dispatch(actions.signup(userData));
 		}
 	}, {
 		key: 'render',
