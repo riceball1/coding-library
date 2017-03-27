@@ -10,9 +10,9 @@ class Login extends React.Component {
 		this.submitForm = this.submitForm.bind(this);
 	}
 
-	componentWillMount() {
-    	this.props.loadUserFromToken();
-  	}
+	// componentWillMount() {
+ //    	this.props.loadUserFromToken();
+ //  	}
 
 	submitForm(e) {
 		e.preventDefault();

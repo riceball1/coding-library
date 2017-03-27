@@ -19,7 +19,7 @@ export default (state=initialState, action) => {
 	if(action.type === actions.LOGIN_ERROR) {
 		console.log(action);
 		console.log('login error');
-		return Object.assign({}, state);
+		return Object.assign({}, state, {error: action.payload});
 	}
 
 	if(action.type === actions.SIGNUP_ERROR) {

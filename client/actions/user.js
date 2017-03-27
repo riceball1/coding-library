@@ -134,8 +134,8 @@ export const login = (username, password) => dispatch => {
             }
             return response;
         })
-        .then(response => { console.log("response ", response);
-        response.text()}) // to get the json
+        .then(response => {
+        response.json()}) // to get the json
         .then(data => {
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(loginSuccess(data.user))

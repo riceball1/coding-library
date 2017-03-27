@@ -7380,8 +7380,7 @@ var login = exports.login = function login(username, password) {
             }
             return response;
         }).then(function (response) {
-            console.log("response ", response);
-            response.text();
+            response.json();
         }) // to get the json
         .then(function (data) {
             sessionStorage.setItem('jwtToken', data.token);
@@ -16999,12 +16998,11 @@ var Login = function (_React$Component) {
 		return _this;
 	}
 
+	// componentWillMount() {
+	//    	this.props.loadUserFromToken();
+	//  	}
+
 	_createClass(Login, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			this.props.loadUserFromToken();
-		}
-	}, {
 		key: 'submitForm',
 		value: function submitForm(e) {
 			e.preventDefault();
@@ -17558,7 +17556,7 @@ exports.default = function () {
 	if (action.type === actions.LOGIN_ERROR) {
 		console.log(action);
 		console.log('login error');
-		return Object.assign({}, state);
+		return Object.assign({}, state, { error: action.payload });
 	}
 
 	if (action.type === actions.SIGNUP_ERROR) {
