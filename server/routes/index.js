@@ -35,7 +35,7 @@ router.post('/login', (req, res) => {
 			};
 
 			if (!user) {
-				return res.sendStatus(401).json({error: 'Username or Password invalid'});
+				return res.status(401).json({error: 'Username or Password invalid'});
 			}
 			// check password
 			bcrypt.compare(req.body.password, user.password, (err, valid) => {
@@ -118,7 +118,7 @@ router.get('/me/from/token', (req, res, next) => {
 	// check header or url parameters or post parameters for token 
 	const token = req.body.token || req.query.token;
 	if(!token) {
-		return res.sendStatus(401).json({message: 'Must pass token'});
+		return res.status(401).json({message: 'Must pass token'});
 	}
 
 	// check token that was passed by decoding token using secret

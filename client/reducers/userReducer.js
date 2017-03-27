@@ -12,18 +12,17 @@ export default (state=initialState, action) => {
 
 	if(action.type === actions.LOGIN_SUCCESS) {
 		console.log('login success');
-		return Object.assign({}, state);
+		// add user to the initialState
+		return Object.assign({}, state, {user: action.payload});
 	}
 	
 	/** errors **/
 	if(action.type === actions.LOGIN_ERROR) {
-		console.log(action);
 		console.log('login error');
 		return Object.assign({}, state, {error: action.payload});
 	}
 
 	if(action.type === actions.SIGNUP_ERROR) {
-		console.log(action);
 		console.log('signup error');
 		return Object.assign({}, state);
 	}

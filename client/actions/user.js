@@ -91,7 +91,7 @@ export const signup = (userData) => dispatch => {
             }
             return response;
         })
-        .then(response => response.json()) // to get the json
+        .then(response =>(response.json())) // to get the json
         .then(data => {
             // console.log("Signup Async Action", data);
             sessionStorage.setItem('jwtToken', data.token);
@@ -134,8 +134,7 @@ export const login = (username, password) => dispatch => {
             }
             return response;
         })
-        .then(response => {
-        response.json()}) // to get the json
+        .then(response => (response.json())) // to get the json
         .then(data => {
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(loginSuccess(data.user))
