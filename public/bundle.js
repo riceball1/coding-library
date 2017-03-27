@@ -7335,7 +7335,7 @@ var signup = exports.signup = function signup(userData) {
             return response.json();
         }) // to get the json
         .then(function (data) {
-            // console.log("Signup Async Action", data);
+            console.log("data ", data);
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user));
         }).catch(function (error) {
@@ -17006,7 +17006,7 @@ var Login = function (_React$Component) {
 			if (this.props.user) {
 				//redirect
 				console.log('redirect!');
-				_reactRouter.browserHistory.push('/');
+				_reactRouter.browserHistory.push('/dashboard');
 			} else {
 				console.log('no redirect - not valid');
 			}
@@ -17306,12 +17306,27 @@ var Signup = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).call(this, props));
 
 		_this.submitForm = _this.submitForm.bind(_this);
+		_this.isValid = _this.isValid.bind(_this);
 		return _this;
 	}
 
 	_createClass(Signup, [{
+		key: 'isValid',
+		value: function isValid() {
+			// redirect
+			if (this.props.user) {
+				console.log('redirect');
+				// browserHistory.push('/login');
+			} else {
+				console.log('no redirect');
+				// clear form?
+			}
+		}
+	}, {
 		key: 'submitForm',
 		value: function submitForm(e) {
+			var _this2 = this;
+
 			this.setState({ errors: {} });
 			e.preventDefault();
 			var userData = {
@@ -17322,12 +17337,14 @@ var Signup = function (_React$Component) {
 				password2: this.password2Input.value
 			};
 			// this returns a promise - can display errors
-			this.props.dispatch(actions.signup(userData));
+			this.props.dispatch(actions.signup(userData)).then(function () {
+				_this2.isValid();
+			});
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this2 = this;
+			var _this3 = this;
 
 			return _react2.default.createElement(
 				'div',
@@ -17347,7 +17364,7 @@ var Signup = function (_React$Component) {
 						'username'
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
-							return _this2.usernameInput = _ref;
+							return _this3.usernameInput = _ref;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
@@ -17355,7 +17372,7 @@ var Signup = function (_React$Component) {
 						'full name'
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'fullname', ref: function ref(_ref2) {
-							return _this2.fullnameInput = _ref2;
+							return _this3.fullnameInput = _ref2;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
@@ -17363,7 +17380,7 @@ var Signup = function (_React$Component) {
 						'email'
 					),
 					_react2.default.createElement('input', { type: 'email', name: 'email', ref: function ref(_ref3) {
-							return _this2.emailInput = _ref3;
+							return _this3.emailInput = _ref3;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
@@ -17371,7 +17388,7 @@ var Signup = function (_React$Component) {
 						'password'
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref4) {
-							return _this2.passwordInput = _ref4;
+							return _this3.passwordInput = _ref4;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
@@ -17379,7 +17396,7 @@ var Signup = function (_React$Component) {
 						'confirm password'
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password2', ref: function ref(_ref5) {
-							return _this2.password2Input = _ref5;
+							return _this3.password2Input = _ref5;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'button',
@@ -17393,6 +17410,13 @@ var Signup = function (_React$Component) {
 
 	return Signup;
 }(_react2.default.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+	console.log(state);
+	return {
+		user: state.userReducer
+	};
+};
 
 exports.default = (0, _reactRedux.connect)()(Signup);
 
@@ -17563,29 +17587,31 @@ exports.default = function () {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	var action = arguments[1];
 
-	/** success **/
-	if (action.type === actions.SIGNUP_SUCCESS) {
-		console.log('signup success');
-		return Object.assign({}, state);
-	}
-
+	/** LOGIN **/
 	if (action.type === actions.LOGIN_SUCCESS) {
 		console.log('login success');
 		// add user to the initialState
 		return Object.assign({}, state, { user: action.payload });
 	}
 
-	/** errors **/
 	if (action.type === actions.LOGIN_ERROR) {
 		console.log('login error');
 		return Object.assign({}, state, { error: action.payload });
 	}
 
-	if (action.type === actions.SIGNUP_ERROR) {
-		console.log('signup error');
-		return Object.assign({}, state);
+	/** SIGNUP **/
+	if (action.type === actions.SIGNUP_SUCCESS) {
+		console.log('signup success');
+		console.log(action);
+		return Object.assign({}, state, { user: action.payload });
 	}
 
+	if (action.type === actions.SIGNUP_ERROR) {
+		console.log('signup error');
+		return Object.assign({}, state, { error: action.payload });
+	}
+
+	/** TOKEN **/
 	if (action.type === actions.ME_FROM_TOKEN) {
 		var updated = {
 			user: null,

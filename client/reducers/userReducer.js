@@ -4,29 +4,32 @@ import * as actions from '../actions/user';
 const initialState = {user: null, status: null, error: null, loading: false};
 
 export default (state=initialState, action) => {
-	/** success **/
-	if(action.type === actions.SIGNUP_SUCCESS) {
-		console.log('signup success');
-		return Object.assign({}, state);
-	}
-
+	/** LOGIN **/
 	if(action.type === actions.LOGIN_SUCCESS) {
 		console.log('login success');
 		// add user to the initialState
 		return Object.assign({}, state, {user: action.payload});
 	}
 	
-	/** errors **/
 	if(action.type === actions.LOGIN_ERROR) {
 		console.log('login error');
 		return Object.assign({}, state, {error: action.payload});
 	}
 
-	if(action.type === actions.SIGNUP_ERROR) {
-		console.log('signup error');
-		return Object.assign({}, state);
+
+	/** SIGNUP **/
+	if(action.type === actions.SIGNUP_SUCCESS) {
+		console.log('signup success');
+		console.log(action);
+		return Object.assign({}, state, {user: action.payload });
 	}
 
+	if(action.type === actions.SIGNUP_ERROR) {
+		console.log('signup error');
+		return Object.assign({}, state, {error: action.payload});
+	}
+
+	/** TOKEN **/
 	if(action.type === actions.ME_FROM_TOKEN) {
 		const updated = {  
 			user: null, 

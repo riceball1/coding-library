@@ -8,6 +8,18 @@ class Signup extends React.Component {
 	constructor(props) {
 		super(props);
 		this.submitForm = this.submitForm.bind(this);
+		this.isValid = this.isValid.bind(this);
+	}
+
+	isValid() {
+		// redirect
+		if(this.props.user) {
+			console.log('redirect');
+			// browserHistory.push('/login');
+		} else {
+			console.log('no redirect');
+			// clear form?
+		}
 	}
 
 	submitForm(e) {
@@ -21,7 +33,9 @@ class Signup extends React.Component {
 			password2: this.password2Input.value
 		};
 		// this returns a promise - can display errors
-		this.props.dispatch(actions.signup(userData));
+		this.props.dispatch(actions.signup(userData)).then(() => {
+			this.isValid();
+		});
 	}
 
 	render() {
@@ -46,5 +60,13 @@ class Signup extends React.Component {
 		)
 	}
 }
+
+const mapStateToProps = (state) => {
+	console.log(state);
+	return {
+		user: state.userReducer
+	}
+}
+
 
 export default connect()(Signup);

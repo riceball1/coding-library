@@ -93,7 +93,7 @@ export const signup = (userData) => dispatch => {
         })
         .then(response =>(response.json())) // to get the json
         .then(data => {
-            // console.log("Signup Async Action", data);
+            console.log("data ", data);
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user))
         })

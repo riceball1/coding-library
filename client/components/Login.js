@@ -16,7 +16,7 @@ class Login extends React.Component {
   		if(this.props.user) {
     		//redirect
     		console.log('redirect!');
-    		browserHistory.push('/');
+    		browserHistory.push('/dashboard');
     	} else {
     		console.log('no redirect - not valid');
     	}
