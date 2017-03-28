@@ -5,8 +5,10 @@
   "description": "A simple coding notebook to store all your programming code snippets",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "webpack"
+    "server": "webpack-dev-server",
+    "build": "webpack --watch",
+    "dev": "webpack -d --watch",
+    "prod": "webpack -p"
   },
   "repository": {
     "type": "git",

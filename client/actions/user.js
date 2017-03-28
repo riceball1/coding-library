@@ -22,16 +22,16 @@ export const meFromToken = (tokenFromStorage) => dispatch => {
     return fetch(postRequest)
         .then(response => {
             if (!response.ok) {
-                const error = new Error(response.statusText)
-                error.response = response
-                console.log(error.response)
+                let error = new Error(response.statusText)
+                error = response
+                console.log(error)
             }
-            console.log("meFromToken response", response);
             return response;
         })
-        .then(response => response.json()) // to get the json
+        .then(response => response.json()) // not giving back correct data
         .then(data => {
-            dispatch(meFromTokenSuccess(data.user))
+            // data.user doesn't exist
+            dispatch(meFromTokenSuccess(data))
         })
         .catch(error => {
           dispatch(meFromTokenFailure(error))
@@ -84,7 +84,6 @@ export const signup = (userData) => dispatch => {
     
     return fetch(postRequest)
         .then(response => {
-            console.log("Signup Response ", response);
             if (!response.ok) {
                 const error = new Error(response.statusText)
                 error.response = response
@@ -92,9 +91,9 @@ export const signup = (userData) => dispatch => {
             }
             return response;
         })
-        .then(response => response.json()) // to get the json
+        .then(response =>(response.json())) // to get the json
         .then(data => {
-            // console.log("Signup Async Action", data);
+            console.log("data ", data);
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user))
         })
@@ -129,19 +128,18 @@ export const login = (username, password) => dispatch => {
     return fetch(postRequest)
         .then(response => {
             if (!response.ok) {
-                const error = new Error(response.statusText)
-                error.response = response
-                console.log(error.response);
+                let error = new Error(response.statusText)
+                error = response
+                console.log(error);
             }
             return response;
         })
-        .then(response => response.json()) // to get the json
+        .then(response => (response.json())) // to get the json
         .then(data => {
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(loginSuccess(data.user))
         })
         .catch(error => {
-            console.log(error);
             dispatch(loginError(error))
         });
 };

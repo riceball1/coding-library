@@ -7258,16 +7258,16 @@ var meFromToken = exports.meFromToken = function meFromToken(tokenFromStorage) {
         return fetch(postRequest).then(function (response) {
             if (!response.ok) {
                 var error = new Error(response.statusText);
-                error.response = response;
-                console.log(error.response);
+                error = response;
+                console.log(error);
             }
-            console.log("meFromToken response", response);
             return response;
         }).then(function (response) {
             return response.json();
-        }) // to get the json
+        }) // not giving back correct data
         .then(function (data) {
-            dispatch(meFromTokenSuccess(data.user));
+            // data.user doesn't exist
+            dispatch(meFromTokenSuccess(data));
         }).catch(function (error) {
             dispatch(meFromTokenFailure(error));
         });
@@ -7325,7 +7325,6 @@ var signup = exports.signup = function signup(userData) {
         });
 
         return fetch(postRequest).then(function (response) {
-            console.log("Signup Response ", response);
             if (!response.ok) {
                 var error = new Error(response.statusText);
                 error.response = response;
@@ -7336,7 +7335,7 @@ var signup = exports.signup = function signup(userData) {
             return response.json();
         }) // to get the json
         .then(function (data) {
-            // console.log("Signup Async Action", data);
+            console.log("data ", data);
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(signupSuccess(data.user));
         }).catch(function (error) {
@@ -7376,8 +7375,8 @@ var login = exports.login = function login(username, password) {
         return fetch(postRequest).then(function (response) {
             if (!response.ok) {
                 var error = new Error(response.statusText);
-                error.response = response;
-                console.log(error.response);
+                error = response;
+                console.log(error);
             }
             return response;
         }).then(function (response) {
@@ -7387,7 +7386,6 @@ var login = exports.login = function login(username, password) {
             sessionStorage.setItem('jwtToken', data.token);
             dispatch(loginSuccess(data.user));
         }).catch(function (error) {
-            console.log(error);
             dispatch(loginError(error));
         });
     };
@@ -16997,26 +16995,41 @@ var Login = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
 		_this.submitForm = _this.submitForm.bind(_this);
+		_this.isValid = _this.isValid.bind(_this);
 		return _this;
 	}
 
 	_createClass(Login, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			this.props.loadUserFromToken();
+		key: 'isValid',
+		value: function isValid() {
+			if (this.props.user) {
+				//redirect
+				console.log('redirect!');
+				_reactRouter.browserHistory.push('/dashboard');
+			} else {
+				console.log('no redirect - not valid');
+			}
 		}
 	}, {
 		key: 'submitForm',
 		value: function submitForm(e) {
+			var _this2 = this;
+
 			e.preventDefault();
+			// validate the username/password
 			var username = this.usernameInput.value;
 			var password = this.passwordInput.value;
-			this.props.submitLogin(username, password);
+			// even if password is wrong it goes to login success - but doesn't
+			// return a user object in userReducer <--
+			this.props.dispatch(actions.login(username, password)).then(function () {
+				console.log("This works!");
+				_this2.isValid();
+			});
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this2 = this;
+			var _this3 = this;
 
 			return _react2.default.createElement(
 				'div',
@@ -17036,7 +17049,7 @@ var Login = function (_React$Component) {
 						'username'
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
-							return _this2.usernameInput = _ref;
+							return _this3.usernameInput = _ref;
 						} }),
 					_react2.default.createElement(
 						'label',
@@ -17044,7 +17057,7 @@ var Login = function (_React$Component) {
 						'password'
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref2) {
-							return _this2.passwordInput = _ref2;
+							return _this3.passwordInput = _ref2;
 						} }),
 					_react2.default.createElement(
 						'button',
@@ -17059,38 +17072,44 @@ var Login = function (_React$Component) {
 	return Login;
 }(_react2.default.Component);
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//   	// submitLogin: (username, password) => {
+//   	// 	dispatch(actions.login(username, password));
+//   	// },
+// 	loadUserFromToken: () => {
+// 	 	let token = sessionStorage.getItem('jwtToken');
+// 	 	if(!token || token === '') {//if there is no token, dont bother
+// 	 		return;
+// 	 	}
+// 		 //fetch user from token (if server deems it's valid token)
+// 	  	dispatch(actions.meFromToken(token))
+// 	    .then((response) => {
+// 	    	console.log("Login", response); // undefined
+// 	      if (!response) {
+// 	      	//reset token (possibly new token that was regenerated by the server)
+// 	      	sessionStorage.setItem('jwtToken', response.payload.data.token);
+// 	        dispatch(actions.meFromTokenSuccess(response.payload));
+// 	      } else {
+// 	      	sessionStorage.removeItem('jwtToken');//remove token from storage
+// 	        dispatch(actions.meFromTokenFailure(response.payload));
+// 	      }
+// 	    });
+// 	},
+// 	resetMe: () =>{
+// 	 	sessionStorage.removeItem('jwtToken'); //remove token from storage
+// 	 	dispatch(actions.resetToken());
+// 	 }
+//   }
+// }
+
+var mapStateToProps = function mapStateToProps(state) {
 	return {
-		submitLogin: function submitLogin(username, password) {
-			dispatch(actions.login(username, password));
-		},
-		loadUserFromToken: function loadUserFromToken() {
-			var token = sessionStorage.getItem('jwtToken');
-			if (!token || token === '') {
-				//if there is no token, dont bother
-				return;
-			}
-			//fetch user from token (if server deems it's valid token)
-			dispatch(actions.meFromToken(token)).then(function (response) {
-				console.log("Login", response); // undefined
-				if (!response) {
-					//reset token (possibly new token that was regenerated by the server)
-					sessionStorage.setItem('jwtToken', response.payload.data.token);
-					dispatch(actions.meFromTokenSuccess(response.payload));
-				} else {
-					sessionStorage.removeItem('jwtToken'); //remove token from storage
-					dispatch(actions.meFromTokenFailure(response.payload));
-				}
-			});
-		},
-		resetMe: function resetMe() {
-			sessionStorage.removeItem('jwtToken'); //remove token from storage
-			dispatch(actions.resetToken());
-		}
+		user: state.userReducer.user
 	};
 };
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Login);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Login);
 
 /***/ }),
 /* 248 */
@@ -17267,6 +17286,8 @@ var _Nav = __webpack_require__(164);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
+var _reactRouter = __webpack_require__(103);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -17286,12 +17307,27 @@ var Signup = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).call(this, props));
 
 		_this.submitForm = _this.submitForm.bind(_this);
+		_this.isValid = _this.isValid.bind(_this);
 		return _this;
 	}
 
 	_createClass(Signup, [{
+		key: 'isValid',
+		value: function isValid() {
+			// redirect
+			if (this.props.user) {
+				console.log('redirect');
+				_reactRouter.browserHistory.push('/login');
+			} else {
+				console.log('no redirect');
+				// clear form?
+			}
+		}
+	}, {
 		key: 'submitForm',
 		value: function submitForm(e) {
+			var _this2 = this;
+
 			this.setState({ errors: {} });
 			e.preventDefault();
 			var userData = {
@@ -17302,12 +17338,14 @@ var Signup = function (_React$Component) {
 				password2: this.password2Input.value
 			};
 			// this returns a promise - can display errors
-			this.props.dispatch(actions.signup(userData));
+			this.props.dispatch(actions.signup(userData)).then(function () {
+				_this2.isValid();
+			});
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this2 = this;
+			var _this3 = this;
 
 			return _react2.default.createElement(
 				'div',
@@ -17327,7 +17365,7 @@ var Signup = function (_React$Component) {
 						'username'
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'username', ref: function ref(_ref) {
-							return _this2.usernameInput = _ref;
+							return _this3.usernameInput = _ref;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
@@ -17335,7 +17373,7 @@ var Signup = function (_React$Component) {
 						'full name'
 					),
 					_react2.default.createElement('input', { type: 'text', name: 'fullname', ref: function ref(_ref2) {
-							return _this2.fullnameInput = _ref2;
+							return _this3.fullnameInput = _ref2;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
@@ -17343,7 +17381,7 @@ var Signup = function (_React$Component) {
 						'email'
 					),
 					_react2.default.createElement('input', { type: 'email', name: 'email', ref: function ref(_ref3) {
-							return _this2.emailInput = _ref3;
+							return _this3.emailInput = _ref3;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
@@ -17351,7 +17389,7 @@ var Signup = function (_React$Component) {
 						'password'
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password', ref: function ref(_ref4) {
-							return _this2.passwordInput = _ref4;
+							return _this3.passwordInput = _ref4;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'label',
@@ -17359,7 +17397,7 @@ var Signup = function (_React$Component) {
 						'confirm password'
 					),
 					_react2.default.createElement('input', { type: 'password', name: 'password2', ref: function ref(_ref5) {
-							return _this2.password2Input = _ref5;
+							return _this3.password2Input = _ref5;
 						}, required: 'required' }),
 					_react2.default.createElement(
 						'button',
@@ -17374,7 +17412,13 @@ var Signup = function (_React$Component) {
 	return Signup;
 }(_react2.default.Component);
 
-exports.default = (0, _reactRedux.connect)()(Signup);
+var mapStateToProps = function mapStateToProps(state) {
+	return {
+		user: state.userReducer
+	};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Signup);
 
 /***/ }),
 /* 252 */
@@ -17543,30 +17587,31 @@ exports.default = function () {
 	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
 	var action = arguments[1];
 
-	/** success **/
-	if (action.type === actions.SIGNUP_SUCCESS) {
-		console.log('signup success');
-		return Object.assign({}, state);
-	}
-
+	/** LOGIN **/
 	if (action.type === actions.LOGIN_SUCCESS) {
 		console.log('login success');
-		return Object.assign({}, state);
+		// add user to the initialState
+		return Object.assign({}, state, { user: action.payload });
 	}
 
-	/** errors **/
 	if (action.type === actions.LOGIN_ERROR) {
-		console.log(action);
 		console.log('login error');
-		return Object.assign({}, state);
+		return Object.assign({}, state, { error: action.payload });
+	}
+
+	/** SIGNUP **/
+	if (action.type === actions.SIGNUP_SUCCESS) {
+		console.log('signup success');
+		console.log(action);
+		return Object.assign({}, state, { user: action.payload });
 	}
 
 	if (action.type === actions.SIGNUP_ERROR) {
-		console.log(action);
 		console.log('signup error');
-		return Object.assign({}, state);
+		return Object.assign({}, state, { error: action.payload });
 	}
 
+	/** TOKEN **/
 	if (action.type === actions.ME_FROM_TOKEN) {
 		var updated = {
 			user: null,

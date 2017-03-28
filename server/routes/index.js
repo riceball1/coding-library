@@ -31,30 +31,30 @@ router.post('/login', (req, res) => {
 		.findOne({username: req.body.username})
 		.exec((err, user) => {
 			if (err) {
-				console.log(err);
+				console.log("This is the error from login ", err);
 			};
 
 			if (!user) {
-				return res.sendStatus(404).json({error: true, message: 'Username or Password invalid'});
+				return res.status(401).json({error: 'Username or Password invalid'});
 			}
 			// check password
 			bcrypt.compare(req.body.password, user.password, (err, valid) => {
+				// valid is a boolean
 				if (!valid) {
-					return res.send(404).json({
-						error: true,
-						message: 'Username or password incorrect'
+					return res.json({
+						error: 'Username or password incorrect'
+					});
+				} else {
+					// if everything aok then return token
+					// token is generated again and resent back
+					const token = utils.generateToken(user);
+					user = utils.getCleanUser(user);
+					res.json({
+						user: user,
+						token: token
 					});
 				}
-			
-			// if everything aok then return token
-			// token is generated again and resent back
-			const token = utils.generateToken(user);
-			user = utils.getCleanUser(user);
-			res.json({
-				user: user,
-				token: token
-			});
-		});
+		}); // end of bcrypt
 	}) // end of exec
 });
 	
@@ -66,8 +66,6 @@ router.post('/login', (req, res) => {
 
 router.post('/signup', (req, res) => {
 	const {username, fullname, password, password2, email} = req.body;
-
-	console.log("signup req body ", req.body);
 	/** Add unique username and unique email **/
 
 	// Validation from expressValidator
@@ -118,7 +116,7 @@ router.get('/me/from/token', (req, res, next) => {
 	// check header or url parameters or post parameters for token 
 	const token = req.body.token || req.query.token;
 	if(!token) {
-		return res.sendStatus(401).json({message: 'Must pass token'});
+		return res.status(401).json({message: 'Must pass token'});
 	}
 
 	// check token that was passed by decoding token using secret
@@ -135,7 +133,7 @@ router.get('/me/from/token', (req, res, next) => {
 			user = utils.getCleanUser(user);
 
 			// either create new token or pass the old token back
-			console.log("after finding user ", user);
+			console.log("after finding user ", user);+
 			res.json({
 				user: user,
 				token: token
