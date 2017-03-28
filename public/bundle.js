@@ -16994,7 +16994,6 @@ var Login = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
-		console.log("props", props);
 		_this.submitForm = _this.submitForm.bind(_this);
 		_this.isValid = _this.isValid.bind(_this);
 		return _this;
@@ -17287,6 +17286,8 @@ var _Nav = __webpack_require__(164);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
+var _reactRouter = __webpack_require__(103);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -17316,7 +17317,7 @@ var Signup = function (_React$Component) {
 			// redirect
 			if (this.props.user) {
 				console.log('redirect');
-				// browserHistory.push('/login');
+				_reactRouter.browserHistory.push('/login');
 			} else {
 				console.log('no redirect');
 				// clear form?
@@ -17412,13 +17413,12 @@ var Signup = function (_React$Component) {
 }(_react2.default.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
-	console.log(state);
 	return {
 		user: state.userReducer
 	};
 };
 
-exports.default = (0, _reactRedux.connect)()(Signup);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Signup);
 
 /***/ }),
 /* 252 */

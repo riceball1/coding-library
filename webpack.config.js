@@ -1,12 +1,19 @@
-var path = require('path');
 var webpack = require('webpack');
-
+var path = require('path');
 
 module.exports = {
-	entry: path.resolve(__dirname, './client/index.js'),
+	entry: path.resolve(__dirname, 'client/index.js'),
 	output: {
 		path: path.resolve(__dirname, 'public'),
 		filename: 'bundle.js'
+	},
+	devServer: {
+		inline: true,
+		contentBase: path.resolve(__dirname, 'public'),
+		compress: true,
+		port: 3000,
+		stats: "errors-only",
+		open: true
 	},
 	module: {
 		loaders: [
@@ -25,7 +32,4 @@ module.exports = {
 		}
 		]
 	}
-
-
-
 }

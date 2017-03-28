@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions/user';
 import Nav from './Nav';
+import {browserHistory} from 'react-router';
 
 
 class Signup extends React.Component {
@@ -15,7 +16,7 @@ class Signup extends React.Component {
 		// redirect
 		if(this.props.user) {
 			console.log('redirect');
-			// browserHistory.push('/login');
+			browserHistory.push('/login');
 		} else {
 			console.log('no redirect');
 			// clear form?
@@ -62,11 +63,10 @@ class Signup extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return {
 		user: state.userReducer
 	}
 }
 
 
-export default connect()(Signup);
+export default connect(mapStateToProps)(Signup);

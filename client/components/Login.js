@@ -7,7 +7,6 @@ import { browserHistory } from 'react-router';
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log("props", props);
 		this.submitForm = this.submitForm.bind(this);
 		this.isValid = this.isValid.bind(this);
 	}
