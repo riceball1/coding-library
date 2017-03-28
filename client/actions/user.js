@@ -58,11 +58,13 @@ export const resetToken = () =>  {//used for logout
   };
 }
 
-export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
-export const signupSuccess = ((user) => ({
-    type: SIGNUP_SUCCESS,
-    payload: user
-}))
+export const LOGOUT = 'LOGOUT';
+export const logout = (() => {
+    sessionStorage.removeItem('jwtToken');
+    return {
+        type: LOGOUT
+    }
+})
 
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 export const signupError = ((error) => ({
@@ -95,7 +97,7 @@ export const signup = (userData) => dispatch => {
         .then(data => {
             console.log("data ", data);
             sessionStorage.setItem('jwtToken', data.token);
-            dispatch(signupSuccess(data.user))
+            dispatch(loginSuccess(data.user))
         })
         .catch(error => {
             console.log("error: ", error);

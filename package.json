@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "server": "webpack-dev-server",
-    "build": "webpack --watch",
+    "build": "webpack",
     "dev": "webpack -d --watch",
     "prod": "webpack -p"
   },

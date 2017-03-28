@@ -5,6 +5,8 @@ import App from './App';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
+import RequireAuth from '../require_auth';
+
 
 const Root = ({store}) =>(
 	<Provider store={store} >
@@ -12,7 +14,7 @@ const Root = ({store}) =>(
 			<Route path="/" component={App} />
 				<Route path="/login" component={Login} />
 				<Route path="/signup" component={Signup} />
-				<Route path="/dashboard" component={Dashboard} />
+				<Route path="/dashboard" component={RequireAuth(Dashboard)} />
 		</Router>
 	</Provider>
 )

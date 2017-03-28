@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Snippets from '../components/Snippets';
 import SidebarTop from '../components/SidebarTop';
 import SidebarBottom from '../components/SidebarBottom';
-
+import * as actions from '../actions/user';
 
 class Sidebar extends React.Component {	
 	constructor(props) {
@@ -12,6 +12,7 @@ class Sidebar extends React.Component {
 			visible: false
 		};
 		this.handleSidebar= this.handleSidebar.bind(this);
+		this.logout = this.logout.bind(this);
 	}
 
 	handleSidebar(e) {
@@ -23,16 +24,27 @@ class Sidebar extends React.Component {
 		}
 	}
 
+	logout(e){
+		e.preventDefault();
+		this.props.dispatch(actions.logout());
+	}
+
 	render() {
 		return (
 			<div>
+			<button onClick={this.handleSidebar} className="sidebar-button">Open/Close</button>
 				<div id="sideBar" className={(this.state.visible? "visible " : "invisible ") + "side-menu"}>
-					<SidebarTop />
+					<div className="top-menu">
+						<input type="search" placeholder="search" /><button>+ notes</button>
+					</div>
 					<Snippets />
-					<SidebarBottom />
-				</div>
-				<button onClick={this.handleSidebar} className="sidebar-button">Open/Close</button>
+		
+					<div className="bottom-menu">
+					<button onClick={this.logout}> Logout</button> Settings
+					</div>
 			</div>
+		</div>
+
 		)
 	}
 }

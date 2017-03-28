@@ -4,6 +4,11 @@ import {Link} from 'react-router';
 
 
 class App extends React.Component {
+
+	componentWillMount() {
+		// loadUserFromToken
+	}
+
 	render() {
 		return (
 			<div className="main">
