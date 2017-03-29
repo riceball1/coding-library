@@ -93,15 +93,20 @@ p, div {
 
 .side-menu {
 	border: 1px solid $lGray;
-	width: 40%;
-	height: 100%;
-	position: absolute;
-	padding: 5px;
-	top: 0;
-	left: 0;
+	height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 5px;
 	.list-snippets {
-		overflow: auto;
+		overflow: hidden;
 		height: 70%;
+		&:hover{
+			overflow: auto;
+		}
 		.individual-snippets {
 			border: 1px solid $lGray;
 			padding: 5px;
@@ -137,12 +142,25 @@ p, div {
 	font-size: 1.2em;
 	border-radius: 2px;
 	outline: none;
+	z-index: 1000;
 }
 
 .invisible {
-	display: none;
+	// display: none;
+	width: 0;
+	opacity: 0;
+	transition: 0.5s ease-in-out;
+
 }
 
 .visible {
-	display: block;
+	width: 50%;
+	opacity: 1;
+	margin: 10px auto;
+	transition: 0.5s ease-in-out;
+}
+
+@media screen and (max-height: 450px) {
+    .sidemenu {padding-top: 15px;}
+    .sidemenu a {font-size: 18px;}
 }

@@ -7,14 +7,14 @@ import Signup from './Signup';
 import Dashboard from './Dashboard';
 import RequireAuth from '../require_auth';
 
-
+/** Add back RequireAuth to dashboard **/
 const Root = ({store}) =>(
 	<Provider store={store} >
 		<Router history={browserHistory}>
 			<Route path="/" component={App} />
-				<Route path="/login" component={Login} />
-				<Route path="/signup" component={Signup} />
-				<Route path="/dashboard" component={RequireAuth(Dashboard)} />
+			<Route path="/login" component={Login} />
+			<Route path="/signup" component={Signup} />
+			<Route path="/dashboard" component={Dashboard} />
 		</Router>
 	</Provider>
 )

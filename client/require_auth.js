@@ -1,4 +1,4 @@
-//require_auth
+// //require_auth
 
 import {browserHistory} from 'react-router';
 import React, { Component } from 'react';
@@ -26,7 +26,7 @@ export default function(ComposedComponent) {
   }
 
   function mapStateToProps(state) {
-    return { user: state.userReducer.user };
+    return { user: state.userReducer.user};
   }
 
   return connect(mapStateToProps)(Authentication);

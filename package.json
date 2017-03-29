@@ -1,4 +1,3 @@
-
 {
   "name": "simple-code",
   "version": "1.0.0",
@@ -60,6 +59,7 @@
     "faker": "^4.1.0",
     "mocha": "^3.2.0",
     "node-sass": "^4.5.1",
+    "react-addons-css-transition-group": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "sass-loader": "^6.0.3",
     "sinon": "^1.4.0",
