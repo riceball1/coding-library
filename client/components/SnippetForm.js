@@ -21,16 +21,14 @@ class SnippetForm extends React.Component {
 
    componentWillReceiveProps(nextProps) {
        this.setState({user: nextProps.user.user});
-       console.log(nextProps.user.user);
    }
     loadUserFromToken() {
         let token = localStorage.getItem('jwtToken');
-        console.log("token", token);
+        console.log(token? "Token true": "Token false");
         if (!token || token === '') {
             //if there is no token, dont bother
             return;
         }
-        //fetch user from token (if server deems it’s valid token)
         this.props.dispatch(actions.meFromToken(token));
     }
 
@@ -40,7 +38,7 @@ class SnippetForm extends React.Component {
             title: this.titleInput.value,
             description: this.descriptionInput.value,
             code: this.codesnippetInput.value,
-            userid: this.state.user._id
+            userId: this.state.user._id
         };
 
         console.log(newSnippet);

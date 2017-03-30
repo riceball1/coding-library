@@ -23,7 +23,10 @@ class Sidebar extends React.Component {
 	componentWillMount() {
 		// fetch the snippets
 		this.props.dispatch(snippetActions.fetchSnippets());
-		this.setState({snippets: this.props.snippets});
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({snippets: nextProps.snippets});
 	}
 
 	toggleSidebar(e) {
@@ -49,12 +52,6 @@ class Sidebar extends React.Component {
 	}
 
 	render() {
-		const snippets = this.state.snippets;
-		const snippetArray = snippets.map((snippet, index)=> {
-			return (
-				<Snippets data={snippet} />
-			)
-		});
 		return (
 			<div>
 			<button onClick={this.toggleSidebar} className="sidebar-button">Open/Close</button>
@@ -63,7 +60,7 @@ class Sidebar extends React.Component {
 					<div className="top-menu">
 						<input type="search" placeholder="search" />
 					</div>
-					{this.snippetArray}
+					<Snippets data={this.state.snippetArray} />
 					<div className="bottom-menu">
 					<button onClick={this.logout}> Logout</button> <button>Settings</button> <button onClick={this.addSnippet}>Create Snippet</button>
 					</div>

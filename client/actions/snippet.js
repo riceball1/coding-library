@@ -27,15 +27,15 @@ export const addSnippetSuccess = ((data) => ({
     payload: data
 }))
 
-export const UPDATE_SNIPPETS_SUCCESS = 'UPDATE_SNIPPETS_SUCCESS';
-export const updateSnippetsSuccess = ((data) => ({
-    type: UPDATE_SNIPPETS_SUCCESS,
+export const UPDATE_SNIPPET_SUCCESS = 'UPDATE_SNIPPET_SUCCESS';
+export const updateSnippetSuccess = ((data) => ({
+    type: UPDATE_SNIPPET_SUCCESS,
     payload: data
 }))
 
-export const DELETE_SNIPPETS_SUCCESS = 'DELETE_SNIPPETS_SUCCESS';
-export const deleteSnippetsSuccess = ((data) => ({
-    type: DELETE_SNIPPETS_SUCCESS,
+export const DELETE_SNIPPET_SUCCESS = 'DELETE_SNIPPET_SUCCESS';
+export const deleteSnippetSuccess = ((data) => ({
+    type: DELETE_SNIPPET_SUCCESS,
     payload: data
 }))
 
@@ -66,7 +66,7 @@ export const addSnippet = (snippet) => dispatch => {
         headers: new Headers({
             'Content-Type': 'application/json',
         }),
-        body: JSON.stringify({snippet}),
+        body: JSON.stringify(snippet),
     });
     
     return fetch(postRequest)

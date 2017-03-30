@@ -56,21 +56,19 @@ router.get('/snippets/:snippetid', (req, res) => {
 
 router.post('/add-snippet', (req, res) => {
 	const {title, description, code, userId} = req.body;
-	console.log(req.user);
-	const newSnippet = new Snippet({
+	let newSnippet = new Snippet({
 			title,
 			description,
 			code,
 			userId: mongoose.Types.ObjectId(userId)
 	});
-	// add new snippet
 	newSnippet.save( (err, snippet) => {
 		if(err) {
 			console.error(err);
-			res.sendStatus(500).json({message: "Error adding snippet"});
+			res.status(500).json({message: "Error adding snippet"});
 		}
 		console.log("New Snippet Added!");
-		res.sendStatus(201).json({snippet});
+		res.status(201).json({snippet});
 	});
 });
 

@@ -10,7 +10,7 @@ export default (state=initialState, action) => {
 		return [...state, action.payload];
 	}
 
-	if(action.type === actions.UPDATE_SNIPPETS_SUCCESS) {
+	if(action.type === actions.UPDATE_SNIPPET_SUCCESS) {
 		
 	}
 
@@ -20,7 +20,8 @@ export default (state=initialState, action) => {
 
 	if(action.type === actions.FETCH_SNIPPETS_SUCCESS) {
 		console.log('fetching snippets success');
-		return state
+		console.log(action.payload);
+		return [...state, action.payload]
 	}
 
 	if(action.type === actions.SNIPPETS_ERROR) {
