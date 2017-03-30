@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import * as actions from '../actions/token';
+import Sidebar from './Sidebar';
 class SnippetForm extends React.Component {
 
     constructor(props) {
@@ -50,30 +51,27 @@ class SnippetForm extends React.Component {
 
 
     render() {
-        console.log(this.state);
         return (
             <div className="main">
                 <header>
                     <h1 className="main-title">Create New Snippet</h1>
                 </header>
                 <div>
-
+                <Sidebar />
                 <form >
-                    <label>username</label>
-                    <input type="text" name="username" ref={ref => this.usernameInput = ref} required="required"/>
-                    <label>full name</label>
-                    <input type="text" name="fullname" ref={ref => this.fullnameInput = ref} required="required"/>
-                    <label>email</label>
-                    <input type="email" name="email" ref={ref => this.emailInput = ref} required="required"/>
-                    <label>password</label>
-                    <input type="password" name="password" ref={ref => this.passwordInput = ref} required="required"/>
-                    <label>confirm password</label>
-                    <input type="password" name="password2" ref={ref => this.password2Input = ref} required="required"/>
+                    <label>title</label>
+                    <input type="text" name="title" ref={ref => this.titleInput = ref} required="required"/>
+
+                    <label>description</label>
+                    <input type="text" name="description" ref={ref => this.descriptionInput = ref} required="required"/>
+                   
+                    <label>code snippet</label>
+                    <input type="text" name="codesnippet" ref={ref => this.codesnippetInput = ref} required="required"/>
                     <button type="button" onClick={this.submitForm}>submit</button>
                 </form>
                 
                 <Link to="/dashboard">
-                    <button className="btn">Dashboard</button>
+                    <button>Dashboard</button>
                 </Link>
                 
                 
