@@ -62,14 +62,14 @@ class SnippetForm extends React.Component {
                     <input type="text" name="description" ref={ref => this.descriptionInput = ref} required="required"/>
                    
                     <label>code snippet</label>
-                    <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} required="required"></textarea>
+                    <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} className="text-box" placeholder="Please type your code here"></textarea>
                     <br/>
                     <select className="language-options" ref={ref => this.languageInput = ref}>
                       <option value="javascript">javascript</option>
                       <option value="css">css</option>
                       <option value="python">python</option>
                       <option value="java">java</option>
-                      <option value="sql">sqlL</option>
+                      <option value="sql">sql</option>
                     </select>
                     <button type="button" onClick={this.submitForm}>submit</button>
                 </form>
