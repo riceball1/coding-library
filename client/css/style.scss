@@ -92,16 +92,22 @@ p, div {
 }
 
 .side-menu {
+	background-color: $dGray;
 	border: 1px solid $lGray;
-	width: 40%;
-	height: 100%;
-	position: absolute;
-	padding: 5px;
-	top: 0;
-	left: 0;
+	height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding: 15px;
 	.list-snippets {
-		overflow: auto;
+		overflow: hidden;
 		height: 70%;
+		&:hover{
+			overflow: auto;
+		}
 		.individual-snippets {
 			border: 1px solid $lGray;
 			padding: 5px;
@@ -113,16 +119,15 @@ p, div {
 	.top-menu {
 		margin-top: 60px;
 		input {
-			width: 60%;
+			width: 100%;
 			border: 1px solid $lGray;
 			display: inline-block;
-			margin: 5px;
 			font-size: 1.2em;
 			line-height: 30px;
 		}
 	}
 	.bottom-menu {
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 		margin-bottom: 30px;
 	}
@@ -137,12 +142,21 @@ p, div {
 	font-size: 1.2em;
 	border-radius: 2px;
 	outline: none;
+	z-index: 1000;
 }
 
 .invisible {
-	display: none;
+	// display: none;
+	width: 0;
+	opacity: 0;
+	transition: 0.5s ease-in-out;
+
 }
 
 .visible {
-	display: block;
+	width: 50%;
+	opacity: 1;
+	// margin: 0 auto;
+	transition: 0.5s ease-in-out;
 }
+

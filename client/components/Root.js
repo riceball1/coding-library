@@ -5,16 +5,18 @@ import App from './App';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
+import SnippetForm from './SnippetForm';
 import RequireAuth from '../require_auth';
 
-
+/** Add back RequireAuth to dashboard **/
 const Root = ({store}) =>(
 	<Provider store={store} >
 		<Router history={browserHistory}>
 			<Route path="/" component={App} />
-				<Route path="/login" component={Login} />
-				<Route path="/signup" component={Signup} />
-				<Route path="/dashboard" component={RequireAuth(Dashboard)} />
+			<Route path="/login" component={Login} />
+			<Route path="/signup" component={Signup} />
+			<Route path="/dashboard" component={Dashboard} />
+			<Route path="/add-snippet" component={SnippetForm} />
 		</Router>
 	</Provider>
 )

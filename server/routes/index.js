@@ -17,95 +17,105 @@ const bcrypt = require('bcryptjs');
 
 // routes
 router.get('/', (req, res) => {
-	res.sendFile(path.resolve('public', 'index.html'));
+    res.sendFile(path.resolve('public', 'index.html'));
 });
-
-// router.get('/login', (req, res) => {
-// 	res.sendFile(path.resolve('public','login.html'));
-// });
 
 // Use JWT to authenticate
-router.post('/login', (req, res) => {
-	// find user
-	User
-		.findOne({username: req.body.username})
-		.exec((err, user) => {
-			if (err) {
-				console.log("This is the error from login ", err);
-			};
+router.post('/api/login', (req, res) => {
+    // find user
+    User
+        .findOne({
+            username: req.body.username
+        })
+        .exec((err, user) => {
+            if (err) {
+                console.log("This is the error from login ", err);
+            };
 
-			if (!user) {
-				return res.status(401).json({error: 'Username or Password invalid'});
-			}
-			// check password
-			bcrypt.compare(req.body.password, user.password, (err, valid) => {
-				// valid is a boolean
-				if (!valid) {
-					return res.json({
-						error: 'Username or password incorrect'
-					});
-				} else {
-					// if everything aok then return token
-					// token is generated again and resent back
-					const token = utils.generateToken(user);
-					user = utils.getCleanUser(user);
-					res.json({
-						user: user,
-						token: token
-					});
-				}
-		}); // end of bcrypt
-	}) // end of exec
+            if (!user) {
+                return res.status(401).json({
+                    error: 'Username or Password invalid'
+                });
+            }
+            // check password
+            bcrypt.compare(req.body.password, user.password, (err, valid) => {
+                // valid is a boolean
+                if (!valid) {
+                    return res.json({
+                        error: 'Username or password incorrect'
+                    });
+                } else {
+                    // if everything aok then return token
+                    // token is generated again and resent back
+                    const token = utils.generateToken(user);
+                    user = utils.getCleanUser(user);
+                    res.json({
+                        user: user,
+                        token: token
+                    });
+                }
+            }); // end of bcrypt
+        }) // end of exec
 });
-	
+
 
 /** 
   signup hash password, create new user; generate token and get clean user; 
 
 **/
 
-router.post('/signup', (req, res) => {
-	const {username, fullname, password, password2, email} = req.body;
-	/** Add unique username and unique email **/
+router.post('/api/signup', (req, res) => {
+    const {
+        username,
+        fullname,
+        password,
+        password2,
+        email
+    } = req.body;
+    /** Add unique username and unique email **/
 
-	// Validation from expressValidator
-		req.checkBody('fullname', 'Name is required').notEmpty();
-		req.checkBody('email', 'Email is required').notEmpty();
-		req.checkBody('email', 'Email is not valid').isEmail();
-		req.checkBody('username', 'Username is required').notEmpty();
-		req.checkBody('password', 'Password is required').notEmpty();
-		req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+    // Validation from expressValidator
+    req.checkBody('fullname', 'Name is required').notEmpty();
+    req.checkBody('email', 'Email is required').notEmpty();
+    req.checkBody('email', 'Email is not valid').isEmail();
+    req.checkBody('username', 'Username is required').notEmpty();
+    req.checkBody('password', 'Password is required').notEmpty();
+    req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
-		const errors = req.validationErrors();
+    const errors = req.validationErrors();
 
-	if(errors) {
-	  console.error(errors);
-	  res.send({message: `There was an error: ${errors}`});
-	} else {
-	  let newUser = new User({
-	    fullname,
-	    email,
-	    username,
-	    password
-	  });
+    if (errors) {
+        console.error(errors);
+        res.send({
+            message: `There was an error: ${errors}`
+        });
+    } else {
+        let newUser = new User({
+            fullname,
+            email,
+            username,
+            password
+        });
 
-	  // createUser handles hashing password;
-	  User.createUser(newUser, (err, user) => {
-	    if(err) {
-	      res.send(500).json({message: "Issue creating user"});
-	    }
-	    console.log("User created!");
-	    //generate token and get clean user
-	    const token = utils.generateToken(newUser);
-	    newUser = utils.getCleanUser(newUser);
+        // createUser handles hashing password;
+        User.createUser(newUser, (err, user) => {
+            if (err) {
+                res.send(500).json({
+                    message: "Issue creating user"
+                });
+            }
+            console.log("User created!");
+            //generate token and get clean user
+            const token = utils.generateToken(newUser);
+            newUser = utils.getCleanUser(newUser);
 
-	    res.json({
-	    	user: newUser,
-	    	token: token
-	    })
+            res.json({
+                user: newUser,
+                token: token
+            })
 
-	  });
-	}
+        });
+    }
 
 });
 
@@ -113,33 +123,36 @@ router.post('/signup', (req, res) => {
 // used for refresh or browser crashing
 router.get('/me/from/token', (req, res, next) => {
 
-	// check header or url parameters or post parameters for token 
-	const token = req.body.token || req.query.token;
-	if(!token) {
-		return res.status(401).json({message: 'Must pass token'});
-	}
+    // check header or url parameters or post parameters for token 
+    const token = req.body.token || req.query.token;
+    if (!token) {
+        return res.status(401).json({
+            message: 'Must pass token'
+        });
+    }
 
-	// check token that was passed by decoding token using secret
-	jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-		if(err) {
-			console.log(err);
+    // check token that was passed by decoding token using secret
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            res.json({error: err});
+        };
+        console.log("me token api user ", user)
 
-		};
-		console.log("me token api user ", user)
+        // return user using the id from w/in JWTToken
+        User.findById(user._id, (err, user) => {
+            if (err) {
+                console.log(err)
+            };
+            user = utils.getCleanUser(user);
 
-		// return user using the id from w/in JWTToken
-		User.findById(user._id, (err, user) => {
-			if(err) {console.log(err)};
-			user = utils.getCleanUser(user);
-
-			// either create new token or pass the old token back
-			console.log("after finding user ", user);+
-			res.json({
-				user: user,
-				token: token
-			});
-		});
-	});
+            // either create new token or pass the old token back
+            console.log("after finding user ", user); +
+            res.json({
+                user: user,
+                token: token
+            });
+        });
+    });
 });
 
-module.exports = router; 
+module.exports = router;
