@@ -60,7 +60,7 @@ app.use('/', index);
 // app.use(authenticateMiddleware);
 app.use('/user', user);
 // add catch all route for pages that don't have routes
-app.use('*', (req, res) => (res.sendFile(path.resolve('public', 'index.html'))));
+app.use('/*', (req, res) => (res.sendFile(path.resolve('public', 'index.html'))));
 
 // set up server for listening
 // closeServer needs access to a server object, but that only

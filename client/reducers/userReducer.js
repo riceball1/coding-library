@@ -22,7 +22,8 @@ export default (state=initialState, action) => {
 		return Object.assign({}, state, {error: action.payload});
 	}
 
-	if(action.type === actions.LOGOUT) { 
+	if(action.type === actions.LOGOUT) {
+		console.log('logging out'); 
     	const updated = {  
     		user: null,
     		error:null

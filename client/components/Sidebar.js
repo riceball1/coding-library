@@ -10,26 +10,36 @@ import {browserHistory} from 'react-router';
 class Sidebar extends React.Component {	
 	constructor(props) {
 		super(props);
+		console.log(this.props);
 		this.state = {
 			visible: false,
 			snippets: []
 		};
-		this.handleSidebar= this.handleSidebar.bind(this);
+		this.toggleSidebar= this.toggleSidebar.bind(this);
 		this.logout = this.logout.bind(this);
+		this.addSnippet = this.addSnippet.bind(this);
 	}
 
 	componentWillMount() {
 		// fetch the snippets
 		this.props.dispatch(snippetActions.fetchSnippets());
+		this.setState({snippets: this.props.snippets});
 	}
 
-	handleSidebar(e) {
+	toggleSidebar(e) {
 		e.preventDefault();
 		if(this.state.visible) {
 			this.setState({visible: false});
 		} else {
 			this.setState({visible: true});
 		}
+	}
+
+	addSnippet(e) {
+		e.preventDefault();
+		// redirects to creating a snippet
+		browserHistory.push('/add-snippet');
+		console.log('create a snippet');
 	}
 
 	logout(e){
@@ -39,18 +49,23 @@ class Sidebar extends React.Component {
 	}
 
 	render() {
+		const snippets = this.state.snippets;
+		const snippetArray = snippets.map((snippet, index)=> {
+			return (
+				<Snippets data={snippet} />
+			)
+		});
 		return (
 			<div>
-			<button onClick={this.handleSidebar} className="sidebar-button">Open/Close</button>
+			<button onClick={this.toggleSidebar} className="sidebar-button">Open/Close</button>
 				
 				<div id="sideBar" className={(this.state.visible? "visible " : "invisible ") + "side-menu"}>
 					<div className="top-menu">
 						<input type="search" placeholder="search" />
 					</div>
-					<Snippets />
-		
+					{this.snippetArray}
 					<div className="bottom-menu">
-					<button onClick={this.logout}> Logout</button> <button>Settings</button> <button>Create Snippet</button>
+					<button onClick={this.logout}> Logout</button> <button>Settings</button> <button onClick={this.addSnippet}>Create Snippet</button>
 					</div>
 			</div>
 		</div>
@@ -59,5 +74,10 @@ class Sidebar extends React.Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		snippets: state.snippetReducer
+			}
+}
 
-export default connect()(Sidebar);
+export default connect(mapStateToProps)(Sidebar);

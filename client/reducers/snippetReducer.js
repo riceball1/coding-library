@@ -7,6 +7,7 @@ const initialState = [];
 export default (state=initialState, action) => {
 	if(action.type === actions.FETCH_SNIPPETS_SUCESS) {
 		console.log('fetching snippets success');
+		return state
 	}
 
 	if(action.type === actions.SNIPPETS_ERROR) {

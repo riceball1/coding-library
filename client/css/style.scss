@@ -100,7 +100,7 @@ p, div {
     top: 0;
     left: 0;
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 5px;
+    padding: 15px;
 	.list-snippets {
 		overflow: hidden;
 		height: 70%;
@@ -118,16 +118,15 @@ p, div {
 	.top-menu {
 		margin-top: 60px;
 		input {
-			width: 60%;
+			width: 100%;
 			border: 1px solid $lGray;
 			display: inline-block;
-			margin: 5px;
 			font-size: 1.2em;
 			line-height: 30px;
 		}
 	}
 	.bottom-menu {
-		position: absolute;
+		position: fixed;
 		bottom: 0;
 		margin-bottom: 30px;
 	}
@@ -156,11 +155,7 @@ p, div {
 .visible {
 	width: 50%;
 	opacity: 1;
-	margin: 10px auto;
+	// margin: 0 auto;
 	transition: 0.5s ease-in-out;
 }
 
-@media screen and (max-height: 450px) {
-    .sidemenu {padding-top: 15px;}
-    .sidemenu a {font-size: 18px;}
-}

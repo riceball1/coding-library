@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default function Snippets() {
 	return (
 		<div className="list-snippets">
@@ -16,3 +15,5 @@ export default function Snippets() {
 		</div>
 	);
 }
+
+

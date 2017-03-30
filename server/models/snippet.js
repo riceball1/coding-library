@@ -21,11 +21,10 @@ const snippetSchema = mongoose.Schema({
  	ref: 'User',
  	required: true
  },
- userName: {
- 	type: String,
- 	ref: 'User'
+ createdOn: {
+ 	type: Date,
+ 	default: [new Date()]
  }
-
 });
 
 // I need to take the "code" and syntax highlight it? do I do this in the server-side or the client side with Prims.js?
