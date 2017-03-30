@@ -11,26 +11,26 @@ class SnippetForm extends React.Component {
         this.state = {
             user: null
         }
-        this.loadUserFromToken = this.loadUserFromToken.bind(this);
+      //  this.loadUserFromToken = this.loadUserFromToken.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
     componentWillMount() {
-        this.loadUserFromToken();
+    //    this.loadUserFromToken();
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({ user: nextProps.user.user });
     }
-    loadUserFromToken() {
-        let token = localStorage.getItem('jwtToken');
-        console.log(token ? "Token true" : "Token false");
-        if (!token || token === '') {
-            //if there is no token, dont bother
-            return;
-        }
-        this.props.dispatch(actions.meFromToken(token));
-    }
+    // loadUserFromToken() {
+    //     let token = localStorage.getItem('jwtToken');
+    //     console.log(token ? "Token true" : "Token false");
+    //     if (!token || token === '') {
+    //         //if there is no token, dont bother
+    //         return;
+    //     }
+    //     this.props.dispatch(actions.meFromToken(token));
+    // }
 
     submitForm(e) {
         e.preventDefault();
@@ -60,7 +60,7 @@ class SnippetForm extends React.Component {
 
                     <label>description</label>
                     <input type="text" name="description" ref={ref => this.descriptionInput = ref} required="required"/>
-                   
+
                     <label>code snippet</label>
                     <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} className="text-box" placeholder="Please type your code here"></textarea>
                     <br/>
@@ -73,12 +73,12 @@ class SnippetForm extends React.Component {
                     </select>
                     <button type="button" onClick={this.submitForm}>submit</button>
                 </form>
-                
+
                 <Link to="/dashboard">
                     <button>Dashboard</button>
                 </Link>
-                
-                
+
+
             </div>
             </div>
         )

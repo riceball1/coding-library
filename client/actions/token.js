@@ -8,6 +8,9 @@ export const ME_FROM_TOKEN = 'ME_FROM_TOKEN';
 export const ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCESS';
 export const ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
 export const RESET_TOKEN = 'RESET_TOKEN';
+export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
+
+
 
 export const meFromToken = (tokenFromStorage) => dispatch => {
   //check if the token is still valid, if so, get me from the server
@@ -51,5 +54,12 @@ export const meFromTokenFailure = (error) => {
   return {
     type: ME_FROM_TOKEN_FAILURE,
     payload: error
+  };
+}
+
+
+export const toggleSidebar = () => {
+  return {
+    type: TOGGLE_SIDEBAR
   };
 }

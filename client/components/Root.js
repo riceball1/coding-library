@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
-import {Router, Route, browserHistory } from 'react-router';
+import {Router, IndexRoute, Route, browserHistory } from 'react-router';
 import {Provider} from 'react-redux';
 import App from './App';
+import Main from './Main';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
@@ -12,11 +13,13 @@ import RequireAuth from '../require_auth';
 const Root = ({store}) =>(
 	<Provider store={store} >
 		<Router history={browserHistory}>
-			<Route path="/" component={App} />
-			<Route path="/login" component={Login} />
-			<Route path="/signup" component={Signup} />
-			<Route path="/dashboard" component={Dashboard} />
-			<Route path="/add-snippet" component={SnippetForm} />
+			<Route path="/" component={App}>
+			  <IndexRoute component={Main} />
+				<Route path="/login" component={Login} />
+				<Route path="/signup" component={Signup} />
+				<Route path="/dashboard" component={Dashboard} />
+				<Route path="/add-snippet" component={SnippetForm} />
+			</Route>
 		</Router>
 	</Provider>
 )
