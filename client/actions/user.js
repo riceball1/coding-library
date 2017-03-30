@@ -18,7 +18,7 @@ export const signupError = ((error) => ({
 
 export const signup = (userData) => dispatch => {
     const newUser = Object.assign({}, userData);
-        
+
     const url = `${ROOT_URL}/api/signup`;
     const postRequest = new Request(url, {
         method: 'POST',
@@ -27,7 +27,7 @@ export const signup = (userData) => dispatch => {
         }),
         body: JSON.stringify(newUser),
     });
-    
+
     return fetch(postRequest)
         .then(response => {
             if (!response.ok) {
@@ -37,7 +37,7 @@ export const signup = (userData) => dispatch => {
             }
             return response;
         })
-        .then(response =>(response.json())) // to get the json
+        .then(response => (response.json())) // to get the json
         .then(data => {
             console.log("data ", data);
             localStorage.setItem('jwtToken', data.token);
@@ -68,9 +68,9 @@ export const login = (username, password) => dispatch => {
         headers: new Headers({
             'Content-Type': 'application/json',
         }),
-        body: JSON.stringify({username, password}),
+        body: JSON.stringify({ username, password }),
     });
-    
+
     return fetch(postRequest)
         .then(response => {
             if (!response.ok) {
