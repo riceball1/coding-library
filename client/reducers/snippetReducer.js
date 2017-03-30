@@ -19,8 +19,7 @@ export default (state = initialState, action) => {
     }
 
     if (action.type === actions.FETCH_SNIPPETS_SUCCESS) {
-        console.log('fetching snippets success');
-        console.log(action.payload);
+        //console.log('fetching snippets success');
         return action.payload;
     }
 

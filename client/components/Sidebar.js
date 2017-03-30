@@ -17,19 +17,15 @@ class Sidebar extends React.Component {
 		this.addSnippet = this.addSnippet.bind(this);
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		// fetch the snippets
 		this.props.dispatch(snippetActions.fetchSnippets());
 	}
 
-	// componentWillReceiveProps(nextProps) {
-	// 	this.setState({snippets: nextProps.snippets});
-	// }
 
 	toggleSidebar(e) {
 		e.preventDefault();
 		this.props.dispatch(tokenActions.toggleSidebar());
-
 	}
 
 	addSnippet(e) {
@@ -40,12 +36,13 @@ class Sidebar extends React.Component {
 	}
 
 	logout(e){
-		e.preventDefault();
-		this.props.dispatch(actions.logout());
-		browserHistory.push('/');
+		// e.preventDefault();
+		// this.props.dispatch(actions.logout());
+		// browserHistory.push('/');
 	}
 
 	render() {
+
 		return (
 			<div>
 			<button onClick={this.toggleSidebar} className="sidebar-button">Open/Close</button>
@@ -54,7 +51,7 @@ class Sidebar extends React.Component {
 			<div className="top-menu">
 			<input type="search" placeholder="search" />
 			</div>
-			<Snippets data={this.props.snippetArray} />
+			<Snippets data={this.props.snippets} />
 			<div className="bottom-menu">
 			<button onClick={this.logout}> Logout</button> <button>Settings</button> <button onClick={this.addSnippet}>Create Snippet</button>
 			</div>

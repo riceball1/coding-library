@@ -52,7 +52,7 @@ export const fetchSnippets = (userid) => dispatch => {
 		})
 		.then(response => (response.json()))
 		.then(data => {
-            dispatch(fetchSnippetsSuccess(data.user))
+            dispatch(fetchSnippetsSuccess(data))
         })
 		.catch(error => {
             dispatch(snippetsError(error))
@@ -68,7 +68,7 @@ export const addSnippet = (snippet) => dispatch => {
         }),
         body: JSON.stringify(snippet),
     });
-    
+
     return fetch(postRequest)
         .then(response => {
             if (!response.ok) {
