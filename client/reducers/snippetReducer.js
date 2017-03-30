@@ -5,7 +5,20 @@ import * as actions from '../actions/snippet';
 const initialState = [];
 
 export default (state=initialState, action) => {
-	if(action.type === actions.FETCH_SNIPPETS_SUCESS) {
+
+	if(action.type === actions.ADD_SNIPPET_SUCCESS) {
+		return [...state, action.payload];
+	}
+
+	if(action.type === actions.UPDATE_SNIPPETS_SUCCESS) {
+		
+	}
+
+	if(action.type === actions.DELETE_SNIPPET_SUCCESS) {
+		
+	}
+
+	if(action.type === actions.FETCH_SNIPPETS_SUCCESS) {
 		console.log('fetching snippets success');
 		return state
 	}

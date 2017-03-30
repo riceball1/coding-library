@@ -24,7 +24,6 @@ class Signup extends React.Component {
 	}
 
 	submitForm(e) {
-		this.setState({errors: {}});
 		e.preventDefault();
 		const userData = {
 			username: this.usernameInput.value,

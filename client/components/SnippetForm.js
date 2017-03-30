@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import * as actions from '../actions/token';
+import * as snippetActions from '../actions/snippet';
 import Sidebar from './Sidebar';
 class SnippetForm extends React.Component {
 
@@ -34,19 +35,16 @@ class SnippetForm extends React.Component {
     }
 
     submitForm(e) {
-        this.setState({errors: {}});
         e.preventDefault();
-        const userData = {
-            username: this.usernameInput.value,
-            fullname: this.fullnameInput.value,
-            email: this.emailInput.value,
-            password: this.passwordInput.value,
-            password2: this.password2Input.value
+        const newSnippet = {
+            title: this.titleInput.value,
+            description: this.descriptionInput.value,
+            code: this.codesnippetInput.value,
+            userid: this.state.user._id
         };
-        // this returns a promise - can display errors
-        this.props.dispatch(actions.signup(userData)).then(() => {
-            this.isValid();
-        });
+
+        console.log(newSnippet);
+        this.props.dispatch(snippetActions.addSnippet(newSnippet));
     }
 
 
@@ -66,7 +64,8 @@ class SnippetForm extends React.Component {
                     <input type="text" name="description" ref={ref => this.descriptionInput = ref} required="required"/>
                    
                     <label>code snippet</label>
-                    <input type="text" name="codesnippet" ref={ref => this.codesnippetInput = ref} required="required"/>
+                    <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} required="required"></textarea>
+                    <br/>
                     <button type="button" onClick={this.submitForm}>submit</button>
                 </form>
                 

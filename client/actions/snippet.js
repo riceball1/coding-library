@@ -21,9 +21,9 @@ export const fetchSnippetsSuccess = ((data) => ({
     payload: data
 }))
 
-export const ADD_SNIPPETS_SUCCESS = 'ADD_SNIPPETS_SUCCESS';
-export const addSnippetsSuccess = ((data) => ({
-    type: ADD_SNIPPETS_SUCCESS,
+export const ADD_SNIPPET_SUCCESS = 'ADD_SNIPPET_SUCCESS';
+export const addSnippetSuccess = ((data) => ({
+    type: ADD_SNIPPET_SUCCESS,
     payload: data
 }))
 
@@ -59,8 +59,8 @@ export const fetchSnippets = (userid) => dispatch => {
         })
 }
 
-export const addSnippets = (snippet) => dispatch => {
-    const url = `${ROOT_URL}/login`;
+export const addSnippet = (snippet) => dispatch => {
+    const url = `${ROOT_URL}/user/add-snippet`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
@@ -80,7 +80,8 @@ export const addSnippets = (snippet) => dispatch => {
         })
         .then(response => (response.json())) // to get the json
         .then(data => {
-            dispatch(addSnippetsSuccess(data.user))
+            // returns back the snippet
+            dispatch(addSnippetSuccess(data))
         })
         .catch(error => {
             dispatch(snippetsError(error))
