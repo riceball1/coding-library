@@ -32,13 +32,13 @@ class Login extends React.Component {
 			console.log("This works!");
 			this.isValid();
 		});
-		
+
 	}
 
 	render() {
 		return (
 			<div>
-			<Nav />
+			
 			<h1>Login</h1>
 				<form >
 				<label>username</label>

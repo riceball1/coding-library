@@ -1,162 +1,193 @@
 /** color variables **/
+
 $lGray: #ddd;
 $dGray: #888;
 $teal: #00b3b3;
 
 /** font **/
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto');
-
-
 * {
-	box-sizing: border-box;
-	font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 h1 {
-	text-align: center;
+    text-align: center;
 }
+
 form {
-	label, input {
-		margin: 5px auto;
-		display: block;
-	}
-	input {
-		width: 80%;
-		line-height: 30px;
-		font-size: 1.5em;
-		border-radius: 5px;
-		border: 1px solid $teal;
-		padding: 5px;
-	}
-	button {
-		font-size: 1.2em;
-		padding: 10px;
-		width: 30%;
-		background-color: $teal;
-		border: none;
-		border-radius: 5px;
-		margin: 10px auto;
-		line-height: 30px;
-	}
+    label,
+    input {
+        margin: 5px auto;
+        display: block;
+    }
+    input {
+        width: 80%;
+        line-height: 30px;
+        font-size: 1.5em;
+        border-radius: 5px;
+        border: 1px solid $teal;
+        padding: 5px;
+        &:focus {
+            border: 3px solid $dGray;
+        }
+    }
+    button {
+        font-size: 1.2em;
+        padding: 10px;
+        width: 30%;
+        background-color: $teal;
+        border: none;
+        border-radius: 5px;
+        margin: 10px auto;
+        line-height: 30px;
+    }
 }
 
 .navbar {
-	ul {
-		list-style-type: none;
-		li {
-			display: inline-block;
-			padding: 5px;
-			margin: 20px;
-		}
-	}
+    ul {
+        list-style-type: none;
+        li {
+            display: inline-block;
+            padding: 5px;
+            margin: 20px;
+        }
+    }
 }
 
 img.main-image {
-	width: 70%;
-	margin: 20px auto;
-	border-radius: 5px;
+    width: 70%;
+    margin: 20px auto;
+    border-radius: 5px;
 }
 
 main {
-	width: 50%;
-	margin: 0 auto;
-	padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-p, div {
-		text-align: center;
-	.slogan {
-		font-size: 1.5em;
-		margin: 10px auto;
-		color: $dGray;
-		padding: 10px;
-		width: 50%;
-		line-height: 30px;
-	}
+p,
+div {
+    text-align: center;
+    .slogan {
+        font-size: 1.5em;
+        margin: 10px auto;
+        color: $dGray;
+        padding: 10px;
+        width: 50%;
+        line-height: 30px;
+    }
 }
 
 .btn {
-	display: block;
-	width: 200px;
-	background-color: $teal;
-	padding: 5px;
-	font-size: 1.2em;
-	margin: 10px auto;
-	border: none;
-	border-radius: 2px;
-	color: white;
+    display: block;
+    width: 200px;
+    background-color: $teal;
+    padding: 5px;
+    font-size: 1.2em;
+    margin: 10px auto;
+    border: none;
+    border-radius: 2px;
+    color: white;
 }
 
 .side-menu {
-	background-color: $dGray;
-	border: 1px solid $lGray;
-	height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    background-color: $dGray;
+    border: 1px solid $lGray;
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
     top: 0;
     left: 0;
-    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
     padding: 15px;
-	.list-snippets {
-		overflow: hidden;
-		height: 70%;
-		&:hover{
-			overflow: auto;
-		}
-		.individual-snippets {
-			border: 1px solid $lGray;
-			padding: 5px;
-			margin: 10px auto;
-			text-align: center;
-			font-size: 1.2em;
-		}
-	}
-	.top-menu {
-		margin-top: 60px;
-		input {
-			width: 100%;
-			border: 1px solid $lGray;
-			display: inline-block;
-			font-size: 1.2em;
-			line-height: 30px;
-		}
-	}
-	.bottom-menu {
-		position: fixed;
-		bottom: 0;
-		margin-bottom: 30px;
-	}
+    .list-snippets {
+        overflow: hidden;
+        height: 70%;
+        &:hover {
+            overflow: auto;
+        }
+        .individual-snippets {
+            border: 1px solid $lGray;
+            padding: 5px;
+            margin: 10px auto;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    }
+    .top-menu {
+        margin-top: 60px;
+        input {
+            width: 100%;
+            border: 1px solid $lGray;
+            display: inline-block;
+            font-size: 1.2em;
+            line-height: 30px;
+        }
+    }
+    .bottom-menu {
+        position: fixed;
+        bottom: 0;
+        margin-bottom: 30px;
+    }
 }
 
 .sidebar-button {
-	position: absolute;
-	top: 0;
-	left: 0;
-	border: none;
-	padding: 10px;
-	font-size: 1.2em;
-	border-radius: 2px;
-	outline: none;
-	z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 2px;
+    outline: none;
+    z-index: 1000;
 }
 
 .invisible {
-	// display: none;
-	width: 0;
-	opacity: 0;
-	transition: 0.5s ease-in-out;
-
+    // display: none;
+    width: 0;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
 }
 
 .visible {
-	width: 50%;
-	opacity: 1;
-	// margin: 0 auto;
-	transition: 0.5s ease-in-out;
+    width: 50%;
+    opacity: 1;
+    // margin: 0 auto;
+    transition: 0.5s ease-in-out;
 }
 
+
+/** SNIPPET FORM ***/
+
+.language-options {
+    display: block;
+    margin: 10px auto;
+    font-size: 1.2em;
+    width: 40%;
+}
+
+.text-box {
+    width: 80%;
+    height: 150px;
+    border-radius: 4px;
+    resize: none;
+    border: 1px solid $teal;
+    font-size: 1.2em;
+    &:focus {
+        border: 3px solid $dGray;
+    }
+}
