@@ -16,6 +16,10 @@ const snippetSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    language: {
+    	type: String,
+    	required: true
+    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
