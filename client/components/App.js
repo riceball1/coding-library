@@ -2,22 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import Sidebar from './Sidebar';
-
-// import * as actions from '../actions/token';
-// import * as actions from '../actions/user';
+import * as userActions from '../actions/user';
+import * as snippetActions from '../actions/snippet';
 import Nav from './Nav';
 class App extends React.Component {
 
   constructor(props) {
     super(props);
-    //  this.loadUserFromToken = this.loadUserFromToken.bind(this);
+
   }
 
   componentWillMount() {
+
     //    this.loadUserFromToken();
   }
 
   componentDidMount() {
+            // LOADING USEER HAPPENS HERE
     //    console.log(this.props.user);
   }
 

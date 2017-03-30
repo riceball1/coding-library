@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import Snippets from '../components/Snippets';
 import SidebarTop from '../components/SidebarTop';
 import SidebarBottom from '../components/SidebarBottom';
-import * as tokenActions from '../actions/token';
+import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
+
 import {browserHistory} from 'react-router';
 
 class Sidebar extends React.Component {

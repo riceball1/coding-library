@@ -60,6 +60,7 @@ export const fetchSnippets = (userid) => dispatch => {
 }
 
 export const addSnippet = (snippet) => dispatch => {
+  console.log("snippet", snippet);
     const url = `${ROOT_URL}/user/add-snippet`;
     const postRequest = new Request(url, {
         method: 'POST',
@@ -68,7 +69,6 @@ export const addSnippet = (snippet) => dispatch => {
         }),
         body: JSON.stringify(snippet),
     });
-
     return fetch(postRequest)
         .then(response => {
             if (!response.ok) {

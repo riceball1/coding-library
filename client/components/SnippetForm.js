@@ -1,17 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
-import * as actions from '../actions/token';
+//import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
 import Sidebar from './Sidebar';
 class SnippetForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            user: null
-        }
-      //  this.loadUserFromToken = this.loadUserFromToken.bind(this);
+
         this.submitForm = this.submitForm.bind(this);
     }
 
@@ -19,18 +16,6 @@ class SnippetForm extends React.Component {
     //    this.loadUserFromToken();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({ user: nextProps.user.user });
-    }
-    // loadUserFromToken() {
-    //     let token = localStorage.getItem('jwtToken');
-    //     console.log(token ? "Token true" : "Token false");
-    //     if (!token || token === '') {
-    //         //if there is no token, dont bother
-    //         return;
-    //     }
-    //     this.props.dispatch(actions.meFromToken(token));
-    // }
 
     submitForm(e) {
         e.preventDefault();
@@ -38,8 +23,9 @@ class SnippetForm extends React.Component {
             title: this.titleInput.value,
             description: this.descriptionInput.value,
             code: this.codesnippetInput.value,
-            language: this.langaugeInput.value,
-            userId: this.state.user._id
+//language: this.langaugeInput.value,
+            //userId: this.props.user._id
+            userId: "58d9d42bbfc7f664f51c97e3"
         };
 
         this.props.dispatch(snippetActions.addSnippet(newSnippet));
