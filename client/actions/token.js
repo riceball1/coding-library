@@ -57,7 +57,6 @@ export const meFromTokenFailure = (error) => {
   };
 }
 
-
 export const toggleSidebar = () => {
   return {
     type: TOGGLE_SIDEBAR

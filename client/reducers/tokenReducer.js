@@ -2,7 +2,7 @@
 
 import * as actions from '../actions/token';
 
-const initialState = { user: null, status: null, error: null, sidebarVisible:true };
+const initialState = { user: null, status: null, error: null, sidebarVisible:false };
 
 export default (state = initialState, action) => {
 
@@ -26,6 +26,13 @@ export default (state = initialState, action) => {
         };
         return Object.assign({}, state, updated);
     }
+
+    if (action.type === actions.TOGGLE_SIDEBAR) {
+        console.log('toggle');
+        return Object.assign({}, state, {sidebarVisible: !state.sidebarVisible});
+    }
+
+
 
     return state;
 }
