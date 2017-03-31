@@ -15,15 +15,7 @@
 - Can export specific code into one large file
 
 
-<b>Use Prismjs:</b>
-- Markup
-- CSS
-- C-like
-- JavaScript
-- JSON
-- ReactJSX
-- Python
-- Java
-- SQL
+## Links:
+- [TODO list](/TODO.md)
+- [Website Design Ideas](/DESIGN.md)
 
-[Add link to wireframes and mockups]
