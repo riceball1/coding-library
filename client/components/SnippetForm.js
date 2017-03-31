@@ -13,7 +13,6 @@ class SnippetForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.loadUserFromToken = this.loadUserFromToken.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
@@ -37,8 +36,7 @@ class SnippetForm extends React.Component {
                     <h1 className="main-title">Create New Snippet</h1>
                 </header>
                 <div>
-                <Sidebar />
-                <form >
+                <form onSubmit={this.submitForm} >
                     <label>title</label>
                     <input type="text" name="title" ref={ref => this.titleInput = ref} />
 

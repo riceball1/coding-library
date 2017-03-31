@@ -10,7 +10,6 @@ class Sidebar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.toggleSidebar= this.toggleSidebar.bind(this);
-		// this.logout = this.logout.bind(this);
 		this.addSnippet = this.addSnippet.bind(this);
 	}
 
@@ -26,9 +25,7 @@ class Sidebar extends React.Component {
 
 	addSnippet(e) {
 		e.preventDefault();
-		// redirects to creating a snippet
 		browserHistory.push('/newsnippet');
-		console.log('create a snippet');
 	}
 
 	render() {
@@ -51,7 +48,9 @@ class Sidebar extends React.Component {
 						{snippetsArray}
 					</div>
 					<div className="bottom-menu">
-					<button onClick={this.logout}> Logout</button> <button>Settings</button> <button onClick={this.addSnippet}>Create Snippet</button>
+					
+					<button>Settings</button> 
+					<button onClick={this.addSnippet}>Create Snippet</button>
 					</div>
 			</div>
 		</div>
