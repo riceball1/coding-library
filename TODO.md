@@ -1,4 +1,12 @@
-#TODO LIST
+TODO LIST
+----------
+
+```
+Created On: March 31, 2017
+Last Modified: March 31, 2017
+````
+
+This is a todo list created after already setting up a node/express/mongodb api, and creating a react/redux application with login/signup using jwt 
 
 ##Snippets
 
