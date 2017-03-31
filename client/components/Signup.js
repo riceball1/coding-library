@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {browserHistory} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 
 
 class Signup extends React.Component {
@@ -53,6 +53,7 @@ class Signup extends React.Component {
 					<input type="password" name="password2" ref={ref => this.password2Input = ref} required="required"/>
 					<button type="button" onClick={this.submitForm}>submit</button>
 				</form>
+					<p><Link to="/login"><button>Already have an account?</button></Link></p>
 			</div>
 		)
 	}

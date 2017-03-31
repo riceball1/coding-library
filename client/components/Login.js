@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as userActions from '../actions/user';
-import { browserHistory } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -45,6 +45,7 @@ class Login extends React.Component {
 				<input type="password" name="password" ref={ref => this.passwordInput = ref}/>
 					<button type="button" onClick={this.submitForm}>submit</button>
 				</form>
+					<p><Link to="/signup"><button>No Account. Sign Up Here.</button></Link></p>
 			</div>
 		)
 	}
