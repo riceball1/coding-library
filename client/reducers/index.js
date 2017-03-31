@@ -1,11 +1,7 @@
-import {combineReducers} from 'redux';
-import userReducer from './userReducer';
+import { combineReducers } from 'redux';
+import mainReducer from './mainReducer';
 import snippetReducer from './snippetReducer';
-import tokenReducer from './tokenReducer';
 
-
-const reducer = combineReducers({userReducer, snippetReducer, tokenReducer});
+const reducer = combineReducers({ mainReducer, snippetReducer });
 
 export default reducer;
-
-

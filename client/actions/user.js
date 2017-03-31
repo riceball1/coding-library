@@ -2,7 +2,16 @@ import 'babel-polyfill';
 import 'isomorphic-fetch';
 const ROOT_URL = location.origin;
 
+export const ME_FROM_TOKEN = 'ME_FROM_TOKEN';
+export const ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCESS';
+export const ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
+export const RESET_TOKEN = 'RESET_TOKEN';
+export const SIGNUP_ERROR = 'SIGNUP_ERROR';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
+export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
+
 export const logout = (() => {
     localStorage.removeItem('jwtToken');
     return {
@@ -10,7 +19,6 @@ export const logout = (() => {
     }
 })
 
-export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 export const signupError = ((error) => ({
     type: SIGNUP_ERROR,
     payload: error
@@ -18,7 +26,7 @@ export const signupError = ((error) => ({
 
 export const signup = (userData) => dispatch => {
     const newUser = Object.assign({}, userData);
-        
+
     const url = `${ROOT_URL}/api/signup`;
     const postRequest = new Request(url, {
         method: 'POST',
@@ -27,7 +35,7 @@ export const signup = (userData) => dispatch => {
         }),
         body: JSON.stringify(newUser),
     });
-    
+
     return fetch(postRequest)
         .then(response => {
             if (!response.ok) {
@@ -37,7 +45,7 @@ export const signup = (userData) => dispatch => {
             }
             return response;
         })
-        .then(response =>(response.json())) // to get the json
+        .then(response => (response.json())) // to get the json
         .then(data => {
             console.log("data ", data);
             localStorage.setItem('jwtToken', data.token);
@@ -49,13 +57,12 @@ export const signup = (userData) => dispatch => {
         });
 };
 
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+
 export const loginSuccess = ((user) => ({
     type: LOGIN_SUCCESS,
     payload: user
 }))
 
-export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const loginError = ((error) => ({
     type: LOGIN_ERROR,
     payload: error
@@ -68,9 +75,9 @@ export const login = (username, password) => dispatch => {
         headers: new Headers({
             'Content-Type': 'application/json',
         }),
-        body: JSON.stringify({username, password}),
+        body: JSON.stringify({ username, password }),
     });
-    
+
     return fetch(postRequest)
         .then(response => {
             if (!response.ok) {
@@ -89,3 +96,58 @@ export const login = (username, password) => dispatch => {
             dispatch(loginError(error))
         });
 };
+
+/** TOKEN **/
+export const meFromToken = (tokenFromStorage) => dispatch => {
+    //check if the token is still valid, if so, get me from the server
+
+    const url = `${ROOT_URL}/me/from/token?token=${tokenFromStorage}`;
+    const postRequest = new Request(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Authorization': `Bearer ${tokenFromStorage}`
+        })
+    });
+
+    return fetch(postRequest)
+        .then(response => {
+            if (!response.ok) {
+                let error = new Error(response.statusText)
+                error = response
+                console.log(error)
+            }
+            return response;
+        })
+        .then(response => response.json()) // not giving back correct data
+        .then(data => {
+            localStorage.setItem('jwtToken', data.token);
+            dispatch(meFromTokenSuccess(data.user))
+        })
+        .catch(error => {
+            localStorage.removeItem('jwtToken');
+            dispatch(meFromTokenFailure(error))
+        });
+}
+
+export const meFromTokenSuccess = (user) => {
+    return {
+        type: ME_FROM_TOKEN_SUCCESS,
+        payload: user
+    };
+}
+
+export const meFromTokenFailure = (error) => {
+    return {
+        type: ME_FROM_TOKEN_FAILURE,
+        payload: error
+    };
+}
+
+
+
+/** OTHER **/
+export const toggleSidebar = () => {
+    return {
+        type: TOGGLE_SIDEBAR
+    }
+}
