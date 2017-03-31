@@ -37,7 +37,7 @@ form {
             border: 3px solid $teal;
         }
     }
-    button {
+     button {
         font-size: 1.2em;
         padding: 10px;
         width: 30%;
@@ -95,6 +95,17 @@ div {
     border: none;
     border-radius: 2px;
     color: white;
+}
+
+.snippet-btn {
+    @extend .btn;
+    right: -40%;
+    position: relative;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    padding: 30px;
+    font-size: 2em;
 }
 
 .side-menu {
@@ -189,6 +200,9 @@ div {
 /** SNIPPET FORM ***/
 
 .snippet-form {
+    border-radius: 3px;
+    border: 1px solid $lGray;
+    margin: auto 10%;
     input {
         margin: 5px auto;
         display: block;
@@ -200,19 +214,22 @@ div {
         padding: 5px;
         border: none;
         &:focus {
-            border-bottom: 1px dotted $dGray;
-            color: $teal;
+            border: none;
+            outline: none;
         }
+    }
+    input[name="description"] {
+        background-color: black;
     }
     .text-box {
         width: 80%;
-        height: 150px;
-        border-radius: 4px;
+        height: 300px;
         resize: none;
-        border: 1px solid $teal;
+        border: none;
         font-size: 1.2em;
         &:focus {
-            border: 3px solid $dGray;
+            border: none;
+            outline: none;
         }
     }
 }

@@ -36,11 +36,11 @@ class SnippetForm extends React.Component {
                 <form className="snippet-form">
                     <input type="text" name="title" ref={ref => this.titleInput = ref} placeholder="title"/>
 
-                    <input type="text" name="description" ref={ref => this.descriptionInput = ref} placeholder="Description"/>
+                    <input type="text" name="description" ref={ref => this.descriptionInput = ref} placeholder="description"/>
                    
                     <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} className="text-box" placeholder="Please type your code here"></textarea>
                     <br/>
-                    <button type="button" onClick={this.submitForm}>submit</button>
+                    <button className="snippet-btn" type="button" onClick={this.submitForm}>{"\u2713"}</button>
                 </form>
                 
                 
