@@ -177,8 +177,10 @@ div {
     border: none;
     padding: 10px;
     font-size: 1.2em;
-    border-radius: 2px;
+    border-radius: 0px 5px 5px 0px;
     outline: none;
+    width: 100px;
+    opacity: 0.3;
     z-index: 1000;
 }
 
@@ -219,7 +221,7 @@ div {
         }
     }
     input[name="description"] {
-        background-color: black;
+        font-size: 1.2em;
     }
     .text-box {
         width: 80%;

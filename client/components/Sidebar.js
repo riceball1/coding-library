@@ -39,7 +39,7 @@ class Sidebar extends React.Component {
 
 		return (
 			<div>
-			<button onClick={this.toggleSidebar} className="sidebar-button">Open/Close</button>
+			<button onClick={this.toggleSidebar} className="sidebar-button">{(this.props.visible? 'close' : 'open')}</button>
 				
 				<div id="sideBar" className={(this.props.visible? "visible " : "invisible ") + "side-menu"}>
 					<div className="top-menu">
