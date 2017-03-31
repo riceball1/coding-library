@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
-import Snippets from '../components/Snippets';
+import Snippet from '../components/Snippet';
 import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
 
@@ -10,7 +10,7 @@ class Sidebar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.toggleSidebar= this.toggleSidebar.bind(this);
-		this.logout = this.logout.bind(this);
+		// this.logout = this.logout.bind(this);
 		this.addSnippet = this.addSnippet.bind(this);
 	}
 
@@ -31,19 +31,13 @@ class Sidebar extends React.Component {
 		console.log('create a snippet');
 	}
 
-	// should be handled on the App.js
-	// logout(e){
-	// 	e.preventDefault();
-	// 	this.props.dispatch(actions.logout());
-	// 	browserHistory.push('/');
-	// }
-
 	render() {
-		const snippetsArray = this.props.snippets.map((snippet, index) => {
+		const snippets = [...this.props.snippets];
+		const snippetsArray = snippets.map((snippet, index) => {
 			return (
-				<Snippet title={snippet.title} />
+				<Snippet title={snippet.title} description={snippet.description} key={index}/>
 			)
-		})
+		});
 
 		return (
 			<div>
@@ -53,7 +47,9 @@ class Sidebar extends React.Component {
 					<div className="top-menu">
 						<input type="search" placeholder="search" />
 					</div>
-					{this.snippetsArray}
+					<div className="list-snippets">
+						{snippetsArray}
+					</div>
 					<div className="bottom-menu">
 					<button onClick={this.logout}> Logout</button> <button>Settings</button> <button onClick={this.addSnippet}>Create Snippet</button>
 					</div>
@@ -67,7 +63,7 @@ class Sidebar extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		snippets: state.snippetReducer,
-		sidebarVisible: state.userReducer.sidebarVisible
+		visible: state.mainReducer.sidebarVisible
 	}
 }
 

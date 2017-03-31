@@ -5,6 +5,7 @@ import App from './App';
 import Main from './Main';
 import Login from './Login';
 import Signup from './Signup';
+import SnippetForm from './SnippetForm';
 import Dashboard from './Dashboard';
 import RequireAuth from '../require_auth';
 

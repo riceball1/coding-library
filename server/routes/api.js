@@ -74,7 +74,7 @@ router.post('/snippet', (req, res) => {
     });
 });
 
-router.put('/update-snippet/:snippetid', (req, res) => {
+router.put('/snippet/:snippetid', (req, res) => {
     // ensure that snippetid in request path and request body match
     if (!(req.params.snippetid && req.body.id && req.params.snippetid === req.body.id)) {
         return res.json({
@@ -106,7 +106,7 @@ router.put('/update-snippet/:snippetid', (req, res) => {
 });
 
 // not working at the moment
-router.delete('/delete-snippet/:snippetid', (req, res) => {
+router.delete('/snippet/:snippetid', (req, res) => {
     Snippet
         .findByIdAndRemove(req.params.snippetid)
         .exec()

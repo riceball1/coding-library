@@ -28,10 +28,10 @@ class Main extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        user: state.userReducer
-    }
+const mapStateToProps = (state) => {
+	return {
+		user: state.mainReducer.user
+	}
 }
 
 export default connect(mapStateToProps)(Main);

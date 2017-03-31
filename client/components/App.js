@@ -19,21 +19,20 @@ class App extends React.Component {
 
         loadUserFromToken() {
             let token = localStorage.getItem('jwtToken');
-            console.log("token", token);
+            console.log(token ? 'Token exists' : 'No token');
             if (!token || token === '') {
                 //if there is no token, dont bother
                 return;
             }
             //fetch user from token (if server deems it’s valid token)
-            this.props.dispatch(actions.meFromToken(token)).then(() => {
-                browserHistory.push('/dashboard');
-            });
+            this.props.dispatch(userActions.meFromToken(token))
+            // push to dashboard?
         }
 
         render() {
                 return (
                 <div className="main">
-                    <Sidebar/>
+                    <Sidebar />
                     <header>
                         <h1 className="main-title">Simple Code</h1>
                     </header>
@@ -49,7 +48,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.userReducer
+        user: state.mainReducer.user
     }
 }
 

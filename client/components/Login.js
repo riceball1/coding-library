@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions/user';
-import Nav from './Nav';
+import * as userActions from '../actions/user';
 import { browserHistory } from 'react-router';
 
 class Login extends React.Component {
@@ -28,7 +27,7 @@ class Login extends React.Component {
 		const password = this.passwordInput.value;
 		// even if password is wrong it goes to login success - but doesn't
 		// return a user object in userReducer <--
-		this.props.dispatch(actions.login(username, password)).then(() => {
+		this.props.dispatch(userActions.login(username, password)).then(() => {
 			console.log("This works!");
 			this.isValid();
 		});
@@ -38,7 +37,6 @@ class Login extends React.Component {
 	render() {
 		return (
 			<div>
-			<Nav />
 			<h1>Login</h1>
 				<form >
 				<label>username</label>
@@ -54,7 +52,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		user: state.userReducer.user
+		user: state.mainReducer.user
 	}
 }
 
