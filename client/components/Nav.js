@@ -20,10 +20,19 @@ class Nav extends React.Component {
 	render() {
 		return (
 			<nav className="navbar">
+				{this.props.user && <Link to="/dashboard">
+                    <button className="btn">Dashboard</button>
+                </Link>}
 				<button className="btn" onClick={this.logout}>Logout</button>
 			</nav>
 		);
 	}
 }
 
-export default connect()(Nav);
+const mapStateToProps = (state) => {
+	return {
+		user: state.userReducer.user
+	}
+}
+
+export default connect(mapStateToProps)(Nav);

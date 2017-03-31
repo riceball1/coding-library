@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
 
 	componentDidMount() {
 		// fetch the snippets
-		this.props.dispatch(snippetActions.fetchSnippets());
+		this.props.dispatch(snippetActions.fetchSnippets(this.props.user.username));
 	}
 
 	toggleSidebar(e) {
@@ -30,7 +30,7 @@ class Sidebar extends React.Component {
 	}
 
 	render() {
-		const snippets = [...this.props.snippets];
+		const snippets = this.props.snippets;
 		const snippetsArray = snippets.map((snippet, index) => {
 			return (
 				<Snippet title={snippet.title} description={snippet.description} key={index}/>
@@ -62,6 +62,7 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
+		user: state.userReducer.user,
 		snippets: state.snippetReducer,
 		visible: state.userReducer.sidebarVisible
 	}

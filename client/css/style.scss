@@ -143,12 +143,12 @@ div {
         }
     }
     .bottom-menu {
-        position: fixed;
+        position: absolute;
         bottom: 0;
+        left: 0;
         margin: 0 auto;
         text-align: center;
         padding: 5px;
-        width: 50%;
         .btn {
             display: inline-block;
             font-size: 1em;

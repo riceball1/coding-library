@@ -4,7 +4,6 @@ consider using codemirror for displaying a code editor like textarea in the form
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, browserHistory } from 'react-router';
 import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
 
@@ -46,10 +45,6 @@ class SnippetForm extends React.Component {
                     <br/>
                     <button type="button" onClick={this.submitForm}>submit</button>
                 </form>
-                
-                <Link to="/dashboard">
-                    <button>Dashboard</button>
-                </Link>
                 
                 
             </div>

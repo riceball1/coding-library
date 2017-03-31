@@ -29,8 +29,9 @@ router.get('/users', (req, res) => {
 
 router.get('/snippets', (req, res) => {
     console.log('getting snippets');
+    const username = req.body.username;
     Snippet
-        .find()
+        .find({'username': username})
         .exec()
         .then(snippets => {
             res.json(snippets);
