@@ -28,8 +28,6 @@ class SnippetForm extends React.Component {
     }
 
     render() {
-        console.log(this.props);
-
         return (
             <div className="main">
                 <header>
@@ -62,7 +60,7 @@ class SnippetForm extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.mainReducer.user
+        user: state.userReducer.user
     }
 }
 

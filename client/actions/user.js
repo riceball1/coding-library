@@ -6,8 +6,7 @@ export const ME_FROM_TOKEN = 'ME_FROM_TOKEN';
 export const ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCESS';
 export const ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
 export const RESET_TOKEN = 'RESET_TOKEN';
-export const SIGNUP_ERROR = 'SIGNUP_ERROR';
-export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const ACCESS_ERROR = 'ACCESS_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
@@ -19,8 +18,8 @@ export const logout = (() => {
     }
 })
 
-export const signupError = ((error) => ({
-    type: SIGNUP_ERROR,
+export const accessError = ((error) => ({
+    type: ACCESS_ERROR,
     payload: error
 }))
 
@@ -53,7 +52,7 @@ export const signup = (userData) => dispatch => {
         })
         .catch(error => {
             console.log("error: ", error);
-            dispatch(signupError(error))
+            dispatch(accessError(error))
         });
 };
 
@@ -61,11 +60,6 @@ export const signup = (userData) => dispatch => {
 export const loginSuccess = ((user) => ({
     type: LOGIN_SUCCESS,
     payload: user
-}))
-
-export const loginError = ((error) => ({
-    type: LOGIN_ERROR,
-    payload: error
 }))
 
 export const login = (username, password) => dispatch => {
@@ -93,7 +87,7 @@ export const login = (username, password) => dispatch => {
             dispatch(loginSuccess(data.user))
         })
         .catch(error => {
-            dispatch(loginError(error))
+            dispatch(accessError(error))
         });
 };
 

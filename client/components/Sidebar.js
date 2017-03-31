@@ -63,7 +63,7 @@ class Sidebar extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		snippets: state.snippetReducer,
-		visible: state.mainReducer.sidebarVisible
+		visible: state.userReducer.sidebarVisible
 	}
 }
 

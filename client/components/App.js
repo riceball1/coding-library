@@ -32,23 +32,18 @@ class App extends React.Component {
         render() {
                 return (
                 <div className="main">
-                    <Sidebar />
-                    <header>
-                        <h1 className="main-title">Simple Code</h1>
-                    </header>
-                    <div>
-                        <Nav />
-                        <div>@@@@@@</div>
+                {this.props.user && <Nav /> }
+                {this.props.user && <Sidebar /> }
                         {this.props.children}
-                    </div>
                 </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log('App state', state);
     return {
-        user: state.mainReducer.user
+        user: state.userReducer.user
     }
 }
 
