@@ -25,6 +25,7 @@ class Sidebar extends React.Component {
 
 	addSnippet(e) {
 		e.preventDefault();
+		this.props.dispatch(userActions.toggleSidebar());
 		browserHistory.push('/newsnippet');
 	}
 
@@ -49,8 +50,8 @@ class Sidebar extends React.Component {
 					</div>
 					<div className="bottom-menu">
 					
-					<button>Settings</button> 
-					<button onClick={this.addSnippet}>Create Snippet</button>
+					<button className="btn">Settings</button> 
+					<button onClick={this.addSnippet} className="btn">Create Snippet</button>
 					</div>
 			</div>
 		</div>

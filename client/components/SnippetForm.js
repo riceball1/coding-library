@@ -18,18 +18,18 @@ class SnippetForm extends React.Component {
 
     submitForm(e) {
         e.preventDefault();
-        console.log(this.state);
         let newSnippet = {
             title: this.titleInput.value,
             description: this.descriptionInput.value,
             code: this.codesnippetInput.value,
-            // userid: this.state.user._id
-            userId: "58d9d42bbfc7f664f51c97e3"
+            userid: this.props.user._id
         };
         this.props.dispatch(snippetActions.addSnippet(newSnippet));
     }
 
     render() {
+        console.log(this.props);
+
         return (
             <div className="main">
                 <header>
@@ -62,7 +62,7 @@ class SnippetForm extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.tokenReducer
+        user: state.mainReducer.user
     }
 }
 

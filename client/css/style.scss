@@ -122,9 +122,10 @@ div {
         .individual-snippets {
             border: 1px solid $lGray;
             padding: 5px;
-            margin: 10px auto;
+            border-radius: 3px;
+            margin: 5px auto;
             text-align: center;
-            font-size: 1.2em;
+            font-size: .8em;
         }
     }
     .top-menu {
@@ -135,12 +136,26 @@ div {
             display: inline-block;
             font-size: 1.2em;
             line-height: 30px;
+            padding: 5px;
+            border-radius: 3px;
+            &:focus {
+                border: 3px solid $teal;
+            }
         }
     }
     .bottom-menu {
         position: fixed;
         bottom: 0;
-        margin-bottom: 30px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 5px;
+        width: 50%;
+        .btn {
+            display: inline-block;
+            font-size: 1em;
+            padding: 10px;
+            margin: 10px;
+        }
     }
 }
 
