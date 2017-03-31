@@ -54,13 +54,15 @@ router.get('/snippets/:snippetid', (req, res) => {
         });
 });
 
-router.post('/add-snippet', (req, res) => {
-    const { title, description, code, userId } = req.body;
+router.post('/snippet', (req, res) => {
+    const { title, description, language, code, userid } = req.body;
+    console.log(typeof code);
     let newSnippet = new Snippet({
         title,
         description,
         code,
-        userId: mongoose.Types.ObjectId(userId)
+        language,
+        userId: mongoose.Types.ObjectId(userid)
     });
     newSnippet.save((err, snippet) => {
         if (err) {

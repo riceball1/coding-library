@@ -21,8 +21,8 @@ mongoose.Promise = global.Promise;
 const { authenticateMiddleware } = require('./middlewares/authenticate');
 
 // imported routes
-const index = require('./server/routes/index.js');
-const user = require('./server/routes/user.js');
+const auth = require('./server/routes/auth.js');
+const api = require('./server/routes/api.js');
 
 // config 
 const { PORT, DATABASE_URL } = require('./server/config.js');
@@ -56,9 +56,9 @@ app.use(morgan('common'));
 app.use('/public', express.static('public'));
 
 // endpoints
-app.use('/', index);
+app.use('/', auth);
 // app.use(authenticateMiddleware);
-app.use('/user', user);
+app.use('/api', api);
 // add catch all route for pages that don't have routes
 app.use('/*', (req, res) => (res.sendFile(path.resolve('public', 'index.html'))));
 

@@ -1,7 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../actions/user';
-import Nav from './Nav';
 import {browserHistory} from 'react-router';
 
 
@@ -41,7 +39,6 @@ class Signup extends React.Component {
 	render() {
 		return (
 			<div>
-			<Nav />
 			<h1>Signup</h1>
 				<form >
 					<label>username</label>

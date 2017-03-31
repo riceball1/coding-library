@@ -1,18 +1,11 @@
 import React from 'react';
-import Sidebar from './Sidebar';
 
-class Dashboard extends React.Component {
-	constructor(props) {
-		super(props)
-	}
-
-	render() {
-		return (
-			<div>
-				<Sidebar />
-			</div>
-		)
-	}
+function Dashboard (props) {
+	return (
+		<div>
+			<p>Simple Code Placeholder</p>
+		</div>
+	)
 }
 
 export default Dashboard;

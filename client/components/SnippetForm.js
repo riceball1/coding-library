@@ -1,50 +1,34 @@
+/**
+consider using codemirror for displaying a code editor like textarea in the form: http://codemirror.net/demo/theme.html#monokai
+**/
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
-import * as actions from '../actions/token';
+import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
-import Sidebar from './Sidebar';
+
+
 class SnippetForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            user: null
-        }
         this.loadUserFromToken = this.loadUserFromToken.bind(this);
         this.submitForm = this.submitForm.bind(this);
     }
 
-    componentWillMount() {
-        this.loadUserFromToken();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({ user: nextProps.user.user });
-    }
-    loadUserFromToken() {
-        let token = localStorage.getItem('jwtToken');
-        console.log(token ? "Token true" : "Token false");
-        if (!token || token === '') {
-            //if there is no token, dont bother
-            return;
-        }
-        this.props.dispatch(actions.meFromToken(token));
-    }
-
     submitForm(e) {
         e.preventDefault();
-        const newSnippet = {
+        console.log(this.state);
+        let newSnippet = {
             title: this.titleInput.value,
             description: this.descriptionInput.value,
             code: this.codesnippetInput.value,
-            language: this.langaugeInput.value,
-            userId: this.state.user._id
+            // userid: this.state.user._id
+            userId: "58d9d42bbfc7f664f51c97e3"
         };
-
         this.props.dispatch(snippetActions.addSnippet(newSnippet));
     }
-
 
     render() {
         return (
@@ -56,21 +40,14 @@ class SnippetForm extends React.Component {
                 <Sidebar />
                 <form >
                     <label>title</label>
-                    <input type="text" name="title" ref={ref => this.titleInput = ref} required="required"/>
+                    <input type="text" name="title" ref={ref => this.titleInput = ref} />
 
                     <label>description</label>
-                    <input type="text" name="description" ref={ref => this.descriptionInput = ref} required="required"/>
+                    <input type="text" name="description" ref={ref => this.descriptionInput = ref} />
                    
                     <label>code snippet</label>
                     <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} className="text-box" placeholder="Please type your code here"></textarea>
                     <br/>
-                    <select className="language-options" ref={ref => this.languageInput = ref}>
-                      <option value="javascript">javascript</option>
-                      <option value="css">css</option>
-                      <option value="python">python</option>
-                      <option value="java">java</option>
-                      <option value="sql">sql</option>
-                    </select>
                     <button type="button" onClick={this.submitForm}>submit</button>
                 </form>
                 

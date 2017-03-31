@@ -26,6 +26,7 @@ export default (state = initialState, action) => {
 
     if (action.type === actions.SNIPPETS_ERROR) {
         console.log('something went wrong!');
+        
     }
     return state;
 }
