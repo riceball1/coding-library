@@ -52,7 +52,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		user: state.mainReducer.user
+		user: state.userReducer.user
 	}
 }
 

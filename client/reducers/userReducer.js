@@ -11,17 +11,13 @@ export default (state = initialState, action) => {
         return Object.assign({}, state, { user: action.payload });
     }
 
-    if (action.type === actions.LOGIN_ERROR) {
-        console.log('login error');
+    if (action.type === actions.ACCESS_ERROR) {
+        console.log('login/signup error');
         return Object.assign({}, state, { error: action.payload });
     }
 
     /** SIGNUP **/
-    if (action.type === actions.SIGNUP_ERROR) {
-        console.log('signup error');
-        return Object.assign({}, state, { error: action.payload });
-    }
-
+    
     if (action.type === actions.LOGOUT) {
         console.log('logging out');
         const updated = {

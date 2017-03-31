@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import mainReducer from './mainReducer';
+import userReducer from './userReducer';
 import snippetReducer from './snippetReducer';
 
-const reducer = combineReducers({ mainReducer, snippetReducer });
+const reducer = combineReducers({ userReducer, snippetReducer });
 
 export default reducer;

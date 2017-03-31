@@ -4,7 +4,6 @@ consider using codemirror for displaying a code editor like textarea in the form
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, browserHistory } from 'react-router';
 import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
 
@@ -18,13 +17,11 @@ class SnippetForm extends React.Component {
 
     submitForm(e) {
         e.preventDefault();
-        console.log(this.state);
         let newSnippet = {
             title: this.titleInput.value,
             description: this.descriptionInput.value,
             code: this.codesnippetInput.value,
-            // userid: this.state.user._id
-            userId: "58d9d42bbfc7f664f51c97e3"
+            userid: this.props.user._id
         };
         this.props.dispatch(snippetActions.addSnippet(newSnippet));
     }
@@ -49,10 +46,6 @@ class SnippetForm extends React.Component {
                     <button type="button" onClick={this.submitForm}>submit</button>
                 </form>
                 
-                <Link to="/dashboard">
-                    <button>Dashboard</button>
-                </Link>
-                
                 
             </div>
             </div>
@@ -62,7 +55,7 @@ class SnippetForm extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.tokenReducer
+        user: state.userReducer.user
     }
 }
 

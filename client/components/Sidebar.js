@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
 
 	componentDidMount() {
 		// fetch the snippets
-		this.props.dispatch(snippetActions.fetchSnippets());
+		this.props.dispatch(snippetActions.fetchSnippets(this.props.user.username));
 	}
 
 	toggleSidebar(e) {
@@ -25,11 +25,12 @@ class Sidebar extends React.Component {
 
 	addSnippet(e) {
 		e.preventDefault();
+		this.props.dispatch(userActions.toggleSidebar());
 		browserHistory.push('/newsnippet');
 	}
 
 	render() {
-		const snippets = [...this.props.snippets];
+		const snippets = this.props.snippets;
 		const snippetsArray = snippets.map((snippet, index) => {
 			return (
 				<Snippet title={snippet.title} description={snippet.description} key={index}/>
@@ -49,8 +50,8 @@ class Sidebar extends React.Component {
 					</div>
 					<div className="bottom-menu">
 					
-					<button>Settings</button> 
-					<button onClick={this.addSnippet}>Create Snippet</button>
+					<button className="btn">Settings</button> 
+					<button onClick={this.addSnippet} className="btn">Create Snippet</button>
 					</div>
 			</div>
 		</div>
@@ -61,8 +62,9 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
+		user: state.userReducer.user,
 		snippets: state.snippetReducer,
-		visible: state.mainReducer.sidebarVisible
+		visible: state.userReducer.sidebarVisible
 	}
 }
 
