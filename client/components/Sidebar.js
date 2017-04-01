@@ -11,6 +11,7 @@ class Sidebar extends React.Component {
 		super(props);
 		this.toggleSidebar= this.toggleSidebar.bind(this);
 		this.addSnippet = this.addSnippet.bind(this);
+		this.showMsg = this.showMsg.bind(this);
 	}
 
 	componentDidMount() {
@@ -29,6 +30,11 @@ class Sidebar extends React.Component {
 		browserHistory.push('/newsnippet');
 	}
 
+	showMsg(e) {
+		e.preventDefault();
+		console.log(e.target.value);
+	}
+
 	render() {
 		const snippets = this.props.snippets;
 		const snippetsArray = snippets.map((snippet, index) => {
@@ -36,8 +42,6 @@ class Sidebar extends React.Component {
 				<Snippet title={snippet.title} description={snippet.description} key={index}/>
 			)
 		});
-
-		console.log('snippetsArray ', snippetsArray);
 		return (
 			<div>
 			<button onClick={this.toggleSidebar} className="sidebar-button">{(this.props.visible? 'close' : 'open')}</button>
@@ -51,8 +55,8 @@ class Sidebar extends React.Component {
 					</div>
 					<div className="bottom-menu">
 					
-					<button className="btn">Settings</button> 
-					<button onClick={this.addSnippet} className="btn">Create Snippet</button>
+					<button className="btn" onMouseOver={this.showMsg} value="settings" onClick={this.openSettings}>{"\u229E"}</button> 
+					<button onClick={this.addSnippet} className="btn" onMouseOver={this.showMsg} value="create snippet">{"\u270E"}</button>
 					</div>
 			</div>
 		</div>
