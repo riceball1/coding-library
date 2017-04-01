@@ -26,7 +26,7 @@ export const accessError = ((error) => ({
 export const signup = (userData) => dispatch => {
     const newUser = Object.assign({}, userData);
 
-    const url = `${ROOT_URL}/api/signup`;
+    const url = `${ROOT_URL}/signup`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
@@ -63,7 +63,7 @@ export const loginSuccess = ((user) => ({
 }))
 
 export const login = (username, password) => dispatch => {
-    const url = `${ROOT_URL}/api/login`;
+    const url = `${ROOT_URL}/login`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
