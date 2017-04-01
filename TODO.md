@@ -3,7 +3,7 @@ TODO LIST
 
 ```
 Created On: March 31, 2017
-Last Modified: March 31, 2017
+Last Modified: April 1, 2017
 ````
 
 This is a todo list created after already setting up a node/express/mongodb api, and creating a react/redux application with login/signup using jwt 
@@ -19,12 +19,13 @@ This is a todo list created after already setting up a node/express/mongodb api,
 ## Notifications
 
 - [ ] Create flash messages whenever user completes tasks (e.g., saved snippet, signed in, logged in, deleted snippet, updated snippet)
-
+    - Update: Only add flash messages for login/signup and errors
 
 ## Search
 
 - [ ] Create GET request to retreive specific snippets
     - Note: Where will the search result show? Does it replace the snippets that are already in the sidebar?
+    - Update: Typing in a search should narrow items in sidebar
 
 
 ## Sidebar
