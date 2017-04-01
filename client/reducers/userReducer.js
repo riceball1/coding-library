@@ -48,7 +48,6 @@ export default (state = initialState, action) => {
     }
 
     if (action.type === actions.TOGGLE_SIDEBAR) {
-        console.log('toggle');
         return Object.assign({}, state, { sidebarVisible: !state.sidebarVisible });
     }
 

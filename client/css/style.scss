@@ -49,14 +49,13 @@ form {
     }
 }
 
-.navbar {
-    ul {
-        list-style-type: none;
-        li {
-            display: inline-block;
-            padding: 5px;
-            margin: 20px;
-        }
+nav {
+    text-align: right;
+    margin: 10px 0px 60px 0px;
+    .nav-link {
+        padding: 10px;
+        margin: 10px auto;
+        color: $dGray;
     }
 }
 
@@ -86,12 +85,12 @@ div {
 }
 
 .btn {
-    display: block;
+    display: inline-block;
     width: 200px;
     background-color: $teal;
     padding: 5px;
     font-size: 1.2em;
-    margin: 10px auto;
+    margin: 5px;
     border: none;
     border-radius: 2px;
     color: white;
@@ -102,10 +101,10 @@ div {
     right: -40%;
     position: relative;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     padding: 30px;
-    font-size: 2em;
+    font-size: 1em;
 }
 
 .side-menu {
@@ -166,12 +165,15 @@ div {
             font-size: 1em;
             padding: 10px;
             margin: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
         }
     }
 }
 
 .sidebar-button {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     border: none;
@@ -192,7 +194,7 @@ div {
 }
 
 .visible {
-    width: 50%;
+    width: 40%;
     opacity: 1;
     // margin: 0 auto;
     transition: 0.5s ease-in-out;

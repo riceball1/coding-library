@@ -77,6 +77,7 @@ export const addSnippet = (snippet) => dispatch => {
         })
         .then(response => (response.json())) // to get the json
         .then(data => {
+            console.log('data', data);
             // returns back the snippet
             dispatch(addSnippetSuccess(data))
         })

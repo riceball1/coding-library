@@ -29,9 +29,6 @@ class SnippetForm extends React.Component {
     render() {
         return (
             <div className="main">
-                <header>
-                    <h1 className="main-title">Create New Snippet</h1>
-                </header>
                 <div>
                 <form className="snippet-form">
                     <input type="text" name="title" ref={ref => this.titleInput = ref} placeholder="title"/>
