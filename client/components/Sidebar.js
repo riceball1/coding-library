@@ -37,6 +37,7 @@ class Sidebar extends React.Component {
 			)
 		});
 
+		console.log('snippetsArray ', snippetsArray);
 		return (
 			<div>
 			<button onClick={this.toggleSidebar} className="sidebar-button">{(this.props.visible? 'close' : 'open')}</button>

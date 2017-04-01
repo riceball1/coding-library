@@ -7,7 +7,7 @@ const initialState = [];
 export default (state = initialState, action) => {
 
     if (action.type === actions.ADD_SNIPPET_SUCCESS) {
-        return [...state, action.payload];
+        return [...state, action.payload.snippet];
     }
 
     if (action.type === actions.UPDATE_SNIPPET_SUCCESS) {
