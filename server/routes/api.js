@@ -27,11 +27,11 @@ router.get('/users', (req, res) => {
         });
 });
 
-router.get('/snippets', (req, res) => {
+router.get('/snippets/:userid', (req, res) => {
     console.log('getting snippets');
-    const username = req.body.username;
+    const userId = req.params.userid;
     Snippet
-        .find({'username': username})
+        .find({userId})
         .exec()
         .then(snippets => {
             res.json(snippets);

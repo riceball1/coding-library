@@ -16,7 +16,7 @@ class Sidebar extends React.Component {
 
 	componentDidMount() {
 		// fetch the snippets
-		this.props.dispatch(snippetActions.fetchSnippets(this.props.user.username));
+;		this.props.dispatch(snippetActions.fetchSnippets(this.props.user._id));
 	}
 
 	toggleSidebar(e) {
@@ -42,6 +42,7 @@ class Sidebar extends React.Component {
 				<Snippet title={snippet.title} description={snippet.description} key={index}/>
 			)
 		});
+		console.log('Snippets Array ', snippetsArray);
 		return (
 			<div>
 			<button onClick={this.toggleSidebar} className="sidebar-button">{(this.props.visible? 'close' : 'open')}</button>
