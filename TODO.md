@@ -14,7 +14,7 @@ This is a todo list created after already setting up a node/express/mongodb api,
 
 - [ ] replace snippet textarea with codemirror
 
-- [ ] snippets should be only those of current user (fix in API)
+- [x] snippets should be only those of current user (fix in API)
 
 ## Notifications
 
