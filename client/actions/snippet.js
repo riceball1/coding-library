@@ -1,7 +1,7 @@
 /** snippet actions **/
 
 import 'babel-polyfill';
-import 'isomorphic-fetch';
+import fetch from 'isomorphic-fetch';
 
 const ROOT_URL = location.origin;
 export const SNIPPETS_ERROR = 'SNIPPETS_ERROR';
@@ -9,6 +9,7 @@ export const FETCH_SNIPPETS_SUCCESS = 'FETCH_SNIPPETS_SUCCESS';
 export const ADD_SNIPPET_SUCCESS = 'ADD_SNIPPET_SUCCESS';
 export const UPDATE_SNIPPET_SUCCESS = 'UPDATE_SNIPPET_SUCCESS';
 export const DELETE_SNIPPET_SUCCESS = 'DELETE_SNIPPET_SUCCESS';
+export const FILTER_SNIPPETS = 'FILTER_SNIPPETS';
 
 // one error to handle all snippets
 export const snippetsError = ((error) => ({
@@ -37,7 +38,7 @@ export const deleteSnippetSuccess = ((data) => ({
 }))
 
 export const fetchSnippets = (userid) => dispatch => {
-    const url = `${ROOT_URL}/api/snippets`;
+    const url = `${ROOT_URL}/api/snippets/${userid}`;
     return fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -77,7 +78,6 @@ export const addSnippet = (snippet) => dispatch => {
         })
         .then(response => (response.json())) // to get the json
         .then(data => {
-            console.log('data', data);
             // returns back the snippet
             dispatch(addSnippetSuccess(data))
         })
@@ -85,3 +85,8 @@ export const addSnippet = (snippet) => dispatch => {
             dispatch(snippetsError(error))
         });
 };
+
+export const filterSnippets = ((query) => ({
+    type: FILTER_SNIPPETS,
+    payload: query
+}))

@@ -10,6 +10,10 @@ export default (state = initialState, action) => {
         return [...state, action.payload.snippet];
     }
 
+    if (action.type === actions.FILTER_SNIPPETS) {
+        // filter snippets based on action.payload (query)
+    }
+
     if (action.type === actions.UPDATE_SNIPPET_SUCCESS) {
         // return state with snippet updated
     }
