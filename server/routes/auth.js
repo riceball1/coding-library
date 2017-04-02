@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 });
 
 // Use JWT to authenticate
-router.post('/api/login', (req, res) => {
+router.post('/login', (req, res) => {
     // find user
     User
         .findOne({
@@ -64,7 +64,7 @@ router.post('/api/login', (req, res) => {
 
 **/
 
-router.post('/api/signup', (req, res) => {
+router.post('/signup', (req, res) => {
     const {
         username,
         fullname,
