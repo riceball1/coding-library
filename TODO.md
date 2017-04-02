@@ -35,3 +35,7 @@ This is a todo list created after already setting up a node/express/mongodb api,
 - [ ] Add handler for 'Settings' - can be popup modal
 
 - [ ] Improve style of individual snippet previews
+
+## Testing
+
+- [ ] Add enzyme testing
