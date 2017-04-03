@@ -113,7 +113,7 @@ export const getSingleSnippet = ((snippetId) => dispatch => {
         });
 });
 
-export const getSnippetSuccess(data) => ({
+export const getSnippetSuccess = (data) => ({
     type: GET_SINGLE_SNIPPET_SUCCESS,
     payload: data
 })
