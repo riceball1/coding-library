@@ -42,8 +42,8 @@ class Sidebar extends React.Component {
 	}
 	// tool tip
 	showMsg(e) {
-		e.preventDefault();
-		console.log(this.value);
+		// e.preventDefault();
+		// console.log(this);
 	}
 
 	render() {
