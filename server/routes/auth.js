@@ -136,19 +136,24 @@ router.get('/me/from/token', (req, res, next) => {
         if (err) {
             res.json({ error: err });
         };
-        // return user using the id from w/in JWTToken
-        User.findById(user._id, (err, user) => {
-            if (err) {
-                console.log(err)
-            };
-            user = utils.getCleanUser(user);
 
-            // either create new token or pass the old token back
-            res.json({
-                user: user,
-                token: token
+        if(!user) {
+            res.status(404).json({message: 'no user found'});
+        } else {
+             // return user using the id from w/in JWTToken
+            User.findById(user._id, (err, user) => {
+                if (err) {
+                    console.log(err)
+                };
+                user = utils.getCleanUser(user);
+
+                // either create new token or pass the old token back
+                res.json({
+                    user: user,
+                    token: token
+                });
             });
-        });
+        }
     });
 });
 
