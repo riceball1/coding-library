@@ -10,6 +10,7 @@ export const ADD_SNIPPET_SUCCESS = 'ADD_SNIPPET_SUCCESS';
 export const UPDATE_SNIPPET_SUCCESS = 'UPDATE_SNIPPET_SUCCESS';
 export const DELETE_SNIPPET_SUCCESS = 'DELETE_SNIPPET_SUCCESS';
 export const FILTER_SNIPPETS = 'FILTER_SNIPPETS';
+export const SET_CURRENT_SNIPPET = 'SET_CURRENT_SNIPPET'; 
 
 // one error to handle all snippets
 export const snippetsError = ((error) => ({
@@ -90,3 +91,9 @@ export const filterSnippets = ((query) => ({
     type: FILTER_SNIPPETS,
     payload: query
 }))
+
+export const setCurrentSnippet = (index) => ({
+    type: SET_CURRENT_SNIPPET,
+    payload: index
+})
+
