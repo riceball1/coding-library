@@ -57,7 +57,7 @@ class Sidebar extends React.Component {
 		
 		const snippetsArray = snippets.map((snippet, index) => {
 			return (
-				<Snippet title={snippet.title} description={snippet.description} key={snippet._id.toString()} onClick={this.openSnippet.bind(null, index )}/>
+				<Snippet title={snippet.title} description={snippet.description} key={snippet._id} onClick={this.openSnippet.bind(null, index )}/>
 			)
 		});
 		return (
