@@ -12,11 +12,23 @@ class Sidebar extends React.Component {
 		this.toggleSidebar= this.toggleSidebar.bind(this);
 		this.addSnippet = this.addSnippet.bind(this);
 		this.showMsg = this.showMsg.bind(this);
+		this.searchSnippets = this.searchSnippets.bind(this);
+		this.openSnippet = this.openSnippet.bind(this);
 	}
 
 	componentDidMount() {
 		// fetch the snippets
 ;		this.props.dispatch(snippetActions.fetchSnippets(this.props.user._id));
+	}
+
+	openSnippet(e) {
+		e.preventDefault();
+		console.log(e.target.getAttribute('data-id'));
+	}
+
+	searchSnippets(e) {
+		e.preventDefault();
+		this.props.dispatch(snippetActions.filterSnippets(e.target.value));
 	}
 
 	toggleSidebar(e) {
@@ -29,27 +41,26 @@ class Sidebar extends React.Component {
 		this.props.dispatch(userActions.toggleSidebar());
 		browserHistory.push('/newsnippet');
 	}
-
+	// tool tip
 	showMsg(e) {
 		e.preventDefault();
-		console.log(e.target.value);
+		console.log(this.value);
 	}
 
 	render() {
 		const snippets = this.props.snippets;
 		const snippetsArray = snippets.map((snippet, index) => {
 			return (
-				<Snippet title={snippet.title} description={snippet.description} key={index}/>
+				<Snippet title={snippet.title} description={snippet.description} key={snippet._id.toString()} onClick={this.openSnippet} id={snippets[index]._id}/>
 			)
 		});
-		console.log('Snippets Array ', snippetsArray);
 		return (
 			<div>
 			<button onClick={this.toggleSidebar} className="sidebar-button">{(this.props.visible? 'close' : 'open')}</button>
 				
 				<div id="sideBar" className={(this.props.visible? "visible " : "invisible ") + "side-menu"}>
 					<div className="top-menu">
-						<input type="search" placeholder="search" />
+						<input type="search" placeholder="search" onChange={this.searchSnippets}/>
 					</div>
 					<div className="list-snippets">
 						{snippetsArray}

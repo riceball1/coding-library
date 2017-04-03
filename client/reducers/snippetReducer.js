@@ -12,6 +12,15 @@ export default (state = initialState, action) => {
 
     if (action.type === actions.FILTER_SNIPPETS) {
         // filter snippets based on action.payload (query)
+        // should show if searching is true or false? 
+        // how to return the state to original if not searching
+        console.log('Current Action', action);
+        console.log('State', state);
+        if(action.payload === '') {
+            return state;
+        } else {
+            return []
+        }
     }
 
     if (action.type === actions.UPDATE_SNIPPET_SUCCESS) {
