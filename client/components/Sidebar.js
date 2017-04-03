@@ -47,8 +47,14 @@ class Sidebar extends React.Component {
 	}
 
 	render() {
-		console.log('Filtered', this.props.filteredSnippets);
-		const snippets = this.props.snippets;
+		const filteredSnippet = this.props.filteredSnippets;
+		let snippets;
+		if(filteredSnippet.length > 0) {
+			snippets = filteredSnippet;
+		} else {
+			snippets = this.props.snippets;
+		}
+		
 		const snippetsArray = snippets.map((snippet, index) => {
 			return (
 				<Snippet title={snippet.title} description={snippet.description} key={snippet._id.toString()} onClick={this.openSnippet.bind(null, index )}/>
