@@ -10,6 +10,7 @@ export const ADD_SNIPPET_SUCCESS = 'ADD_SNIPPET_SUCCESS';
 export const UPDATE_SNIPPET_SUCCESS = 'UPDATE_SNIPPET_SUCCESS';
 export const DELETE_SNIPPET_SUCCESS = 'DELETE_SNIPPET_SUCCESS';
 export const FILTER_SNIPPETS = 'FILTER_SNIPPETS';
+export const GET_SINGLE_SNIPPET_SUCCESS = 'GET_SINGLE_SNIPPET_SUCCESS'; 
 
 // one error to handle all snippets
 export const snippetsError = ((error) => ({
@@ -90,3 +91,30 @@ export const filterSnippets = ((query) => ({
     type: FILTER_SNIPPETS,
     payload: query
 }))
+
+export const getSingleSnippet = ((snippetId) => dispatch => {
+    const url = `${ROOT_URL}/api/snippet/${snippetId}`;
+    return fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                let error = new Error(response.statusText)
+                error = response
+                console.log(error);
+            }
+            return response;
+        })
+        .then(response => (response.json())) // to get the json
+        .then(data => {
+            // returns back the snippet
+            dispatch(getSnippetSuccess(data))
+        })
+        .catch(error => {
+            dispatch(snippetsError(error))
+        });
+});
+
+export const getSnippetSuccess(data) => ({
+    type: GET_SINGLE_SNIPPET_SUCCESS,
+    payload: data
+})
+

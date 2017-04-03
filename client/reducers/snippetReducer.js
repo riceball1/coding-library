@@ -36,6 +36,11 @@ export default (state = initialState, action) => {
         return action.payload;
     }
 
+    if (action.type === actions.GET_SINGLE_SNIPPET_SUCCESS) {
+        // return specific snippet information back
+        // but do not want to mess with the state on the side menu
+    }
+
     if (action.type === actions.SNIPPETS_ERROR) {
         console.log('Snippet Error');
         console.log('Error: ', action.payload)

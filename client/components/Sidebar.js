@@ -23,7 +23,8 @@ class Sidebar extends React.Component {
 
 	openSnippet(e) {
 		e.preventDefault();
-		console.log(e.target.getAttribute('data-id'));
+		const snippetId = e.target.getAttribute('data-id');
+		this.props.dispatch(snippetActions.getSingleSnippet(snippetId));
 	}
 
 	searchSnippets(e) {
