@@ -131,11 +131,12 @@ div {
         }
         .individual-snippets {
             border: 1px solid $lGray;
-            padding: 5px;
+            padding: 30px;
             border-radius: 3px;
             margin: 5px auto;
             text-align: center;
             font-size: .8em;
+            cursor: pointer;
         }
     }
     .top-menu {
