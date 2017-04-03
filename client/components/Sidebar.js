@@ -21,10 +21,8 @@ class Sidebar extends React.Component {
 ;		this.props.dispatch(snippetActions.fetchSnippets(this.props.user._id));
 	}
 
-	openSnippet(e) {
-		e.preventDefault();
-		const snippetId = e.target.getAttribute('data-id');
-		this.props.dispatch(snippetActions.getSingleSnippet(snippetId));
+	openSnippet(index) {
+		this.props.dispatch(snippetActions.setCurrentSnippet(index));
 	}
 
 	searchSnippets(e) {
@@ -49,10 +47,11 @@ class Sidebar extends React.Component {
 	}
 
 	render() {
+		console.log('Filtered', this.props.filteredSnippets);
 		const snippets = this.props.snippets;
 		const snippetsArray = snippets.map((snippet, index) => {
 			return (
-				<Snippet title={snippet.title} description={snippet.description} key={snippet._id.toString()} onClick={this.openSnippet} id={snippets[index]._id}/>
+				<Snippet title={snippet.title} description={snippet.description} key={snippet._id.toString()} onClick={this.openSnippet.bind(null, index )}/>
 			)
 		});
 		return (
@@ -81,7 +80,8 @@ class Sidebar extends React.Component {
 const mapStateToProps = (state) => {
 	return {
 		user: state.userReducer.user,
-		snippets: state.snippetReducer,
+		snippets: state.snippetReducer.snippets,
+		filteredSnippets: state.snippetReducer.filteredSnippets,
 		visible: state.userReducer.sidebarVisible
 	}
 }

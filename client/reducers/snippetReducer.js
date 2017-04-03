@@ -2,24 +2,29 @@
 
 import * as actions from '../actions/snippet';
 
-const initialState = [];
+const initialState = {
+    snippets:[],
+    filteredSnippets: [],
+    currentSnippet: {},
+    //add to handle form
+    error: null
+};
 
 export default (state = initialState, action) => {
 
     if (action.type === actions.ADD_SNIPPET_SUCCESS) {
-        return [...state, action.payload.snippet];
+        return Object.assign({}, state, {snippets: [...state.snippets, action.payload]});
     }
 
     if (action.type === actions.FILTER_SNIPPETS) {
-        // filter snippets based on action.payload (query)
-        // should show if searching is true or false? 
-        // how to return the state to original if not searching
-        console.log('Current Action', action);
-        console.log('State', state);
-        if(action.payload === '') {
-            return state;
+        if(action.payload) {
+            let filtered = state.snippets.filter((snippet) => {
+                return snippet.title.includes(action.payload);
+            });
+            return  Object.assign({}, state, {filteredSnippets: filtered});
+
         } else {
-            return []
+            return Object.assign({}, state, {filteredSnippets: []});
         }
     }
 
@@ -33,18 +38,18 @@ export default (state = initialState, action) => {
 
     if (action.type === actions.FETCH_SNIPPETS_SUCCESS) {
         console.log('Fetch snippets ', action.payload);
-        return action.payload;
+        return Object.assign({}, state, {snippets: action.payload});
     }
 
-    if (action.type === actions.GET_SINGLE_SNIPPET_SUCCESS) {
-        // return specific snippet information back
-        // but do not want to mess with the state on the side menu
+    if (action.type === actions.SET_CURRENT_SNIPPET) {
+        let currentSnippet = state.snippets[action.payload]
+        return Object.assign({}, state, {currentSnippet});
     }
 
     if (action.type === actions.SNIPPETS_ERROR) {
         console.log('Snippet Error');
         console.log('Error: ', action.payload)
-        return action.payload;
+        return Object.assign({}, state, {error: action.payload});
     }
 
     return state;

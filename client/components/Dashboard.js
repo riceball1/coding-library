@@ -1,11 +1,26 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-function Dashboard (props) {
-	return (
-		<div>
-			<p>Simple Code Placeholder</p>
-		</div>
-	)
+class Dashboard extends React.Component {
+	constructor(props) {
+		super(props);
+		
+	}
+
+	render() {
+		return (
+			<div>
+				<p>{this.props.currentSnippet.title}</p>
+			</div>
+		)
+	}
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+	return {
+		user: state.userReducer.user,
+		currentSnippet: state.snippetReducer.currentSnippet,
+	}
+}
+
+export default connect(mapStateToProps)(Dashboard);
