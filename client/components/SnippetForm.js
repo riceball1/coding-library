@@ -31,21 +31,24 @@ class SnippetForm extends React.Component {
     }
 
     render() {
-        console.log('current object', this.props.currentSnippet);
-        return (
-            <div className="main">
-                <div>
-                <form className="snippet-form">
-                    <input type="text" name="title" value={this.props.currentSnippet.title}  onChange={this.handleChange}/>
+        if (!this.props.currentSnippet) {
+            return( <h2> Create new snippet to get started. </h2>)
+        } else {
+            return (
+                <div className="main">
+                    <div>
+                    <form className="snippet-form">
+                        <input type="text" name="title" value={this.props.currentSnippet.title}  onChange={this.handleChange}/>
 
-                    <input type="text" name="description" value={this.props.currentSnippet.description} onChange={this.handleChange}/>
-                   
-                    <textarea rows="4" cols="50" name="code" className="text-box" value={this.props.currentSnippet.code} onChange={this.handleChange}></textarea>
-                    <br/>
-                </form>    
-            </div>
-            </div>
-        )
+                        <input type="text" name="description" value={this.props.currentSnippet.description} onChange={this.handleChange}/>
+                       
+                        <textarea rows="4" cols="50" name="code" className="text-box" value={this.props.currentSnippet.code} onChange={this.handleChange}></textarea>
+                        <br/>
+                    </form>    
+                </div>
+                </div>
+            )
+        }
     }
 }
 
