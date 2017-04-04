@@ -14,6 +14,13 @@ class SnippetForm extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.deleteSnippet = this.deleteSnippet.bind(this);
+    }
+
+    deleteSnippet(e) {
+        e.preventDefault();
+        console.log('Delete snippet');
+        this.props.dispatch(snippetActions.deleteSnippet(this.props.currentSnippet._id));
     }
 
   handleChange(event) {
@@ -24,7 +31,7 @@ class SnippetForm extends React.Component {
     this.props.dispatch(snippetActions.updateCurrentSnippetLocally({name, value}));
     // TODO: interval throttle underscore
     this.props.dispatch(snippetActions.updateCurrentSnippet(this.props.currentSnippet));
-    _.throttle(() => {console.log('This works!')}, 8000);
+    // _.throttle(function() {console.log('This works!')}, 1000);
   }
 
     render() {
@@ -35,6 +42,7 @@ class SnippetForm extends React.Component {
                 <div className="main">
                     <div>
                     <form className="snippet-form">
+                        <button onClick={this.deleteSnippet} className="delete-button">x</button>
                         <input type="text" name="title" value={this.props.currentSnippet.title}  onChange={this.handleChange}/>
 
                         <input type="text" name="description" value={this.props.currentSnippet.description} onChange={this.handleChange}/>
