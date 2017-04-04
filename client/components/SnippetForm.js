@@ -36,10 +36,10 @@ class SnippetForm extends React.Component {
 
     render() {
         if (!this.props.currentSnippet) {
-            return( <h2> Create new snippet to get started. </h2>)
+            return( <div className={(this.props.visible? "left" : "")}><h2> Create new snippet to get started. </h2></div>)
         } else {
             return (
-                <div className="main">
+                <div className={(this.props.visible? "left" : "") + " main"}>
                     <div>
                     <form className="snippet-form">
                         <button onClick={this.deleteSnippet} className="delete-button">x</button>
@@ -60,7 +60,8 @@ class SnippetForm extends React.Component {
 function mapStateToProps(state) {
     return {
         user: state.userReducer.user,
-        currentSnippet: state.snippetReducer.currentSnippet
+        currentSnippet: state.snippetReducer.currentSnippet,
+        visible: state.userReducer.sidebarVisible
     }
 }
 
