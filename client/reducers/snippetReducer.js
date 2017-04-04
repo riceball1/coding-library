@@ -14,7 +14,8 @@ const initialState = {
 export default (state = initialState, action) => {
 
     if (action.type === actions.ADD_SNIPPET_SUCCESS) {
-        return Object.assign({}, state, {snippets: [...state.snippets, action.payload]});
+        // last item in the snippets array will be the current snippet
+        return Object.assign({}, state, {snippets: [...state.snippets, action.payload], currentSnippet: action.payload});
     }
 
     if (action.type === actions.FILTER_SNIPPETS) {
@@ -35,21 +36,22 @@ export default (state = initialState, action) => {
 
     if (action.type === actions.DELETE_SNIPPET_SUCCESS) {
         // return state with snippet removed
+        let toDeleteSnippet = state.snippets[action.payload];
+        // return Object.assign({}, state, {snippets: action.payload});
     }
 
     if (action.type === actions.FETCH_SNIPPETS_SUCCESS) {
-        console.log('Fetch snippets ', action.payload);
         return Object.assign({}, state, {snippets: action.payload});
     }
 
     if (action.type === actions.SET_CURRENT_SNIPPET) {
-        let currentSnippet = state.snippets[action.payload]
-        return Object.assign({}, state, {currentSnippet});
+        let newCurrentSnippet = state.snippets[action.payload];
+        return Object.assign({}, state, {currentSnippet: newCurrentSnippet});
     }
 
     if (action.type === actions.SNIPPETS_ERROR) {
         console.log('Snippet Error');
-        console.log('Error: ', action.payload)
+        console.log('Error: ', action.payload);
         return Object.assign({}, state, {error: action.payload});
     }
 

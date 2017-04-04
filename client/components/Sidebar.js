@@ -18,11 +18,13 @@ class Sidebar extends React.Component {
 
 	componentDidMount() {
 		// fetch the snippets
-;		this.props.dispatch(snippetActions.fetchSnippets(this.props.user._id));
+		this.props.dispatch(snippetActions.fetchSnippets(this.props.user._id));
 	}
 
 	openSnippet(index) {
+		console.log(this.props.snippets[index]);
 		this.props.dispatch(snippetActions.setCurrentSnippet(index));
+		browserHistory.push('/newsnippet');
 	}
 
 	searchSnippets(e) {
@@ -38,6 +40,15 @@ class Sidebar extends React.Component {
 	addSnippet(e) {
 		e.preventDefault();
 		this.props.dispatch(userActions.toggleSidebar());
+		// create an empty snippet, and reducer should make it the new currentsnippet
+		// in the 'newsnippet', form should populate with current snippet info
+		let newSnippet = {
+            title: 'Title',
+            description: 'Add a short description here.',
+            code: 'Write some code here.',
+            userid: this.props.user._id
+        };
+        this.props.dispatch(snippetActions.addSnippet(newSnippet));
 		browserHistory.push('/newsnippet');
 	}
 	// tool tip
@@ -57,7 +68,7 @@ class Sidebar extends React.Component {
 		
 		const snippetsArray = snippets.map((snippet, index) => {
 			return (
-				<Snippet title={snippet.title} description={snippet.description} key={snippet._id} onClick={this.openSnippet.bind(null, index )}/>
+				<Snippet title={snippet.title} description={snippet.description} key={index} onClick={this.openSnippet.bind(null, index )}/>
 			)
 		});
 		return (
@@ -90,6 +101,13 @@ const mapStateToProps = (state) => {
 		filteredSnippets: state.snippetReducer.filteredSnippets,
 		visible: state.userReducer.sidebarVisible
 	}
+}
+
+Sidebar.propTypes = {
+	user: React.PropTypes.object,
+	snippets: React.PropTypes.array,
+	filterSnippets: React.PropTypes.array,
+	visible: React.PropTypes.bool
 }
 
 export default connect(mapStateToProps)(Sidebar);

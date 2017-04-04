@@ -37,6 +37,9 @@ form {
             border: 3px solid $teal;
         }
     }
+    input[name="username"], input[name="email"] {
+        text-transform: lowercase;
+    }
      button {
         font-size: 1.2em;
         padding: 10px;
