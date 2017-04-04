@@ -17,6 +17,8 @@ class SnippetForm extends React.Component {
 
     componentDidMount() {
         this.titleInput.value = this.props.currentSnippet.title;
+        this.descriptionInput.value = this.props.currentSnippet.description;
+        this.codesnippetInput.value = this.props.currentSnippet.codesnippet;
     }
 
     autoSave() {
@@ -42,7 +44,6 @@ class SnippetForm extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.snippetReducer.currentSnippet);
     return {
         user: state.userReducer.user,
         currentSnippet: state.snippetReducer.currentSnippet

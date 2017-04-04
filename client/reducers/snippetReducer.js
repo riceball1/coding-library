@@ -45,8 +45,8 @@ export default (state = initialState, action) => {
     }
 
     if (action.type === actions.SET_CURRENT_SNIPPET) {
-        let currentSnippet = state.snippets[action.payload];
-        return Object.assign({}, state, {currentSnippet});
+        let newCurrentSnippet = state.snippets[action.payload];
+        return Object.assign({}, state, {currentSnippet: newCurrentSnippet});
     }
 
     if (action.type === actions.SNIPPETS_ERROR) {

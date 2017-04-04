@@ -18,11 +18,13 @@ class Sidebar extends React.Component {
 
 	componentDidMount() {
 		// fetch the snippets
-;		this.props.dispatch(snippetActions.fetchSnippets(this.props.user._id));
+		this.props.dispatch(snippetActions.fetchSnippets(this.props.user._id));
 	}
 
 	openSnippet(index) {
+		console.log(this.props.snippets[index]);
 		this.props.dispatch(snippetActions.setCurrentSnippet(index));
+		browserHistory.push('/newsnippet');
 	}
 
 	searchSnippets(e) {
@@ -99,6 +101,13 @@ const mapStateToProps = (state) => {
 		filteredSnippets: state.snippetReducer.filteredSnippets,
 		visible: state.userReducer.sidebarVisible
 	}
+}
+
+Sidebar.propTypes = {
+	user: React.PropTypes.object,
+	snippets: React.PropTypes.array,
+	filterSnippets: React.PropTypes.array,
+	visible: React.PropTypes.bool
 }
 
 export default connect(mapStateToProps)(Sidebar);
