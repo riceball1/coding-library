@@ -257,5 +257,10 @@ div {
     position: absolute;
     top: 0;
     right: 10px;
+    cursor: pointer;
+    &:hover {
+        background-color: $dGray;
+        color: $teal;
+    }
 
 }
