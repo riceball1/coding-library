@@ -195,24 +195,26 @@ div {
 .invisible {
     width: 0%;
     opacity: 0;
-    transition: width 0.2s;
+    transition: 0.2s;
 }
 
 .visible {
     width: 40%;
     opacity: 1;
-    transition: width 0.2s;
+    z-index: 1;
+    transition: 0.2s;
 }
 
 main {
     margin-left: 0;
     width: 500px;
-    transition: margin-left 0.2s;
+    transition: 0.2s;
 }
 
 .left {
-    margin-left: 250px;
+    margin-left: 50%;
     transition: margin-left 0.2s;
+    z-index: 0;
 }
 
 /** SNIPPET FORM ***/
