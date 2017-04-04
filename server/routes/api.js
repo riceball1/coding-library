@@ -77,16 +77,16 @@ router.post('/snippet', (req, res) => {
 
 router.put('/snippet/:snippetid', (req, res) => {
     // ensure that snippetid in request path and request body match
-    if (!(req.params.snippetid && req.body.id && req.params.snippetid === req.body.id)) {
+    if (!(req.params.snippetid && req.body._id && req.params.snippetid === req.body._id)) {
         return res.json({
             message: `Request path id (${req.params.snippetid}) and request body id ` +
-                `(${req.body.id}) must match`
+                `(${req.body._id}) must match`
         });
     }
 
     // updatable fields
     const toUpdate = {};
-    const updatableFields = ['title', 'code'];
+    const updatableFields = ['title', 'description', 'code'];
     updatableFields.forEach(field => {
         if (field in req.body) {
             toUpdate[field] = req.body[field];

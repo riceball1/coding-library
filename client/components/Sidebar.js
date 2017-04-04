@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
 	openSnippet(index) {
 		console.log(this.props.snippets[index]);
 		this.props.dispatch(snippetActions.setCurrentSnippet(index));
-		browserHistory.push('/newsnippet');
+		browserHistory.push('/dashboard');
 	}
 
 	searchSnippets(e) {
@@ -49,7 +49,7 @@ class Sidebar extends React.Component {
             userid: this.props.user._id
         };
         this.props.dispatch(snippetActions.addSnippet(newSnippet));
-		browserHistory.push('/newsnippet');
+		browserHistory.push('/dashboard');
 	}
 	// tool tip
 	showMsg(e) {
