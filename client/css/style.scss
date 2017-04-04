@@ -135,13 +135,21 @@ div {
             overflow: auto;
         }
         .individual-snippets {
-            border: 1px solid $lGray;
+            border-bottom: 1px solid $lGray;
             padding: 30px;
+            width: 90%;
             border-radius: 3px;
             margin: 5px auto;
-            text-align: center;
             font-size: .8em;
             cursor: pointer;
+            h1, p {
+                text-align: left;
+            }
+            &:hover {
+                background-color: $lGray;
+                color: $teal;
+                border: 1px dotted $teal;
+            }
         }
     }
     .top-menu {
