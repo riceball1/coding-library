@@ -6,7 +6,8 @@ const initialState = {
     snippets:[],
     filteredSnippets: [],
     currentSnippet: {},
-    //add to handle form
+    isSaving: false,
+    unsavedChanges: false,
     error: null
 };
 
