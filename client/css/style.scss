@@ -55,11 +55,17 @@ form {
 
 nav {
     text-align: right;
-    margin: 10px 0px 60px 0px;
+    margin: 10px 10%;
+    padding: 10px;
     .nav-link {
         padding: 10px;
         margin: 10px auto;
         color: $dGray;
+        &:hover {
+            color: $teal;
+            background-color: $lGray;
+            border-radius: 5px;
+        }
     }
 }
 
@@ -124,6 +130,7 @@ div {
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 0;
     overflow-x: hidden;
     /* Disable horizontal scroll */
     padding: 15px;
@@ -134,13 +141,21 @@ div {
             overflow: auto;
         }
         .individual-snippets {
-            border: 1px solid $lGray;
+            border-bottom: 1px solid $lGray;
             padding: 30px;
+            width: 90%;
             border-radius: 3px;
             margin: 5px auto;
-            text-align: center;
             font-size: .8em;
             cursor: pointer;
+            h1, p {
+                text-align: left;
+            }
+            &:hover {
+                background-color: $lGray;
+                color: $teal;
+                border: 1px dotted $teal;
+            }
         }
     }
     .top-menu {
@@ -187,32 +202,37 @@ div {
     border-radius: 0px 5px 5px 0px;
     outline: none;
     width: 100px;
-    opacity: 0.3;
     z-index: 1000;
     cursor: pointer;
+    color: &teal;
+    &:hover {
+        color: white;
+        background-color: $teal;
+    }
 }
 
 .invisible {
-    width: 0%;
     opacity: 0;
-    transition: width 0.2s;
+    width: 0%;
+    transition: opacity 0.3s width 0.3s;
 }
 
 .visible {
     width: 40%;
     opacity: 1;
-    transition: width 0.2s;
+    transition: opacity 1s width 0.3s margin-left 1s;
 }
 
-main {
+.main {
     margin-left: 0;
-    width: 500px;
-    transition: margin-left 0.2s;
+    width: 100%;
+    transition: width 0.2s margin-left 0.5s;
 }
 
 .left {
-    margin-left: 250px;
-    transition: margin-left 0.2s;
+    margin-left: 50%;
+    width: 700px;
+    transition: width 0.2s margin-left 0.5s;
 }
 
 /** SNIPPET FORM ***/
@@ -256,18 +276,21 @@ main {
 
 
 .delete-button {
-    font-size: 1em;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    font-size: 2em;
+    background: none;
+    width: 100px;
+    height: 100px;
+    color: black;
+    padding: 0;
+    // border-radius: 50%;
     margin: 0;
-    line-height: 0;
+    // line-height: 0;
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 0;
     cursor: pointer;
     &:hover {
-        background-color: $dGray;
+        // background-color: $dGray;
         color: $teal;
     }
 
