@@ -3,6 +3,7 @@ consider using codemirror for displaying a code editor like textarea in the form
 **/
 
 import React from 'react';
+import _ from 'underscore';
 import { connect } from 'react-redux';
 import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
@@ -12,7 +13,6 @@ class SnippetForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.autoSave = this.autoSave.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -24,11 +24,8 @@ class SnippetForm extends React.Component {
     this.props.dispatch(snippetActions.updateCurrentSnippetLocally({name, value}));
     // TODO: interval throttle underscore
     this.props.dispatch(snippetActions.updateCurrentSnippet(this.props.currentSnippet));
+    _.throttle(() => {console.log('This works!')}, 8000);
   }
-
-    autoSave() {
-        // autosaving
-    }
 
     render() {
         if (!this.props.currentSnippet) {
