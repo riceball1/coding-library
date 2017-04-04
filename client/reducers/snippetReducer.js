@@ -30,8 +30,15 @@ export default (state = initialState, action) => {
         }
     }
 
+    if (action.type === actions.UPDATE_CURRENT_SNIPPET_LOCALLY) {
+        let currentSnippet = Object.assign({}, state.currentSnippet);
+        currentSnippet[action.payload.name] = action.payload.value;
+        return Object.assign({}, state, {currentSnippet});
+    }
+
     if (action.type === actions.UPDATE_SNIPPET_SUCCESS) {
         // return state with snippet updated
+        return Object.assign({}, state, {snippets: action.payload});
     }
 
     if (action.type === actions.DELETE_SNIPPET_SUCCESS) {
@@ -41,6 +48,9 @@ export default (state = initialState, action) => {
     }
 
     if (action.type === actions.FETCH_SNIPPETS_SUCCESS) {
+        if(!state.currentSnippet._id) {
+            return Object.assign({}, state, {snippets: action.payload, currentSnippet: action.payload[0]});
+        }
         return Object.assign({}, state, {snippets: action.payload});
     }
 

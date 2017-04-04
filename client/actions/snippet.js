@@ -97,3 +97,41 @@ export const setCurrentSnippet = (index) => ({
     payload: index
 })
 
+export const UPDATE_CURRENT_SNIPPET_LOCALLY = 'UPDATE_CURRENT_SNIPPET_LOCALLY';
+export const updateCurrentSnippetLocally = (update) => ({
+    type: UPDATE_CURRENT_SNIPPET_LOCALLY,
+    payload: update
+})
+
+export const updateCurrentSnippet = (snippet) => dispatch => {
+    const url = `${ROOT_URL}/api/snippet/${snippet._id}`;
+    const postRequest = new Request(url, {
+        method: 'PUT',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(snippet),
+    });
+
+    return fetch(postRequest)
+        .then(response => {
+            if (!response.ok) {
+                let error = new Error(response.statusText)
+                error = response
+                console.log(error);
+            }
+            return response;
+        })
+        .then(response => (response.json())) // to get the json
+        .then(data => {
+            // TODO: update sidebar
+            console.log('updated', data);
+            dispatch(fetchSnippets(data.userId));
+            // dispatch(updateSnippetSuccess(data))
+        })
+        .catch(error => {
+            dispatch(snippetsError(error))
+        });
+};
+
+
