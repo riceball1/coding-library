@@ -55,7 +55,8 @@ form {
 
 nav {
     text-align: right;
-    margin: 10px 0px 60px 0px;
+    margin: 10px 10%;
+    padding: 10px;
     .nav-link {
         padding: 10px;
         margin: 10px auto;
@@ -209,13 +210,13 @@ div {
 .visible {
     width: 40%;
     opacity: 1;
-    transition: opacity 1s width 0.3s margin-left 0.5s;
+    transition: opacity 1s width 0.3s margin-left 1s;
 }
 
-main {
+.main {
     margin-left: 0;
     width: 100%;
-    transition: width 0.3s;
+    transition: width 0.2s margin-left 0.5s;
 }
 
 .left {
