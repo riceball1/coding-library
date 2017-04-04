@@ -38,6 +38,15 @@ class Sidebar extends React.Component {
 	addSnippet(e) {
 		e.preventDefault();
 		this.props.dispatch(userActions.toggleSidebar());
+		// create an empty snippet, and reducer should make it the new currentsnippet
+		// in the 'newsnippet', form should populate with current snippet info
+		let newSnippet = {
+            title: 'Title',
+            description: 'Add a short description here.',
+            code: 'Write some code here.',
+            userid: this.props.user._id
+        };
+        this.props.dispatch(snippetActions.addSnippet(newSnippet));
 		browserHistory.push('/newsnippet');
 	}
 	// tool tip
@@ -57,7 +66,7 @@ class Sidebar extends React.Component {
 		
 		const snippetsArray = snippets.map((snippet, index) => {
 			return (
-				<Snippet title={snippet.title} description={snippet.description} key={snippet._id.toString()} onClick={this.openSnippet.bind(null, index )}/>
+				<Snippet title={snippet.title} description={snippet.description} key={index} onClick={this.openSnippet.bind(null, index )}/>
 			)
 		});
 		return (

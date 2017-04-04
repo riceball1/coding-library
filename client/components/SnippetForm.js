@@ -12,18 +12,15 @@ class SnippetForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.submitForm = this.submitForm.bind(this);
+        this.autoSave = this.autoSave.bind(this);
     }
 
-    submitForm(e) {
-        e.preventDefault();
-        let newSnippet = {
-            title: this.titleInput.value,
-            description: this.descriptionInput.value,
-            code: this.codesnippetInput.value,
-            userid: this.props.user._id
-        };
-        this.props.dispatch(snippetActions.addSnippet(newSnippet));
+    componentDidMount() {
+        this.titleInput.value = this.props.currentSnippet.title;
+    }
+
+    autoSave() {
+        // autosaving
     }
 
     render() {
@@ -31,16 +28,13 @@ class SnippetForm extends React.Component {
             <div className="main">
                 <div>
                 <form className="snippet-form">
-                    <input type="text" name="title" ref={ref => this.titleInput = ref} placeholder="title"/>
+                    <input type="text" name="title" ref={ref => this.titleInput = ref}/>
 
                     <input type="text" name="description" ref={ref => this.descriptionInput = ref} placeholder="description"/>
                    
                     <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} className="text-box" placeholder="Please type your code here"></textarea>
                     <br/>
-                    <button className="snippet-btn" type="button" onClick={this.submitForm}>{"\u2713"}</button>
-                </form>
-                
-                
+                </form>    
             </div>
             </div>
         )
@@ -48,8 +42,10 @@ class SnippetForm extends React.Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state.snippetReducer.currentSnippet);
     return {
-        user: state.userReducer.user
+        user: state.userReducer.user,
+        currentSnippet: state.snippetReducer.currentSnippet
     }
 }
 
