@@ -42,7 +42,7 @@ class SnippetForm extends React.Component {
                 <div className={(this.props.visible? "left" : "") + " main"}>
                     <div>
                     <form className="snippet-form">
-                        <button onClick={this.deleteSnippet} className="delete-button">x</button>
+                        <span onClick={this.deleteSnippet} className="delete-button">x</span>
                         <input type="text" name="title" value={this.props.currentSnippet.title}  onChange={this.handleChange}/>
 
                         <input type="text" name="description" value={this.props.currentSnippet.description} onChange={this.handleChange}/>
