@@ -43,8 +43,12 @@ export default (state = initialState, action) => {
 
     if (action.type === actions.DELETE_SNIPPET_SUCCESS) {
         // return state with snippet removed
-        let toDeleteSnippet = state.snippets[action.payload];
-        // return Object.assign({}, state, {snippets: action.payload});
+        let updatedArray = state.snippets.filter((snippet) => {
+            return !snippet._id.includes(action.payload);
+        });
+        console.log('updatedArray', updatedArray);
+        // what if the deleted item was the currentSnippet?
+        return Object.assign({}, state, {snippets: updatedArray});
     }
 
     if (action.type === actions.FETCH_SNIPPETS_SUCCESS) {

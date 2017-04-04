@@ -10,7 +10,9 @@ export const ADD_SNIPPET_SUCCESS = 'ADD_SNIPPET_SUCCESS';
 export const UPDATE_SNIPPET_SUCCESS = 'UPDATE_SNIPPET_SUCCESS';
 export const DELETE_SNIPPET_SUCCESS = 'DELETE_SNIPPET_SUCCESS';
 export const FILTER_SNIPPETS = 'FILTER_SNIPPETS';
-export const SET_CURRENT_SNIPPET = 'SET_CURRENT_SNIPPET'; 
+export const SET_CURRENT_SNIPPET = 'SET_CURRENT_SNIPPET';
+export const UPDATE_CURRENT_SNIPPET_LOCALLY = 'UPDATE_CURRENT_SNIPPET_LOCALLY';
+
 
 // one error to handle all snippets
 export const snippetsError = ((error) => ({
@@ -33,10 +35,28 @@ export const updateSnippetSuccess = ((data) => ({
     payload: data
 }))
 
-export const deleteSnippetSuccess = ((data) => ({
-    type: DELETE_SNIPPET_SUCCESS,
-    payload: data
+export const filterSnippets = ((query) => ({
+    type: FILTER_SNIPPETS,
+    payload: query
 }))
+
+export const setCurrentSnippet = (index) => ({
+    type: SET_CURRENT_SNIPPET,
+    payload: index
+})
+
+export const deleteSnippetSuccess = (snippetid) => ({
+    type: DELETE_SNIPPET_SUCCESS,
+    payload: snippetid
+})
+
+export const updateCurrentSnippetLocally = (update) => ({
+    type: UPDATE_CURRENT_SNIPPET_LOCALLY,
+    payload: update
+})
+
+/****** ASYNC ACTIONS *********/
+
 
 export const fetchSnippets = (userid) => dispatch => {
     const url = `${ROOT_URL}/api/snippets/${userid}`;
@@ -87,22 +107,6 @@ export const addSnippet = (snippet) => dispatch => {
         });
 };
 
-export const filterSnippets = ((query) => ({
-    type: FILTER_SNIPPETS,
-    payload: query
-}))
-
-export const setCurrentSnippet = (index) => ({
-    type: SET_CURRENT_SNIPPET,
-    payload: index
-})
-
-export const UPDATE_CURRENT_SNIPPET_LOCALLY = 'UPDATE_CURRENT_SNIPPET_LOCALLY';
-export const updateCurrentSnippetLocally = (update) => ({
-    type: UPDATE_CURRENT_SNIPPET_LOCALLY,
-    payload: update
-})
-
 export const updateCurrentSnippet = (snippet) => dispatch => {
     const url = `${ROOT_URL}/api/snippet/${snippet._id}`;
     const postRequest = new Request(url, {
@@ -134,4 +138,33 @@ export const updateCurrentSnippet = (snippet) => dispatch => {
         });
 };
 
+export const deleteSnippet = (snippetid) => dispatch => {
+    const url = `${ROOT_URL}/api/snippet/${snippetid}`;
+    const postRequest = new Request(url, {
+        method: 'DELETE',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        })
+    });
+
+    return fetch(postRequest)
+        .then(response => {
+            if (!response.ok) {
+                let error = new Error(response.statusText)
+                error = response
+                console.log(error);
+            }
+            return response;
+        })
+        .then(response => (response.json())) // to get the json
+        .then(data => {
+            // TODO: update sidebar
+            console.log('updated', data);
+            dispatch(deleteSnipetSuccess());
+            // dispatch(updateSnippetSuccess(data))
+        })
+        .catch(error => {
+            dispatch(snippetsError(error))
+        });
+};
 

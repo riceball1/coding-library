@@ -117,14 +117,13 @@ div {
     border: 1px solid $lGray;
     height: 100%;
     /* 100% Full-height */
-    width: 0;
+    width: 100%;
     /* 0 width - change this with JavaScript */
     position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Stay on top */
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     overflow-x: hidden;
     /* Disable horizontal scroll */
     padding: 15px;
@@ -190,22 +189,31 @@ div {
     width: 100px;
     opacity: 0.3;
     z-index: 1000;
+    cursor: pointer;
 }
 
 .invisible {
-    // display: none;
-    width: 0;
+    width: 0%;
     opacity: 0;
-    transition: 0.5s ease-in-out;
+    transition: width 0.2s;
 }
 
 .visible {
     width: 40%;
     opacity: 1;
-    // margin: 0 auto;
-    transition: 0.5s ease-in-out;
+    transition: width 0.2s;
 }
 
+main {
+    margin-left: 0;
+    width: 500px;
+    transition: margin-left 0.2s;
+}
+
+.left {
+    margin-left: 250px;
+    transition: margin-left 0.2s;
+}
 
 /** SNIPPET FORM ***/
 
@@ -213,6 +221,8 @@ div {
     border-radius: 3px;
     border: 1px solid $lGray;
     margin: auto 10%;
+    position: relative;
+    padding-top: 5%;
     input {
         margin: 5px auto;
         display: block;
@@ -242,4 +252,23 @@ div {
             outline: none;
         }
     }
+}
+
+
+.delete-button {
+    font-size: 1em;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 0;
+    line-height: 0;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+    &:hover {
+        background-color: $dGray;
+        color: $teal;
+    }
+
 }
