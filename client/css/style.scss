@@ -203,26 +203,25 @@ div {
 .invisible {
     opacity: 0;
     width: 0%;
-    transition: opacity 3s width 3s;
+    transition: opacity 0.3s width 0.3s;
 }
 
 .visible {
     width: 40%;
     opacity: 1;
-    transition: opacity 3s width 3s margin-left 3s;
+    transition: opacity 1s width 0.3s margin-left 0.5s;
 }
 
 main {
     margin-left: 0;
     width: 100%;
-    transition: width 3s margin-left 4s;
+    transition: width 0.3s;
 }
 
 .left {
     margin-left: 50%;
     width: 700px;
-    transition: width 2s margin-left 3s;
-    // z-index: 0;
+    transition: width 0.2s margin-left 0.5s;
 }
 
 /** SNIPPET FORM ***/
