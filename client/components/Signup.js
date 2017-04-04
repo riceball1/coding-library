@@ -24,9 +24,9 @@ class Signup extends React.Component {
 	submitForm(e) {
 		e.preventDefault();
 		const userData = {
-			username: this.usernameInput.value,
+			username: this.usernameInput.value.toLowerCase(),
 			fullname: this.fullnameInput.value,
-			email: this.emailInput.value,
+			email: this.emailInput.value.toLowerCase(),
 			password: this.passwordInput.value,
 			password2: this.password2Input.value
 		};
