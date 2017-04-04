@@ -16,9 +16,9 @@ class SnippetForm extends React.Component {
     }
 
     componentDidMount() {
-        this.titleInput.value = this.props.currentSnippet.title;
-        this.descriptionInput.value = this.props.currentSnippet.description;
-        this.codesnippetInput.value = this.props.currentSnippet.codesnippet;
+        // this.titleInput.value = ;
+        // this.descriptionInput.value = this.props.currentSnippet.description;
+        // this.codesnippetInput.value = this.props.currentSnippet.code;
     }
 
     autoSave() {
@@ -30,11 +30,11 @@ class SnippetForm extends React.Component {
             <div className="main">
                 <div>
                 <form className="snippet-form">
-                    <input type="text" name="title" ref={ref => this.titleInput = ref}/>
+                    <input type="text" name="title" ref={ref => this.titleInput = ref} defaultValue={this.props.currentSnippet.title}/>
 
-                    <input type="text" name="description" ref={ref => this.descriptionInput = ref} placeholder="description"/>
+                    <input type="text" name="description" ref={ref => this.descriptionInput = ref} defaultValue={this.props.currentSnippet.description}/>
                    
-                    <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} className="text-box" placeholder="Please type your code here"></textarea>
+                    <textarea rows="4" cols="50" name="codesnippet" ref={ref => this.codesnippetInput = ref} className="text-box" defaultValue={this.props.currentSnippet.code}></textarea>
                     <br/>
                 </form>    
             </div>

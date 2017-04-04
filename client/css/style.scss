@@ -28,8 +28,8 @@ form {
     }
     input {
         width: 80%;
-        line-height: 30px;
-        font-size: 1.5em;
+        line-height: 50px;
+        font-size: 2em;
         padding: 5px;
         border-radius: 2px;
         border: 3px dotted $lGray;
@@ -41,14 +41,15 @@ form {
         text-transform: lowercase;
     }
      button {
-        font-size: 1.2em;
-        padding: 10px;
+        font-size: 1.5em;
+        padding: 3%;
         width: 30%;
         background-color: $teal;
         border: none;
         border-radius: 5px;
         margin: 10px auto;
         line-height: 30px;
+        color: white;
     }
 }
 
@@ -88,15 +89,16 @@ div {
 }
 
 .btn {
-    display: inline-block;
-    width: 200px;
+    display: block;
+    width: 40%;
     background-color: $teal;
-    padding: 5px;
-    font-size: 1.2em;
-    margin: 5px;
+    padding: 3%;
+    font-size: 1.5em;
+    margin: 15px auto;
     border: none;
     border-radius: 2px;
     color: white;
+    cursor: pointer;
 }
 
 .snippet-btn {
