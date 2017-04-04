@@ -61,6 +61,11 @@ nav {
         padding: 10px;
         margin: 10px auto;
         color: $dGray;
+        &:hover {
+            color: $teal;
+            background-color: $lGray;
+            border-radius: 5px;
+        }
     }
 }
 
@@ -199,6 +204,11 @@ div {
     width: 100px;
     z-index: 1000;
     cursor: pointer;
+    color: &teal;
+    &:hover {
+        color: white;
+        background-color: $teal;
+    }
 }
 
 .invisible {
