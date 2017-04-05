@@ -33,6 +33,7 @@ class SnippetForm extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
+    /* use cases for dispatching events: https://developmentarc.gitbooks.io/react-indepth/content/life_cycle/update/tapping_into_componentwillupdate.html */
     this.props.dispatch(snippetActions.updateCurrentSnippet(nextProps.currentSnippet));
   }
 
