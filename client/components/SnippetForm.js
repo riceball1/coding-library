@@ -1,9 +1,9 @@
 /**
 consider using codemirror for displaying a code editor like textarea in the form: http://codemirror.net/demo/theme.html#monokai
 **/
-import throttle from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
 
@@ -21,6 +21,8 @@ class SnippetForm extends React.Component {
         e.preventDefault();
         console.log('Delete snippet');
         this.props.dispatch(snippetActions.deleteSnippet(this.props.currentSnippet._id));
+        // after deleting - clear the dashboard or move it to a new snippet
+        browserHistory.push('/dashboard');       
     }
 
   handleChange(event) {
@@ -28,7 +30,6 @@ class SnippetForm extends React.Component {
     const value = target.value;
     const name = target.name;
 
-    console.log(value, name);
     this.props.dispatch(snippetActions.updateCurrentSnippetLocally({name, value}));
   }
 

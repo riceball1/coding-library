@@ -46,9 +46,12 @@ export default (state = initialState, action) => {
         let updatedArray = state.snippets.filter((snippet) => {
             return !snippet._id.includes(action.payload);
         });
-        console.log('updatedArray', updatedArray);
+        let newCurrentSnippet = {};
+        if(state.snippets.length > 0) {
+            newCurrentSnippet = state.snippets[0];
+        } 
         // what if the deleted item was the currentSnippet?
-        return Object.assign({}, state, {snippets: updatedArray});
+        return Object.assign({}, state, {snippets: updatedArray, currentSnippet: newCurrentSnippet});
     }
 
     if (action.type === actions.FETCH_SNIPPETS_SUCCESS) {

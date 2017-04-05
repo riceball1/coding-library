@@ -129,9 +129,7 @@ export const updateCurrentSnippet = (snippet) => dispatch => {
         .then(response => (response.json())) // to get the json
         .then(data => {
             // TODO: update sidebar
-            console.log('updated', data);
             dispatch(fetchSnippets(data.userId));
-            // dispatch(updateSnippetSuccess(data))
         })
         .catch(error => {
             dispatch(snippetsError(error))
@@ -156,12 +154,11 @@ export const deleteSnippet = (snippetid) => dispatch => {
             }
             return response;
         })
-        .then(response => (response.json())) // to get the json
+        .then(response => (response.text())) // to get the json
         .then(data => {
             // TODO: update sidebar
-            console.log('updated', data);
-            dispatch(deleteSnipetSuccess());
-            // dispatch(updateSnippetSuccess(data))
+            console.log('deleted');
+            dispatch(deleteSnippetSuccess(snippetid));
         })
         .catch(error => {
             dispatch(snippetsError(error))
