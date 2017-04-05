@@ -103,6 +103,11 @@ div {
     border-radius: 5px;
     color: white;
     cursor: pointer;
+    transition-duration: 0.4s;
+    &:hover {
+        color: $dGray;
+        background-color: black;
+    }
 }
 
 .snippet-btn {
@@ -199,11 +204,12 @@ div {
     width: 100px;
     z-index: 1000;
     cursor: pointer;
-    color: &teal;
+    background-color: $teal;
+    color: black;
     transition-duration: 0.4s;
     &:hover {
-        color: white;
-        background-color: $teal;
+        color: $lGray;
+        background-color: black;
     }
 }
 
