@@ -42,13 +42,12 @@ form {
     }
      button {
         font-size: 1.5em;
-        padding: 3%;
-        width: 30%;
+        padding: 20px;
+        width: 200px;
         background-color: $teal;
         border: none;
         border-radius: 5px;
         margin: 10px auto;
-        line-height: 30px;
         color: white;
     }
 }
@@ -299,5 +298,11 @@ div {
 @media screen and (max-width: 699px) and (min-width: 520px) {
     .btn {
         width: 40%;
+    }
+
+    form {
+        button {
+            width: 40%;
+        }
     }
 }
