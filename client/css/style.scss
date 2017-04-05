@@ -96,13 +96,13 @@ div {
 
 .btn {
     display: block;
-    width: 40%;
+    width: 200px;
     background-color: $teal;
-    padding: 3%;
+    padding: 20px;
     font-size: 1.5em;
     margin: 15px auto;
     border: none;
-    border-radius: 2px;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
 }
@@ -294,4 +294,10 @@ div {
         color: $teal;
     }
 
+}
+
+@media screen and (max-width: 699px) and (min-width: 520px) {
+    .btn {
+        width: 40%;
+    }
 }
