@@ -119,7 +119,7 @@ div {
 
 .side-menu {
     background-color: $dGray;
-    border: 1px solid $lGray;
+    // border: 1px solid $lGray;
     height: 100%;
     /* 100% Full-height */
     width: 100%;
@@ -131,8 +131,6 @@ div {
     bottom: 0;
     z-index: 0;
     overflow-x: hidden;
-    /* Disable horizontal scroll */
-    padding: 15px;
     .list-snippets {
         overflow: hidden;
         height: 70%;
@@ -140,11 +138,8 @@ div {
             overflow: auto;
         }
         .individual-snippets {
-            border-bottom: 1px solid $lGray;
-            padding: 30px;
-            width: 90%;
-            border-radius: 3px;
-            margin: 5px auto;
+            border-bottom: 1px dotted $lGray;
+            padding: 10px;
             font-size: .8em;
             cursor: pointer;
             h1, p {
@@ -158,7 +153,7 @@ div {
         }
     }
     .top-menu {
-        margin-top: 60px;
+        margin-top: 60px 10px 10px 10px;
         input {
             width: 100%;
             border: 1px solid $lGray;
