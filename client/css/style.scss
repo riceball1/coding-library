@@ -59,11 +59,10 @@ nav {
     .nav-link {
         padding: 10px;
         margin: 10px auto;
-        color: $dGray;
+        color: $teal;
+        transition-duration: 0.4s;
         &:hover {
-            color: $teal;
-            background-color: $lGray;
-            border-radius: 5px;
+            color: $dGray;
         }
     }
 }
@@ -145,6 +144,7 @@ div {
             h1, p {
                 text-align: left;
             }
+            transition-duration: 0.4s;
             &:hover {
                 background-color: $lGray;
                 color: $teal;
@@ -162,6 +162,7 @@ div {
             line-height: 30px;
             padding: 5px;
             border-radius: 3px;
+            transition-duration: 0.4s;
             &:focus {
                 border: 3px solid $teal;
             }
@@ -199,6 +200,7 @@ div {
     z-index: 1000;
     cursor: pointer;
     color: &teal;
+    transition-duration: 0.4s;
     &:hover {
         color: white;
         background-color: $teal;
@@ -208,25 +210,25 @@ div {
 .invisible {
     opacity: 0;
     width: 0%;
-    transition: opacity 0.3s width 0.3s;
+    transition-duration: 0.4s;
 }
 
 .visible {
     width: 40%;
     opacity: 1;
-    transition: opacity 1s width 0.3s margin-left 1s;
+    transition-duration: 0.4s;
 }
 
 .main {
     margin-left: 0;
     width: 100%;
-    transition: width 0.2s margin-left 0.5s;
+    transition-duration: 0.4s;
 }
 
 .left {
     margin-left: 50%;
     width: 700px;
-    transition: width 0.2s margin-left 0.5s;
+    transition-duration: 0.4s;
 }
 
 /** SNIPPET FORM ***/
@@ -283,11 +285,10 @@ div {
     top: 0;
     right: 0;
     cursor: pointer;
+    transition-duration: 0.4s;
     &:hover {
-        // background-color: $dGray;
         color: $teal;
     }
-
 }
 
 @media screen and (max-width: 699px) and (min-width: 520px) {
