@@ -41,24 +41,25 @@ export default (state = initialState, action) => {
         return Object.assign({}, state, {snippets: action.payload});
     }
 
-    if (action.type === actions.DELETE_SNIPPET_SUCCESS) {
-        // return state with snippet removed
-        let updatedArray = state.snippets.filter((snippet) => {
-            return !snippet._id.includes(action.payload);
-        });
-        let newCurrentSnippet = {};
-        if(state.snippets.length > 0) {
-            newCurrentSnippet = state.snippets[0];
-        } 
-        // what if the deleted item was the currentSnippet?
-        return Object.assign({}, state, {snippets: updatedArray, currentSnippet: newCurrentSnippet});
-    }
+    // if (action.type === actions.DELETE_SNIPPET_SUCCESS) {
+    //     // return state with snippet removed
+    //     let updatedArray = state.snippets.filter((snippet) => {
+    //         return !snippet._id.includes(action.payload);
+    //     });
+    //     let newCurrentSnippet = {};
+    //     if(state.snippets.length > 0) {
+    //         newCurrentSnippet = state.snippets[0];
+    //     } 
+    //     // what if the deleted item was the currentSnippet?
+    //     return Object.assign({}, state, {snippets: updatedArray, currentSnippet: newCurrentSnippet});
+    // }
 
     if (action.type === actions.FETCH_SNIPPETS_SUCCESS) {
-        if(!state.currentSnippet._id) {
+        console.log('Fetch', action.payload);
+        if(action.payload.length > 0 && !state.currentSnippet._id) {
             return Object.assign({}, state, {snippets: action.payload, currentSnippet: action.payload[0]});
         }
-        return Object.assign({}, state, {snippets: action.payload});
+        return Object.assign({}, state, {snippets: action.payload, currentSnippet: {}});
     }
 
     if (action.type === actions.SET_CURRENT_SNIPPET) {

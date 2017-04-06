@@ -19,7 +19,7 @@ class SnippetForm extends React.Component {
     deleteSnippet(e) {
         e.preventDefault();
         console.log('Delete snippet');
-        this.props.dispatch(snippetActions.deleteSnippet(this.props.currentSnippet._id));
+        this.props.dispatch(snippetActions.deleteSnippet(this.props.currentSnippet._id, this.props.user._id));
         // after deleting - clear the dashboard or move it to a new snippet
         browserHistory.push('/dashboard');       
     }
@@ -34,13 +34,10 @@ class SnippetForm extends React.Component {
 
   componentWillUpdate(nextProps) {
     /* use cases for dispatching events: https://developmentarc.gitbooks.io/react-indepth/content/life_cycle/update/tapping_into_componentwillupdate.html */
-    this.props.dispatch(snippetActions.updateCurrentSnippet(nextProps.currentSnippet));
+    this.props.dispatch(snippetActions.updateCurrentSnippet(nextProps.currentSnippet, this.props.user._id));
   }
 
   render() {
-    if (!this.props.currentSnippet) {
-        return( <div className={(this.props.visible? "left" : "")}><h2> Create new snippet to get started. </h2></div>)
-    } else {
         return (
             <div className={(this.props.visible? "left" : "") + " main"}>
                 <div>
@@ -55,7 +52,6 @@ class SnippetForm extends React.Component {
                 </form>    
             </div>
         </div>)
-        }
     }
 }
 

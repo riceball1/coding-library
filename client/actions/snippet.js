@@ -107,7 +107,7 @@ export const addSnippet = (snippet) => dispatch => {
         });
 };
 
-export const updateCurrentSnippet = (snippet) => dispatch => {
+export const updateCurrentSnippet = (snippet, userid) => dispatch => {
     const url = `${ROOT_URL}/api/snippet/${snippet._id}`;
     const postRequest = new Request(url, {
         method: 'PUT',
@@ -129,14 +129,14 @@ export const updateCurrentSnippet = (snippet) => dispatch => {
         .then(response => (response.json())) // to get the json
         .then(data => {
             // TODO: update sidebar
-            dispatch(fetchSnippets(data.userId));
+            dispatch(fetchSnippets(userid));
         })
         .catch(error => {
             dispatch(snippetsError(error))
         });
 };
 
-export const deleteSnippet = (snippetid) => dispatch => {
+export const deleteSnippet = (snippetid, userid) => dispatch => {
     const url = `${ROOT_URL}/api/snippet/${snippetid}`;
     const postRequest = new Request(url, {
         method: 'DELETE',
@@ -154,11 +154,11 @@ export const deleteSnippet = (snippetid) => dispatch => {
             }
             return response;
         })
-        .then(response => (response.text())) // to get the json
+        .then(response => (response.json())) // to get the json
         .then(data => {
             // TODO: update sidebar
             console.log('deleted');
-            dispatch(deleteSnippetSuccess(snippetid));
+            dispatch(fetchSnippets(userid));
         })
         .catch(error => {
             dispatch(snippetsError(error))
