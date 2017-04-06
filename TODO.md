@@ -49,3 +49,4 @@ This is a todo list created after already setting up a node/express/mongodb api,
 ## Testing
 
 - [ ] Add enzyme testing
+    - Resource: https://semaphoreci.com/community/tutorials/testing-react-components-with-enzyme-and-mocha
