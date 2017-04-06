@@ -14,7 +14,6 @@ class SnippetForm extends React.Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.deleteSnippet = this.deleteSnippet.bind(this);
-        // this.autosave = this.autosave.bind(this);
     }
 
     deleteSnippet(e) {
