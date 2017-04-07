@@ -40,7 +40,7 @@ class Signup extends React.Component {
 		return (
 			<div>
 			<h1>Signup</h1>
-				<form >
+				<form onSubmit={this.submitForm}>
 					<label>username</label>
 					<input type="text" name="username" ref={ref => this.usernameInput = ref} required="required"/>
 					<label>full name</label>
@@ -51,7 +51,7 @@ class Signup extends React.Component {
 					<input type="password" name="password" ref={ref => this.passwordInput = ref} required="required"/>
 					<label>confirm password</label>
 					<input type="password" name="password2" ref={ref => this.password2Input = ref} required="required"/>
-					<button type="button" onClick={this.submitForm}>submit</button>
+					<button type="submit" onClick={this.submitForm}>submit</button>
 				</form>
 					<p><Link to="/login"><button>Already have an account?</button></Link></p>
 			</div>

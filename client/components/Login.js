@@ -43,7 +43,7 @@ class Login extends React.Component {
 				<input type="text" name="username" ref={ref => this.usernameInput = ref}/>
 				<label>password</label>
 				<input type="password" name="password" ref={ref => this.passwordInput = ref}/>
-					<button type="button" onClick={this.submitForm}>submit</button>
+					<button type="submit" onClick={this.submitForm}>submit</button>
 				</form>
 					<p><Link to="/signup"><button>No Account. Sign Up Here.</button></Link></p>
 			</div>
