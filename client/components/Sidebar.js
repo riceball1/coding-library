@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
 	openSnippet(index) {
 		console.log(this.props.snippets[index]);
 		this.props.dispatch(snippetActions.setCurrentSnippet(index));
-		browserHistory.push('/dashboard');
+		// browserHistory.push('/dashboard');
 	}
 
 	searchSnippets(e) {

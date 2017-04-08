@@ -37,10 +37,11 @@ form {
             border: 3px solid $teal;
         }
     }
-    input[name="username"], input[name="email"] {
+    input[name="username"],
+    input[name="email"] {
         text-transform: lowercase;
     }
-     button {
+    button {
         font-size: 1.5em;
         padding: 20px;
         width: 200px;
@@ -52,20 +53,20 @@ form {
     }
 }
 
-nav {
-    text-align: right;
-    margin: 10px 10%;
-    padding: 10px;
-    .nav-link {
-        padding: 10px;
-        margin: 10px auto;
-        color: $teal;
-        transition-duration: 0.4s;
-        &:hover {
-            color: $dGray;
-        }
-    }
-}
+// nav {
+//     text-align: right;
+//     margin: 10px 10%;
+//     padding: 10px;
+//     .nav-link {
+//         padding: 10px;
+//         margin: 10px auto;
+//         color: $teal;
+//         transition-duration: 0.4s;
+//         &:hover {
+//             color: $dGray;
+//         }
+//     }
+// }
 
 img.main-image {
     width: 70%;
@@ -77,6 +78,7 @@ main {
     width: 50%;
     margin: 0 auto;
     padding: 20px;
+    margin-top: 60px;
 }
 
 p,
@@ -146,7 +148,8 @@ div {
             padding: 10px;
             font-size: .8em;
             cursor: pointer;
-            h1, p {
+            h1,
+            p {
                 text-align: left;
             }
             transition-duration: 0.4s;
@@ -226,6 +229,7 @@ div {
 }
 
 .main {
+    margin-top: 60px;
     margin-left: 0;
     width: 100%;
     transition-duration: 0.4s;
@@ -236,6 +240,7 @@ div {
     width: 700px;
     transition-duration: 0.4s;
 }
+
 
 /** SNIPPET FORM ***/
 
@@ -276,7 +281,6 @@ div {
     }
 }
 
-
 .delete-button {
     font-size: 2em;
     background: none;
@@ -297,11 +301,69 @@ div {
     }
 }
 
+nav {
+    margin: 0px;
+    padding: 0px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    box-shadow: 0 8px 6px -6px #999;
+}
+
+
+.main-nav {
+    ul {
+        width: 100%;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li {
+        float: right;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: $teal;
+    }
+}
+
+.parallax { 
+    /* The image used */
+    background-image: url("https://tctechcrunch2011.files.wordpress.com/2015/04/codecode.jpg");
+    // background-color: black;
+    /* Full height */
+    // height: 100%; 
+    min-height: 500px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // color: $teal;
+}
+
+.other-parallax {
+    height:1000px;
+    background-color:red;
+    font-size:36px
+}
+
 @media screen and (max-width: 699px) and (min-width: 520px) {
     .btn {
         width: 40%;
     }
-
     form {
         button {
             width: 40%;

@@ -129,7 +129,9 @@ export const updateCurrentSnippet = (snippet, userid) => dispatch => {
         .then(response => (response.json())) // to get the json
         .then(data => {
             // TODO: update sidebar
-            dispatch(fetchSnippets(userid));
+
+            // This makes an infinite loop
+            // dispatch(fetchSnippets(userid));
         })
         .catch(error => {
             dispatch(snippetsError(error))
@@ -158,7 +160,9 @@ export const deleteSnippet = (snippetid, userid) => dispatch => {
         .then(data => {
             // TODO: update sidebar
             console.log('deleted');
+            // creates a cast error
             dispatch(fetchSnippets(userid));
+
         })
         .catch(error => {
             dispatch(snippetsError(error))

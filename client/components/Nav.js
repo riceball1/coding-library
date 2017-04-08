@@ -19,10 +19,12 @@ class Nav extends React.Component {
 
 	render() {
 		return (
-			<nav className="navbar">
-			{this.props.user && <Link to="/dashboard" className="nav-link">Dashboard</Link>}
-                {this.props.user && <Link to="" onClick={this.logout} className="nav-link">Logout</Link>}
-			</nav>
+			<nav className="main-nav">
+                     <ul>
+                          <li><Link to="/dashboard">Dashboard</Link></li>
+                          <li><Link to="" onClick={this.logout}>Logout</Link></li>
+                     </ul>
+                </nav>
 		);
 	}
 }

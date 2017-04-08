@@ -57,7 +57,7 @@ app.use('/public', express.static('public'));
 
 // endpoints
 app.use('/', auth);
-// app.use(authenticateMiddleware);
+app.use(authenticateMiddleware);
 app.use('/api', api);
 // add catch all route for pages that don't have routes
 app.use('/*', (req, res) => (res.sendFile(path.resolve('public', 'index.html'))));
