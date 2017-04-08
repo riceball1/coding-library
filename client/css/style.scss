@@ -341,11 +341,11 @@ nav {
 
 .parallax { 
     /* The image used */
-    background-image: url("https://tctechcrunch2011.files.wordpress.com/2015/04/codecode.jpg");
+    background-image: url(".../public/code-image.jpg");
     // background-color: black;
     /* Full height */
     // height: 100%; 
-    min-height: 500px;
+    min-height: 300px;
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -355,9 +355,9 @@ nav {
 }
 
 .other-parallax {
-    height:1000px;
-    background-color:red;
-    font-size:36px
+    height:300px;
+    background-color:white;
+    // font-size:36px;
 }
 
 @media screen and (max-width: 699px) and (min-width: 520px) {

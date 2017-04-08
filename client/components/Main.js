@@ -20,19 +20,35 @@ class Main extends React.Component {
                           <li><Link to="#">Simple Code</Link></li>
                      </ul>
                 </nav>)}
-
-            	<div className="slogan">Create code snippets to keep yourself organized</div>
-				<Link to="/login">
-					<button className="btn">Login</button>
-				</Link>
-				<Link to="/signup">
-					<button className="btn">Sign Up</button>
-				</Link>
+            	<div className="other-parallax">
+	            	<div className="slogan">Create code snippets to keep yourself organized</div>
+					<Link to="/login">
+						<button className="btn">Login</button>
+					</Link>
+					<Link to="/signup">
+						<button className="btn">Sign Up</button>
+					</Link>
+				</div>
 
 				<div className="parallax"></div>
 				
-				<p className="other-parallax">Make Snippets. Save. Search. </p>
+				<div className="other-parallax">
+				
+					<div className="row">
+						<div className="col-6">
+						DIV
+						</div>
+						<div className="col-6">
+						DIV
+						</div>
+					</div>
+				</div>
+
 				<div className="parallax">
+				</div>
+				<div className="other-parallax">
+				
+				<p>Make Snippets. Save. Search. </p>
 				</div>
 			</div>
         )
