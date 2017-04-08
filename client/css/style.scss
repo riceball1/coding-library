@@ -341,11 +341,28 @@ nav {
 
 .parallax { 
     /* The image used */
-    background-image: url(".../public/code-image.jpg");
-    // background-color: black;
+    background-image: url("https://github.com/riceball1/simple-code/blob/master/public/code-image.jpg?raw=truecode-image.jpg");
+    filter: grayscale(100%);
+    // background-color: $teal;
     /* Full height */
     // height: 100%; 
     min-height: 300px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // color: $teal;
+}
+
+.parallax2 { 
+    /* The image used */
+    background-image: url("http://d1s8mqgwixvb29.cloudfront.net/article/article_extra_large_image/1451383443_LDMzq6_tablets-laptop-shutterstock_870.jpg");
+    filter: grayscale(100%);
+    // background-color: $teal;
+    /* Full height */
+    // height: 100%; 
+    min-height: 500px;
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;

@@ -15,40 +15,39 @@ class Main extends React.Component {
             <div className="main">
             	{!this.props.user && (<nav className="main-nav">
                      <ul>
-                          <li><Link to="#features">Features</Link></li>
-                          <li><Link to="#contact">Contact</Link></li>
-                          <li><Link to="#">Simple Code</Link></li>
+                          <li><Link to="/login">Login</Link></li>
+                          <li><Link to="/signup">SignUp</Link></li>
                      </ul>
                 </nav>)}
-            	<div className="other-parallax">
+            	<div>
 	            	<div className="slogan">Create code snippets to keep yourself organized</div>
-					<Link to="/login">
-						<button className="btn">Login</button>
-					</Link>
-					<Link to="/signup">
-						<button className="btn">Sign Up</button>
-					</Link>
+	            	<Link to="/login">
+                          <button className="btn">Login</button>
+                     </Link>
+                     <Link to="/signup">
+                          <button className="btn">Sign Up</button>
+                     </Link>
+					<img src="https://i.imgur.com/dlRrvfT.png" alt="code image" className="main-image" />
+
 				</div>
 
 				<div className="parallax"></div>
 				
-				<div className="other-parallax">
+				<div className="other-parallax" id="#features">
 				
 					<div className="row">
 						<div className="col-6">
-						DIV
+						<h2>Faster Organization</h2>
+						<p>Easily search code snippets and keep organized.</p>
 						</div>
 						<div className="col-6">
-						DIV
+						<h2>Cleaner Design</h2>
+						<p>The minimal design helps keep you focus on writing clean code, and makes it easy to search.</p>
+						</div>
+						<div className="col-12">
+							<p className="slogan">Make Snippets. Save. Search.</p>
 						</div>
 					</div>
-				</div>
-
-				<div className="parallax">
-				</div>
-				<div className="other-parallax">
-				
-				<p>Make Snippets. Save. Search. </p>
 				</div>
 			</div>
         )

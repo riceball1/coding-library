@@ -35,7 +35,11 @@ module.exports = {
 			// scss
 			test: /\.scss$/,
 			loader: 'style-loader!css-loader!sass-loader'
-		}
+		},
+		{
+			// images
+			test: /\.(jpe?g|png|gif|svg)$/i, 
+			loader: "file-loader?name=/public/[name].[ext]"}
 		]
 	}
 }
