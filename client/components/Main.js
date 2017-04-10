@@ -42,8 +42,8 @@ class Main extends React.Component {
 						<img src="https://i.imgur.com/dlRrvfT.png" alt="code image" className="main-image" />
 						</div>
 						<div className="col-6">
-						<h2>Cleaner Design</h2>
-						<p>The minimal design helps keep you focus on writing clean code, and makes it easy to search.</p>
+						<h2>Code Beautiful Snippets</h2>
+						<p>Syntax highlight available in almost any language to keep all your code organized.</p>
 						</div>
 						<div className="col-12"></div>
 						<div className="col-6">
