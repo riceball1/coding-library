@@ -19,8 +19,9 @@
 
 ## Other:
 - Icons used designed by Madebyoliver from Flaticon
-    - Settings
-    - Menu
+    - edit-1.png
+    - settings-4.png
+    - garbage-2.png
 
 
 ## Links:

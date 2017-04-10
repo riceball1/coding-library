@@ -76,8 +76,8 @@ class Sidebar extends React.Component {
 					</div>
 					<div className="bottom-menu">
 					
-					<button className="btn" onMouseOver={this.showMsg} value="settings" onClick={this.openSettings}>{"\u229E"}</button> 
-					<button onClick={this.addSnippet} className="btn" onMouseOver={this.showMsg} value="create snippet">{"\u270E"}</button>
+					<div value="settings" onClick={this.openSettings} className="menu-btn"><img src="https://github.com/riceball1/simple-code/blob/master/public/icons-for-simple-code/settings-4.png?raw=true" /></div> 
+					<div onClick={this.addSnippet} value="create snippet" className="menu-btn"><img src="https://github.com/riceball1/simple-code/blob/master/public/icons-for-simple-code/edit-1.png?raw=true" /></div>
 					</div>
 			</div>
 		</div>
