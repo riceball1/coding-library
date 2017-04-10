@@ -53,6 +53,7 @@ class Main extends React.Component {
 						<div className="col-6">
 							<img src="http://i.imgur.com/sJ2l1BE.png" className="main-image"/>
 						</div>
+						<div className="col-12"></div>
 						<div className="col-12">
 							<p className="slogan">Make Snippets. Save. Search.</p>
 						</div>

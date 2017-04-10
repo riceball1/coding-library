@@ -93,9 +93,10 @@ div {
     font-size: 1.5em;
     margin: 15px auto;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     color: white;
     cursor: pointer;
+    box-shadow: 0 8px 6px -6px #999;
     transition-duration: 0.4s;
     &:hover {
         color: $dGray;
