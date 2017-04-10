@@ -23,6 +23,8 @@
     - settings-4.png
     - garbage-2.png
     - info.png
+    - search-1.png
+    - cloud-computing-2.png
 
 
 ## Links:
