@@ -17,6 +17,12 @@
 - Can export specific code into one large file
 
 
+## Other:
+- Icons used designed by Madebyoliver from Flaticon
+    - Settings
+    - Menu
+
+
 ## Links:
 - [TODO list](/TODO.md)
 - [Website Design Ideas](/DESIGN.md)
