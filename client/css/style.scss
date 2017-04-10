@@ -6,14 +6,15 @@ $teal: #00b3b3;
 
 /** font **/
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300');
 * {
     box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 h1 {
@@ -21,7 +22,7 @@ h1 {
 }
 
 p {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 form {
@@ -37,6 +38,7 @@ form {
         padding: 5px;
         border-radius: 2px;
         border: 3px dotted $lGray;
+        font-family: 'Raleway', sans-serif;
         &:focus {
             border: 3px solid $teal;
         }
@@ -54,11 +56,12 @@ form {
         border-radius: 5px;
         margin: 10px auto;
         color: white;
+        font-family: 'Raleway', sans-serif;
     }
 }
 
 img.main-image {
-    width: 70%;
+    width: 60%;
     margin: 20px auto;
     border-radius: 5px;
     box-shadow: 0 8px 6px -6px #999;
@@ -95,6 +98,7 @@ div {
     background-color: $teal;
     padding: 20px;
     font-size: 1.5em;
+    font-family: 'Raleway', sans-serif;
     margin: 15px auto;
     border: none;
     border-radius: 2px;
@@ -150,7 +154,7 @@ div {
             }
             transition-duration: 0.4s;
             &:hover {
-                background-color: $lGray;
+                background-color: black;
                 color: $teal;
                 border: 1px dotted $teal;
             }
@@ -205,9 +209,6 @@ div {
     color: black;
     box-shadow: 0 8px 6px -6px #999;
     transition-duration: 0.4s;
-    &:hover {
-        background-color: $lGray;
-    }
 }
 
 .open.sidebar-button {
@@ -275,6 +276,7 @@ div {
         resize: none;
         border: none;
         font-size: 1.2em;
+        font-family: 'Raleway', sans-serif;
         &:focus {
             border: none;
             outline: none;
@@ -342,6 +344,19 @@ nav {
     }
 }
 
+div .bottom-main-nav {
+    @extend .main-nav;
+    bottom: 0;
+    position: relative;
+    background-color: $lGray;
+    height: 100px;
+    width: 100%;
+    p {
+        margin: 20px auto;
+        padding: 20px;
+    }
+}
+
 .nav-brand{
     color: $teal !important;
     float: left !important;
@@ -381,6 +396,10 @@ nav {
     width: 70%;
 }
 
+.bottom-slogan {
+    @extend .main-slogan;
+}
+
 .scrolled-nav {
     font-size: 16px;
 }
@@ -406,6 +425,10 @@ div.menu-btn {
         opacity: 1;
         transition: 0.4s;
     }
+}
+
+.grey-row {
+    border-bottom: 1px dotted #999;
 }
 
 /** sidebar menu **/
