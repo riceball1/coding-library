@@ -43,11 +43,12 @@ class SnippetForm extends React.Component {
                 <div>
                 <form className="snippet-form">
                     <span onClick={this.deleteSnippet} className="delete-button">x</span>
-                    <input type="text" name="title" value={this.props.currentSnippet.title}  onChange={this.handleChange}/>
+                    <input type="text" name="title" defaultValue="untitled" value={this.props.currentSnippet.title}  onChange={this.handleChange}/>
 
-                    <input type="text" name="description" value={this.props.currentSnippet.description} onChange={this.handleChange}/>
+                    <input type="text" name="description" value={this.props.currentSnippet.description} defaultValue="A short description" onChange={this.handleChange}/>
                    
-                    <textarea rows="4" cols="50" name="code" className="text-box" value={this.props.currentSnippet.code} onChange={this.handleChange}></textarea>
+                    <textarea rows="4" cols="50" name="code" className="text-box" value={this.props.currentSnippet.code} onChange={this.handleChange} defaultValue="function() {
+                     example }"></textarea>
                     <br/>
                 </form>    
             </div>

@@ -8,5 +8,6 @@ import store from './store';
 require('./css/normalize.css');
 require('./css/style.scss');
 require('./css/grid.scss');
+require('./js/navbar.js');
 
 ReactDOM.render(<Root store={store}/>, document.getElementById('root'));

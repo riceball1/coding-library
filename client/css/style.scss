@@ -20,6 +20,10 @@ h1 {
     text-align: center;
 }
 
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
 form {
     label,
     input {
@@ -52,21 +56,6 @@ form {
         color: white;
     }
 }
-
-// nav {
-//     text-align: right;
-//     margin: 10px 10%;
-//     padding: 10px;
-//     .nav-link {
-//         padding: 10px;
-//         margin: 10px auto;
-//         color: $teal;
-//         transition-duration: 0.4s;
-//         &:hover {
-//             color: $dGray;
-//         }
-//     }
-// }
 
 img.main-image {
     width: 70%;
@@ -355,29 +344,32 @@ nav {
     // color: $teal;
 }
 
-.parallax2 { 
-    /* The image used */
-    background-image: url("http://d1s8mqgwixvb29.cloudfront.net/article/article_extra_large_image/1451383443_LDMzq6_tablets-laptop-shutterstock_870.jpg");
-    filter: grayscale(100%);
-    // background-color: $teal;
-    /* Full height */
-    // height: 100%; 
-    min-height: 500px;
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    // color: $teal;
-}
-
 .other-parallax {
+    margin-top: 30px;
     height:300px;
     background-color:white;
-    // font-size:36px;
 }
 
-@media screen and (max-width: 699px) and (min-width: 520px) {
+.main-slogan {
+    font-size: 2em;
+    background-color: $lGray;
+    line-height: 90px;
+    opacity: 0.5;
+    margin: 10% auto;
+    width: 70%;
+}
+
+.scrolled-nav {
+    font-size: 16px;
+}
+
+.col-6 {
+    color: $dGray;
+    font-size: 1.5em;
+    margin-top: 10%;
+}
+
+@media screen and (max-width: 699px){
     .btn {
         width: 40%;
     }
@@ -385,5 +377,9 @@ nav {
         button {
             width: 40%;
         }
+    }
+
+    .main-slogan {
+        width: 80%;
     }
 }
