@@ -65,7 +65,12 @@ class Sidebar extends React.Component {
 		console.log('snippets', this.props.snippets);
 		return (
 			<div>
-			<button onClick={this.toggleSidebar} className="sidebar-button">{(this.props.visible? 'close' : 'open')}</button>
+				<button onClick={this.toggleSidebar} className={(this.props.visible? "open " : "") + "sidebar-button"}><div className={(this.props.visible? "open" : "")} id="nav-icon1">
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	</div>
+</button>
 				
 				<div id="sideBar" className={(this.props.visible? "visible " : "invisible ") + "side-menu"}>
 					<div className="top-menu">
