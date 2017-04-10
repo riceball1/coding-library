@@ -40,9 +40,9 @@ export const setCurrentSnippet = (index) => ({
     payload: index
 })
 
-export const deleteSnippetSuccess = (snippetid) => ({
+export const deleteSnippetSuccess = (snippet) => ({
     type: DELETE_SNIPPET_SUCCESS,
-    payload: snippetid
+    payload: snippet
 })
 
 export const updateCurrentSnippetLocally = (update) => ({
@@ -132,10 +132,6 @@ export const updateCurrentSnippet = (snippet, userid) => dispatch => {
         .then(data => {
             console.log("data",data)
             dispatch(updateSnippetSuccess(data))
-            // TODO: update sidebar
-
-            // This makes an infinite loop
-            // dispatch(fetchSnippets(userid));
         })
         .catch(error => {
             dispatch(snippetsError(error))

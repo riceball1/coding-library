@@ -112,7 +112,10 @@ router.delete('/snippet/:snippetid', (req, res) => {
     Snippet
         .findByIdAndRemove(req.params.snippetid)
         .exec()
-        .then(snippet => res.status(204))
+        .then(snippet => {
+            console.log('deletesnippet', snippet);
+            res.status(204).json(snippet)
+        })
         .catch(err => {
             console.error(err);
             res.sendStatus(500).json({ message: "Issue with deleting snippet" });

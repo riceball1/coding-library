@@ -41,11 +41,6 @@ class SnippetForm extends React.Component {
     this.throttledFunc();
   }
 
-  // componentWillUpdate(nextProps) {
-  //    use cases for dispatching events: https://developmentarc.gitbooks.io/react-indepth/content/life_cycle/update/tapping_into_componentwillupdate.html 
-    
-  // }
-
   render() {
         return (
             <div className={(this.props.visible? "left" : "") + " main"}>
