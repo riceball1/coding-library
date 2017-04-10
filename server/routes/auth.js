@@ -134,11 +134,11 @@ router.get('/me/from/token', (req, res, next) => {
     // check token that was passed by decoding token using secret
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) {
-            res.json({ error: err });
+            return res.json({ error: err });
         };
 
         if(!user) {
-            res.status(404).json({message: 'no user found'});
+            return res.json({message: 'no user found'});
         } else {
              // return user using the id from w/in JWTToken
             User.findById(user._id, (err, user) => {
@@ -148,10 +148,10 @@ router.get('/me/from/token', (req, res, next) => {
                 user = utils.getCleanUser(user);
 
                 // either create new token or pass the old token back
-                res.json({
-                    user: user,
-                    token: token
-                });
+                return res.json({
+                            user: user,
+                            token: token
+                        });
             });
         }
     });

@@ -30,11 +30,6 @@ export const addSnippetSuccess = ((data) => ({
     payload: data
 }))
 
-export const updateSnippetSuccess = ((data) => ({
-    type: UPDATE_SNIPPET_SUCCESS,
-    payload: data
-}))
-
 export const filterSnippets = ((query) => ({
     type: FILTER_SNIPPETS,
     payload: query
@@ -55,6 +50,10 @@ export const updateCurrentSnippetLocally = (update) => ({
     payload: update
 })
 
+export const updateSnippetSuccess = (update) => ({
+    type: UPDATE_SNIPPET_SUCCESS,
+    payload: update
+})
 /****** ASYNC ACTIONS *********/
 
 
@@ -99,6 +98,7 @@ export const addSnippet = (snippet) => dispatch => {
         })
         // .then(response => (response.json())) // to get the json
         .then(data => {
+            console.log('add snippet', data);
             // returns back the snippet
             dispatch(addSnippetSuccess(data))
         })
@@ -108,6 +108,7 @@ export const addSnippet = (snippet) => dispatch => {
 };
 
 export const updateCurrentSnippet = (snippet, userid) => dispatch => {
+    console.log("updateCurrentSnippet")
     const url = `${ROOT_URL}/api/snippet/${snippet._id}`;
     const postRequest = new Request(url, {
         method: 'PUT',
@@ -128,6 +129,8 @@ export const updateCurrentSnippet = (snippet, userid) => dispatch => {
         })
         .then(response => (response.json())) // to get the json
         .then(data => {
+            console.log("data",data)
+            dispatch(updateSnippetSuccess(data))
             // TODO: update sidebar
 
             // This makes an infinite loop
@@ -159,9 +162,9 @@ export const deleteSnippet = (snippetid, userid) => dispatch => {
         .then(response => (response.json())) // to get the json
         .then(data => {
             // TODO: update sidebar
-            console.log('deleted');
+            console.log('deleted', data);
             // creates a cast error
-            dispatch(fetchSnippets(userid));
+            dispatch(deleteSnippetSuccess(data));
 
         })
         .catch(error => {

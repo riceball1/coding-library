@@ -51,11 +51,6 @@ class Sidebar extends React.Component {
         this.props.dispatch(snippetActions.addSnippet(newSnippet));
 		browserHistory.push('/dashboard');
 	}
-	// tool tip
-	showMsg(e) {
-		// e.preventDefault();
-		// console.log(this);
-	}
 
 	render() {
 		const filteredSnippet = this.props.filteredSnippets;

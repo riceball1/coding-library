@@ -57,7 +57,6 @@ router.get('/snippets/:snippetid', (req, res) => {
 
 router.post('/snippet', (req, res) => {
     const { title, description, language, code, userid } = req.body;
-    console.log(typeof code);
     let newSnippet = new Snippet({
         title,
         description,
@@ -97,7 +96,10 @@ router.put('/snippet/:snippetid', (req, res) => {
     Snippet
         .findByIdAndUpdate(req.params.snippetid, { $set: toUpdate })
         .exec()
-        .then(snippet => res.json(snippet))
+        .then(snippet => {
+            
+            res.json(req.body)
+        })
         // should send back snippet -- but only showing "created"
         .catch(err => {
             console.error(err);

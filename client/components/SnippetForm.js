@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
+import throttle from 'lodash/throttle';
 
 
 class SnippetForm extends React.Component {
@@ -14,6 +15,13 @@ class SnippetForm extends React.Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.deleteSnippet = this.deleteSnippet.bind(this);
+    
+        this.throttledFunc = throttle(() => {
+            console.log(this.props.currentSnippet)
+         this.props.dispatch(snippetActions.updateCurrentSnippet(this.props.currentSnippet, this.props.user._id));
+     }, 5000, { 'leading': false })
+    
+
     }
 
     deleteSnippet(e) {
@@ -30,12 +38,13 @@ class SnippetForm extends React.Component {
     const name = target.name;
 
     this.props.dispatch(snippetActions.updateCurrentSnippetLocally({name, value}));
+    this.throttledFunc();
   }
 
-  componentWillUpdate(nextProps) {
-    /* use cases for dispatching events: https://developmentarc.gitbooks.io/react-indepth/content/life_cycle/update/tapping_into_componentwillupdate.html */
-    this.props.dispatch(snippetActions.updateCurrentSnippet(nextProps.currentSnippet, this.props.user._id));
-  }
+  // componentWillUpdate(nextProps) {
+  //    use cases for dispatching events: https://developmentarc.gitbooks.io/react-indepth/content/life_cycle/update/tapping_into_componentwillupdate.html 
+    
+  // }
 
   render() {
         return (

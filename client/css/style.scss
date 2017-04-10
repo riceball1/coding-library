@@ -237,7 +237,8 @@ div {
 
 .snippet-form {
     border-radius: 3px;
-    border: 1px solid $lGray;
+    box-shadow: 0 8px 6px -6px #999;
+    height: auto;
     margin: auto 10%;
     position: relative;
     padding-top: 5%;

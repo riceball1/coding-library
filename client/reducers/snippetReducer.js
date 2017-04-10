@@ -38,7 +38,18 @@ export default (state = initialState, action) => {
 
     if (action.type === actions.UPDATE_SNIPPET_SUCCESS) {
         // return state with snippet updated
-        return Object.assign({}, state, {snippets: action.payload});
+        let updatedSnippetId = action.payload._id;
+        let newSnippetArr = [...state.snippets];
+        
+        newSnippetArr.forEach((snippet, i)=> {
+            if(snippet._id === updatedSnippetId) {
+             newSnippetArr[i]=action.payload;
+           } 
+        })
+
+            //return snippet._id !== updatedSnippetId;
+        
+        return Object.assign({}, state, {snippets: newSnippetArr});
     }
 
     // if (action.type === actions.DELETE_SNIPPET_SUCCESS) {
