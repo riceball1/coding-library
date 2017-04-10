@@ -328,6 +328,14 @@ nav {
     }
 }
 
+.nav-brand{
+    color: $teal !important;
+    float: left !important;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+}
+
 .parallax { 
     /* The image used */
     background-image: url("https://github.com/riceball1/simple-code/blob/master/public/code-image.jpg?raw=truecode-image.jpg");
@@ -368,6 +376,8 @@ nav {
     font-size: 1.5em;
     margin-top: 10%;
 }
+
+
 
 @media screen and (max-width: 699px){
     .btn {

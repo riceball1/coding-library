@@ -11,17 +11,29 @@ class Main extends React.Component {
     }
 
     render() {
+    	
         return (
             <div className="main">
             	{!this.props.user && (<nav className="main-nav" id="index-nav">
                      <ul>
                           <li><Link to="/login">Login</Link></li>
                           <li><Link to="/signup">Sign Up</Link></li>
+                          <li className="nav-brand">Simple Code</li>
                      </ul>
                 </nav>)}
                 
                 	<div className="main-slogan">Create code snippets to keep yourself organized</div>
                
+               <div>
+                      <Link to="/login">
+                          <button className="btn">Login</button>
+                     </Link>
+                     <Link to="/signup">
+                          <button className="btn">Sign Up</button>
+                     </Link>
+
+                    </div>
+
 	
 				<div className="other-parallax">
 				
