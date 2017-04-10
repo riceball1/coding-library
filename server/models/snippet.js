@@ -6,14 +6,17 @@ const mongoose = require('mongoose');
 const snippetSchema = mongoose.Schema({
     title: {
         type: String,
+        default: "An awesome snippet",
         required: true
     },
     description: {
         type: String,
+        default: "Keep calm and code on.",
         required: true
     },
     code: {
         type: String,
+        default: "function(){toBeAwesome()}",
         required: true
     },
     userId: {
