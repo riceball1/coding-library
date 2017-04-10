@@ -19,7 +19,7 @@ class SnippetForm extends React.Component {
         this.throttledFunc = throttle(() => {
             console.log(this.props.currentSnippet)
          this.props.dispatch(snippetActions.updateCurrentSnippet(this.props.currentSnippet, this.props.user._id));
-     }, 5000, { 'leading': false })
+     }, 3000, { 'leading': false })
     
 
     }

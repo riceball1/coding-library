@@ -39,10 +39,13 @@ class Sidebar extends React.Component {
 	addSnippet(e) {
 		e.preventDefault();
 		this.props.dispatch(userActions.toggleSidebar());
-		// create an empty snippet, and reducer should make it the new currentsnippet
-		// in the 'newsnippet', form should populate with current snippet info
-        this.props.dispatch(snippetActions.addSnippet(this.props.user._id));
-		browserHistory.push('/dashboard');
+		let newSnippet = {
+            title: 'Title',
+            description: 'Add a short description here.',
+            code: 'Write some code here.',
+            userid: this.props.user._id
+        };
+        this.props.dispatch(snippetActions.addSnippet(newSnippet));
 	}
 
 	render() {
@@ -59,6 +62,7 @@ class Sidebar extends React.Component {
 				<Snippet title={snippet.title} description={snippet.description} key={index} onClick={this.openSnippet.bind(null, index )}/>
 			)
 		});
+		console.log('snippets', this.props.snippets);
 		return (
 			<div>
 			<button onClick={this.toggleSidebar} className="sidebar-button">{(this.props.visible? 'close' : 'open')}</button>

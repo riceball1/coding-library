@@ -51,25 +51,25 @@ router.get('/snippets/:snippetid', (req, res) => {
         })
         .catch(err => {
             console.error(err);
-            return res.sendStatus(500).json({ message: "Issue finding snippet" });
+            return res.status(500).json({ message: "Issue finding snippet" });
         });
 });
 
 router.post('/snippet', (req, res) => {
-    // const { title, description, language, code, userid } = req.body;
-    let newSnippet = {
-            title: 'Title',
-            description: 'Add a short description here.',
-            code: 'Write some code here.',
-            userid: req.body.userid
-        };
-    newSnippet.save((err, snippet) => {
+    const { title, description, language, code, userid } = req.body;
+    let newSnippet = new Snippet ({
+        title,
+        description,
+        code,
+        userId: mongoose.Types.ObjectId(userid)
+    });
+        newSnippet.save((err, snippet) => {
         if (err) {
             console.error(err);
             res.status(500).json({ message: "Error adding snippet" });
         }
-        console.log("New Snippet Added!");
-        res.status(201).json(snippet);
+        console.log("New Snippet Added!", snippet);
+        return res.json(snippet);
     });
 });
 

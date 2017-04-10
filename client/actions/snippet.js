@@ -77,14 +77,15 @@ export const fetchSnippets = (userid) => dispatch => {
         })
 }
 
-export const addSnippet = (userid) => dispatch => {
+export const addSnippet = (snippet) => dispatch => {
+    console.log('snippet', snippet);
     const url = `${ROOT_URL}/api/snippet`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json',
         }),
-        body: userid,
+        body: JSON.stringify(snippet),
     });
 
     return fetch(postRequest)
@@ -96,7 +97,7 @@ export const addSnippet = (userid) => dispatch => {
             }
             return response;
         })
-        // .then(response => (response.json())) // to get the json
+        .then(response => (response.json())) // to get the json
         .then(data => {
             console.log('add snippet', data);
             // returns back the snippet
