@@ -22,6 +22,7 @@
     - edit-1.png
     - settings-4.png
     - garbage-2.png
+    - info.png
 
 
 ## Links:
