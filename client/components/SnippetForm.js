@@ -42,7 +42,7 @@ class SnippetForm extends React.Component {
   render() {
         if(this.props.snippets.length <= 0) {
             return (
-                <h1>Add a snippet to begin.</h1>
+                <h1 className="empty-snippets-h1">Add a snippet to begin.</h1>
             )
         } else {
             return (

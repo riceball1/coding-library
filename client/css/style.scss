@@ -3,6 +3,7 @@
 $lGray: #ddd;
 $dGray: #888;
 $teal: #00b3b3;
+$lBlack: #333;
 
 /** font **/
 
@@ -96,15 +97,13 @@ div {
     display: block;
     width: 200px;
     background-color: $teal;
-    padding: 20px;
-    font-size: 1.5em;
     font-family: 'Raleway', sans-serif;
     margin: 15px auto;
     border: none;
+    padding: 5px;
     border-radius: 2px;
     color: white;
     cursor: pointer;
-    box-shadow: 0 8px 6px -6px #999;
     transition-duration: 0.4s;
     &:hover {
         color: $dGray;
@@ -170,9 +169,10 @@ div {
             line-height: 30px;
             padding: 5px;
             border-radius: 3px;
-            transition-duration: 0.4s;
+            font-family: 'Raleway', sans-serif;
             &:focus {
-                border: 3px solid $teal;
+                border: 1px solid $teal;
+                transition-duration: 0.25s;
             }
         }
     }
@@ -229,7 +229,7 @@ div {
 }
 
 .main {
-    margin-top: 60px;
+    margin-top: 40px;
     margin-left: 0;
     width: 100%;
     transition-duration: 0.4s;
@@ -244,10 +244,15 @@ div {
 
 /** SNIPPET FORM ***/
 
+
+.empty-snippets-h1 {
+    margin: 10% auto;
+}
+
 .snippet-form {
     border-radius: 3px;
     height: auto;
-    margin: auto 10%;
+    margin: 10% auto;
     position: relative;
     padding-top: 5%;
     background-color: white;
@@ -311,18 +316,20 @@ nav {
     position: fixed;
     width: 100%;
     top: 0;
-    box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 7px 5px -9px $dGray;
+    background-color: $lBlack;
 }
 
 
+
 .main-nav {
+    background-color: $lBlack;
     ul {
         width: 100%;
         list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background-color: #333;
     }
 
     li {
@@ -341,6 +348,16 @@ nav {
     li a:hover {
         background-color: $teal;
     }
+}
+
+.nav-transparent {
+    background-color: $lGray;
+    box-shadow: 0 7px 5px -9px $lBlack;
+   ul {
+    li a {
+        color: $lBlack;
+    }
+   }
 }
 
 div .bottom-main-nav {
@@ -386,17 +403,23 @@ div .bottom-main-nav {
     background-color:white;
 }
 
-.main-slogan {
+div.main-slogan {
     font-size: 2em;
-    background-color: $lGray;
+    background-color: $lBlack;
+    color: white;
     line-height: 90px;
-    opacity: 0.5;
-    margin: 10% auto;
-    width: 70%;
+    padding: 20px;
+    width: 100%;
+    height: 350px;
 }
 
 .bottom-slogan {
     @extend .main-slogan;
+    font-size: 2em;
+    color: $teal;
+    width: 80%;
+    margin: 60px auto;
+
 }
 
 .scrolled-nav {

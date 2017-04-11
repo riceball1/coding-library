@@ -24,16 +24,18 @@ class Main extends React.Component {
                 
                
 
-                	<div className="main-slogan">Create code snippets to keep yourself organized</div>
-                	 <div>
-                      <Link to="/login">
-                          <button className="btn">Login</button>
-                     </Link>
-                     <Link to="/signup">
-                          <button className="btn">Sign Up</button>
-                     </Link>
+                	<div className="main-slogan">Create code snippets to keep yourself organized
+	                	<div>
+	                      <Link to="/login">
+	                          <button className="btn">Login</button>
+	                     </Link>
+	                     <Link to="/signup">
+	                          <button className="btn">Sign Up</button>
+	                     </Link>
 
-                    </div>
+	                    </div>
+                	</div>
+                	 
 
 
                	<img src="https://i.imgur.com/dlRrvfT.png" className="main-image" />
@@ -71,7 +73,7 @@ class Main extends React.Component {
 					</div>
 					<div className="row">
 					<div className="col-12">
-							<p className="bottom-slogan">Make Snippets. Save. Search.</p>
+							<p className="bottom-slogan">Code. Save. Search.</p>
 						</div>
 						</div>
 					<div className="bottom-main-nav">
