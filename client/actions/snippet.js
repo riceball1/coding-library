@@ -156,7 +156,7 @@ export const deleteSnippet = (snippetid, userid) => dispatch => {
             }
             return response;
         })
-        .then(response => (response.json())) // to get the json
+        .then(response => (response.json()))
         .then(data => {
             // TODO: update sidebar
             console.log('deleted', data);
