@@ -38,7 +38,7 @@ form {
         font-size: 2em;
         padding: 5px;
         border-radius: 2px;
-        border: 3px dotted $lGray;
+        border: 1px solid $lGray;
         font-family: 'Raleway', sans-serif;
         &:focus {
             border: 3px solid $teal;
@@ -251,8 +251,11 @@ div {
 
 .snippet-form {
     border-radius: 3px;
+    border: 1px solid $lGray;
     height: auto;
-    margin: 10% auto;
+    margin: 0px auto;
+    width: 80%;
+    margin-top: 60px;
     position: relative;
     padding-top: 5%;
     background-color: white;
@@ -292,8 +295,6 @@ div {
     font-size: 2em;
     height: 50%;
     color: black;
-    padding: 10px;
-    margin: 0;
     position: fixed;
     right: 0;
     .snippet-button {
@@ -301,6 +302,7 @@ div {
         opacity: 0.5;
        img {
         width: 40px;
+        margin: 10px;
        }
        &:hover {
             opacity: 1;

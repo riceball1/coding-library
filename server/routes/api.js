@@ -68,7 +68,7 @@ router.post('/snippet', (req, res) => {
             console.error(err);
             res.status(500).json({ message: "Error adding snippet" });
         }
-        console.log("New Snippet Added!", snippet);
+        console.log("New Snippet Added!");
         return res.json(snippet);
     });
 });
