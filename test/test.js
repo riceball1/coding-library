@@ -20,6 +20,10 @@ import SnippetForm from '../client/components/SnippetForm';
 
 describe('Login component', () => {
 	it('Renders the input fields and button', () => {
-		
+
 	});
+
+	it('Submit button dispatches an action');
+
+	it('')
 });

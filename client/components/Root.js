@@ -17,7 +17,7 @@ const Root = ({store}) =>(
 				<IndexRoute component={Main} />
 				<Route path="/login" component={Login} />
 				<Route path="/signup" component={Signup} />
-				<Route path="/dashboard" component={SnippetForm} />
+				<Route path="/dashboard" component={RequireAuth(SnippetForm)} />
 			</Route>
 		</Router>
 	</Provider>

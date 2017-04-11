@@ -14,6 +14,10 @@ mongoose.Promise = global.Promise;
 const User = require('../models/user');
 const Snippet = require('../models/snippet');
 
+const { authenticateMiddleware } = require('../middlewares/authenticate');
+
+router.use(authenticateMiddleware);
+
 router.get('/users', (req, res) => {
     User
         .find()

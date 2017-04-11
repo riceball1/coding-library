@@ -59,7 +59,16 @@ export const updateSnippetSuccess = (update) => ({
 
 export const fetchSnippets = (userid) => dispatch => {
     const url = `${ROOT_URL}/api/snippets/${userid}`;
-    return fetch(url)
+    let token = localStorage.getItem('jwtToken');
+    const postRequest = new Request(url, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer '+token
+        })
+    });
+
+    return fetch(postRequest)
         .then(response => {
             if (!response.ok) {
                 let error = new Error(response.statusText)
@@ -78,12 +87,14 @@ export const fetchSnippets = (userid) => dispatch => {
 }
 
 export const addSnippet = (snippet) => dispatch => {
+  
     console.log('snippet', snippet);
     const url = `${ROOT_URL}/api/snippet`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json',
+            'authorization': 'Bearer '+token
         }),
         body: JSON.stringify(snippet),
     });
@@ -99,7 +110,6 @@ export const addSnippet = (snippet) => dispatch => {
         })
         .then(response => (response.json())) // to get the json
         .then(data => {
-            console.log('add snippet', data);
             // returns back the snippet
             dispatch(addSnippetSuccess(data))
         })
@@ -130,7 +140,6 @@ export const updateCurrentSnippet = (snippet, userid) => dispatch => {
         })
         .then(response => (response.json())) // to get the json
         .then(data => {
-            console.log("data",data)
             dispatch(updateSnippetSuccess(data))
         })
         .catch(error => {
@@ -158,9 +167,6 @@ export const deleteSnippet = (snippetid, userid) => dispatch => {
         })
         .then(response => (response.json()))
         .then(data => {
-            // TODO: update sidebar
-            console.log('deleted', data);
-            // creates a cast error
             dispatch(deleteSnippetSuccess(data));
 
         })

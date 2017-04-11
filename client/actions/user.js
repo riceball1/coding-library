@@ -114,10 +114,13 @@ export const meFromToken = (tokenFromStorage) => dispatch => {
         })
         .then(response => response.json()) // not giving back correct data
         .then(data => {
+            
             localStorage.setItem('jwtToken', data.token);
+            console.log(data.token)
             dispatch(meFromTokenSuccess(data.user))
         })
         .catch(error => {
+            
             localStorage.removeItem('jwtToken');
             dispatch(meFromTokenFailure(error))
         });

@@ -18,7 +18,7 @@ mongoose.Promise = global.Promise;
 
 
 // authentication middleware for jwt
-const { authenticateMiddleware } = require('./middlewares/authenticate');
+// const { authenticateMiddleware } = require('./middlewares/authenticate');
 
 // imported routes
 const auth = require('./server/routes/auth.js');
