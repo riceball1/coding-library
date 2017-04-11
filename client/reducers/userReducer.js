@@ -1,7 +1,7 @@
 /** user reducer **/
 import * as actions from '../actions/user';
 
-const initialState = { user: null, status: null, loading: null, error: null, sidebarVisible: false };
+const initialState = { user: null, authenticated: false, loading: null, error: null, sidebarVisible: false };
 
 export default (state = initialState, action) => {
     /** LOGIN **/
@@ -22,7 +22,8 @@ export default (state = initialState, action) => {
         console.log('logging out');
         const updated = {
             user: null,
-            error: null
+            error: null,
+            authenticated: false
         };
         return Object.assign({}, state, updated);
     }
@@ -30,7 +31,7 @@ export default (state = initialState, action) => {
     if (action.type === actions.ME_FROM_TOKEN_SUCCESS) {
         const updated = {
             user: action.payload,
-            status: 'authenticated',
+            authenticated: true,
             error: null
         };
         return Object.assign({}, state, updated);
@@ -42,7 +43,7 @@ export default (state = initialState, action) => {
         const updated = {
             user: null,
             error: error,
-            status: 'storage'
+            authenticated: false
         };
         return Object.assign({}, state, updated);
     }

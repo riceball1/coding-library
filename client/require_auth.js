@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 export default function(ComposedComponent) {
     class Authentication extends Component {
 
-
         componentWillMount() {
             if (!this.props.user) {
                 browserHistory.push('/login');
@@ -26,8 +25,12 @@ export default function(ComposedComponent) {
     }
 
     function mapStateToProps(state) {
-        return { user: state.userReducer.user };
+        return {
+            authenticated: state.userReducer.authenticated,
+            user: state.userReducer.user
+        };
     }
 
     return connect(mapStateToProps)(Authentication);
 }
+

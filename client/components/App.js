@@ -27,6 +27,7 @@ class App extends React.Component {
             //fetch user from token (if server deems it’s valid token)
             this.props.dispatch(userActions.meFromToken(token))
             // push to dashboard?
+            browserHistory.push('/dashboard');
         }
 
         render() {
