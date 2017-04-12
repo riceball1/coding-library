@@ -88,13 +88,13 @@ export const fetchSnippets = (userid) => dispatch => {
 
 export const addSnippet = (snippet) => dispatch => {
   
-    console.log('snippet', snippet);
+    let token = localStorage.getItem('jwtToken');
     const url = `${ROOT_URL}/api/snippet`;
     const postRequest = new Request(url, {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json',
-            'authorization': 'Bearer '+token
+            'authorization': 'Bearer '+ token
         }),
         body: JSON.stringify(snippet),
     });
@@ -119,12 +119,13 @@ export const addSnippet = (snippet) => dispatch => {
 };
 
 export const updateCurrentSnippet = (snippet, userid) => dispatch => {
-    console.log("updateCurrentSnippet")
+    let token = localStorage.getItem('jwtToken');
     const url = `${ROOT_URL}/api/snippet/${snippet._id}`;
     const postRequest = new Request(url, {
         method: 'PUT',
         headers: new Headers({
             'Content-Type': 'application/json',
+            'authorization': 'Bearer '+token
         }),
         body: JSON.stringify(snippet),
     });
@@ -148,11 +149,13 @@ export const updateCurrentSnippet = (snippet, userid) => dispatch => {
 };
 
 export const deleteSnippet = (snippetid, userid) => dispatch => {
+    let token = localStorage.getItem('jwtToken');
     const url = `${ROOT_URL}/api/snippet/${snippetid}`;
     const postRequest = new Request(url, {
         method: 'DELETE',
         headers: new Headers({
             'Content-Type': 'application/json',
+            'authorization': 'Bearer '+token
         })
     });
 
