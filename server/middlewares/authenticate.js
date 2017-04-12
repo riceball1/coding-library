@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 function authenticateMiddleware(req,res,next){
 	// check header or url parameters for token
 	let token = req.headers['authorization'];
-	console.log(req.headers)
-	console.log("token2", token)
 	if(!token) return res.send('not authorized'); // if no token continue
 	token = token.replace('Bearer ', '');
 
