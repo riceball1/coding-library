@@ -63,9 +63,9 @@ export default (state = initialState, action) => {
 
         let newCurrentSnippet = {};
         if (state.snippets.length > 0) {
-            newCurrentSnippet = state.snippets[0];
+            newCurrentSnippet = newSnippetArr[0];
         }
-        // what if the deleted item was the currentSnippet?
+    
         return Object.assign({}, state, { snippets: newSnippetArr, currentSnippet: newCurrentSnippet });
     }
 
