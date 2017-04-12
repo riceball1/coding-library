@@ -21,7 +21,6 @@ class Sidebar extends React.Component {
 	}
 
 	openSnippet(index) {
-		console.log(this.props.snippets[index]);
 		this.props.dispatch(snippetActions.setCurrentSnippet(index));
 		// browserHistory.push('/dashboard');
 	}
@@ -62,7 +61,6 @@ class Sidebar extends React.Component {
 				<Snippet title={snippet.title} description={snippet.description} key={index} onClick={this.openSnippet.bind(null, index )}/>
 			)
 		});
-		console.log('snippets', this.props.snippets);
 		return (
 			<div>
 				<button onClick={this.toggleSidebar} className={(this.props.visible? "open " : "") + "sidebar-button"}><div className={(this.props.visible? "open" : "")} id="nav-icon1">

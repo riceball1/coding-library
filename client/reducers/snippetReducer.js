@@ -51,7 +51,6 @@ export default (state = initialState, action) => {
     }
 
     if (action.type === actions.DELETE_SNIPPET_SUCCESS) {
-        console.log('Deleting snippet', action.payload)
             // return state with snippet removed
         let deleteArrId = action.payload._id;
         let newSnippetArr = [...state.snippets];
@@ -71,7 +70,6 @@ export default (state = initialState, action) => {
     }
 
     if (action.type === actions.FETCH_SNIPPETS_SUCCESS) {
-        console.log('Fetch', action.payload);
         if (action.payload.length > 0 && !state.currentSnippet._id) {
             return Object.assign({}, state, { snippets: action.payload, currentSnippet: action.payload[0] });
         }
@@ -84,7 +82,6 @@ export default (state = initialState, action) => {
     }
 
     if (action.type === actions.SNIPPETS_ERROR) {
-        console.log('Snippet Error');
         console.log('Error: ', action.payload);
         return Object.assign({}, state, { error: action.payload });
     }

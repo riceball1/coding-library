@@ -46,7 +46,6 @@ export const signup = (userData) => dispatch => {
         })
         .then(response => (response.json())) // to get the json
         .then(data => {
-            console.log("data ", data);
             localStorage.setItem('jwtToken', data.token);
             dispatch(loginSuccess(data.user))
         })
@@ -116,7 +115,6 @@ export const meFromToken = (tokenFromStorage) => dispatch => {
         .then(data => {
             
             localStorage.setItem('jwtToken', data.token);
-            console.log(data.token)
             dispatch(meFromTokenSuccess(data.user))
         })
         .catch(error => {

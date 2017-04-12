@@ -24,7 +24,7 @@ const Root = ({store}) =>(
 )
 
 // this works but why?
-function requireAuth(nextState, replace) {  
+function requireAuth(nextState, replace) { 
   if (!localStorage.getItem('jwtToken')) {
     replace({
       pathname: '/login',
