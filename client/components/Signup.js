@@ -28,7 +28,6 @@ class Signup extends React.Component {
 			password: this.passwordInput.value,
 			password2: this.password2Input.value
 		};
-		// this returns a promise - can display errors
 		this.props.dispatch(userActions.signup(userData)).then(() => {
 			this.isValid();
 		});

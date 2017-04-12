@@ -42,7 +42,7 @@ class SnippetForm extends React.Component {
   render() {
         if(this.props.snippets.length <= 0) {
             return (
-                <h1 className="empty-snippets-h1">Keep calm and code awesome snippets.</h1>
+                <h1 className={(this.props.visible? "left " : "") +"empty-snippets-h1"}>Keep calm and code awesome snippets.</h1>
             )
         } else {
             return (

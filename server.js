@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // // express validator - immediately after bodyParser
 app.use(expressValidator({
     errorFormater: (param, msg, value) => {
-        var namespace = param.split('.'),
+        let namespace = param.split('.'),
             root = namespace.shift(),
             formParam = root;
 

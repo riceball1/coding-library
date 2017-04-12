@@ -90,6 +90,10 @@ router.post('/signup', (req, res) => {
             message: `There was an error: ${errors}`
         });
     } else {
+
+        // check if username and email is unique
+        // if not send error
+
         let newUser = new User({
             fullname,
             email,
