@@ -2,8 +2,8 @@
 require('babel-polyfill');
 
 const React = require('react');
-import TestUtils from 'react-addons-test-utils';
-import chai from 'chai';
+const TestUtils = require('react-addons-test-utils');
+const chai = require('chai');
 
 const should = chai.should();
 

@@ -1,4 +1,11 @@
 language: node_js
 node_js:
-  - "iojs"
-  - "7"
+- iojs
+- '7'
+deploy:
+  provider: heroku
+  api_key:
+    secure: f9/6gXsFhnvs+CE5P/QuEP1n3eKeqXBmVU5iMdoMxMBrnPlsYtw2VobIK8z7CGEEdwC8XPXvPvgFEg65W8kajsTqoQbMrvSR+wz5gmi0tD1L9rNQjKzO1QjhTtIxzsFl50JA14t1LHkIhCp8ZhymquXtNv1//bBJjvZDQL8ROnWLynLyPXkrFzzdDFVHtljAci1u7wdf5URFLINC/vCTcOMikWK+e/GrwBVyyFxbM+fLaaxqJgksIpIjY1bjmoo5k0pn57ypF56zd8bcFsp0RrXUYZi3qUxPmQIdqc+MgZ47tb1yl3/I+WITz9HgrqOAnZWOX+Xzr+ChW2cbtY7987HDGBU9CF+01cTTUDs73YiPD72f4fHBNBtvwXAdiLGu5xOdycWq9PR9pgS2CoRDlJ5KLUEW0rKSIBuimr/TXSYhrK4al27g57b4/aYjQfPrG5yzynFo7pOSIVqIZizeHbCkTzVsumZtli+mKKuoNhd+fRGLEvJIt9rCdxtnUwmY5d0G4gR2b+KLMEXH/v1Si20DqXH32qTZeYIwp6J4c2h9yibhDSigadLpfwa4VRKkXvtMXUbhthsR8jHORj3dafSxFzTmeYWQxryxn1CUXuSO+yg0ImWwjY0Lk5G+163wldWBgWGYZheMjCRyivjficcArauHHDkjpMBjkLW0kFo=
+  app: simple-code-app
+  on:
+    repo: riceball1/simple-code
