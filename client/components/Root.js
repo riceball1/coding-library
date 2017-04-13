@@ -7,7 +7,7 @@ import Login from './Login';
 import Signup from './Signup';
 import SnippetForm from './SnippetForm';
 import Dashboard from './Dashboard';
-// import RequireAuth from '../require_auth';
+import RequireAuth from '../require_auth';
 
 /** Add back RequireAuth to dashboard **/
 const Root = ({store}) =>(
@@ -17,14 +17,14 @@ const Root = ({store}) =>(
 				<IndexRoute component={Main} />
 				<Route path="/login" component={Login} />
 				<Route path="/signup" component={Signup} />
-				<Route path="/dashboard" component={SnippetForm} onEnter={requireAuth}/>
+				<Route path="/dashboard" component={SnippetForm} onEnter={requireAuth} />
 			</Route>
 		</Router>
 	</Provider>
 )
 
-// this works but why?
-function requireAuth(nextState, replace) { 
+// not full proof - not hacky
+function requireAuth(nextState, replace) {
   if (!localStorage.getItem('jwtToken')) {
     replace({
       pathname: '/login',

@@ -56,6 +56,7 @@ export const signup = (userData) => dispatch => {
 };
 
 
+
 export const loginSuccess = ((user) => ({
     type: LOGIN_SUCCESS,
     payload: user
@@ -146,3 +147,35 @@ export const toggleSidebar = () => {
         type: TOGGLE_SIDEBAR
     }
 }
+
+
+/*** DEMO ACCESS ***/ 
+
+export const demoAccess = (username, password) => dispatch => {
+    const url = `${ROOT_URL}/login`;
+    const postRequest = new Request(url, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({ username, password }),
+    });
+
+    return fetch(postRequest)
+        .then(response => {
+            if (!response.ok) {
+                let error = new Error(response.statusText)
+                error = response
+                console.log(error);
+            }
+            return response;
+        })
+        .then(response => (response.json())) // to get the json
+        .then(data => {
+            localStorage.setItem('jwtToken', data.token);
+            dispatch(loginSuccess(data.user))
+        })
+        .catch(error => {
+            dispatch(accessError(error))
+        });
+};

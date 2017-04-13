@@ -8,7 +8,22 @@ class Main extends React.Component {
 
     constructor(props) {
         super(props);
+        this.demoAccess = this.demoAccess.bind(this);
+        this.isValid = this.isValid.bind(this);
     }
+
+    demoAccess() {
+    	this.props.dispatch(userActions.demoAccess('demo', 'test123'));
+    }
+
+    isValid() {
+  		if(this.props.user) {
+    		//redirect
+    		browserHistory.push('/dashboard');
+    	} else {
+    		browserHistory.push('/');
+    	}
+  	}
 
     render() {
 
@@ -31,6 +46,9 @@ class Main extends React.Component {
 	                     </Link>
 	                     <Link to="/signup">
 	                          <button className="btn">Sign Up</button>
+	                     </Link>
+	                     <Link onClick={this.demoAccess}>
+	                          <button className="btn">Demo Access</button>
 	                     </Link>
 
 	                    </div>
