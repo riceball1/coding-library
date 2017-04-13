@@ -527,6 +527,14 @@ div.menu-btn {
   transform: rotate(-135deg);
 }
 
+textarea, #myTextArea {
+    background-color: #fdfdfd;
+    font-family: monospace;
+    color: $teal;
+    padding: 5px;
+    margin: 5px;
+}
+
 @media screen and (max-width: 699px){
     .btn {
         width: 40%;
