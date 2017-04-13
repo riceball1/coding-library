@@ -13,7 +13,10 @@ class Main extends React.Component {
     }
 
     demoAccess() {
-    	this.props.dispatch(userActions.demoAccess('demo', 'test123'));
+    	this.props.dispatch(userActions.demoAccess('demo', 'test123')).then(() => {
+    		this.isValid();
+    	});
+    	
     }
 
     isValid() {
