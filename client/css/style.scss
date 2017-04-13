@@ -535,7 +535,7 @@ textarea, #myTextArea {
     margin: 5px;
 }
 
-@media screen and (max-width: 699px){
+@media screen and (max-width: 795px){
     .btn {
         width: 40%;
     }
@@ -547,5 +547,8 @@ textarea, #myTextArea {
 
     .main-slogan {
         width: 80%;
+    }
+    div.main-slogan {
+        height: 500px;
     }
 }
