@@ -50,7 +50,7 @@ class Signup extends React.Component {
 					<input type="password" name="password2" ref={ref => this.password2Input = ref} required="required"/>
 					<button type="submit" onClick={this.submitForm} className="btn">submit</button>
 				</form>
-					<p><Link to="/login"><button>Already have an account?</button></Link></p>
+					<p><Link to="/login"><button className="acct-btn">Already have an account?</button></Link></p>
 			</div>
 		)
 	}

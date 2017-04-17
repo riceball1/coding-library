@@ -1,7 +1,7 @@
 /** color variables **/
 
 $lGray: #ddd;
-$dGray: #888;
+$dGray: #a6a6a6;
 $teal: #00b3b3;
 $lBlack: #333;
 
@@ -33,7 +33,7 @@ form {
         display: block;
     }
     input {
-        width: 80%;
+        max-width: 80%;
         line-height: 50px;
         font-size: 2em;
         padding: 5px;
@@ -534,6 +534,19 @@ textarea, #myTextArea {
     padding: 5px;
     margin: 5px;
 }
+
+
+/** Extra css styling added from suggestions **/
+
+.acct-btn {
+    @extend .btn;
+    // background-color: $lGray;
+    // border: none;
+    // padding: 10px;
+    // font-family: 'Raleway', sans-serif;
+}
+
+
 
 @media screen and (max-width: 795px){
     .btn {
