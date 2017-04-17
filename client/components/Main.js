@@ -36,6 +36,7 @@ class Main extends React.Component {
                      <ul>
                           <li><Link to="/login">Login</Link></li>
                           <li><Link to="/signup">Sign Up</Link></li>
+                  
                           <li className="nav-brand">Simple Code</li>
                      </ul>
                 </nav>)}

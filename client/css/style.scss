@@ -429,7 +429,7 @@ div.main-slogan {
 }
 
 .col-6 {
-    color: $dGray;
+    color: black;
     font-size: 1.5em;
     margin-top: 10%;
 }
@@ -550,7 +550,9 @@ textarea, #myTextArea {
 
 @media screen and (max-width: 795px){
     .btn {
-        width: 40%;
+        max-width: 50%;
+        transition-duration: 0.4s;
+
     }
     form {
         button {
@@ -562,6 +564,8 @@ textarea, #myTextArea {
         width: 80%;
     }
     div.main-slogan {
-        height: 500px;
+        height: 450px;
+        line-height: 1.5em;
+        transition-duration: 0.4s;
     }
 }
