@@ -97,7 +97,7 @@ class Main extends React.Component {
 					<div className="col-12">
 							<p className="bottom-slogan">Code. Save. Search.</p>
 							<Link onClick={this.demoAccess}>
-	                          <button className="btn">Demo Access</button>
+	                          <button className="acct-btn">Demo Access</button>
 	                     </Link>
 						</div>
 						</div>
