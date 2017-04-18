@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
     if (action.type === actions.FILTER_SNIPPETS) {
         if (action.payload) {
             let filtered = state.snippets.filter((snippet) => {
-                return snippet.title.toLowerCase().includes(action.payload);
+                return snippet.title.toLowerCase().includes(action.payload.toLowerCase());
             });
             return Object.assign({}, state, { filteredSnippets: filtered });
 
