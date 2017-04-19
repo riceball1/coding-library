@@ -67,11 +67,11 @@ class SnippetForm extends React.Component {
                         <input type="text" name="description" value={this.props.currentSnippet.description} placeholder="A short description" onChange={this.handleChange}/>
                        
                         
-                         <CodeMirror className="text-box" value={this.props.currentSnippet.code} options={{
+                         <CodeMirror value={this.props.currentSnippet.code} options={{
                             mode: 'javascript',
                             lineNumbers: true
                          }} onChange={this.handleChange} placeholder="function() {
-                         example }" id="myTextArea" name="code"/>
+                         example }" name="code"/>
                     </form>  
                 </div>
                 

@@ -544,6 +544,15 @@ textarea, #myTextArea {
 }
 
 
+/** CodeMirror **/
+
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+  margin: 20px auto;
+  text-align: left;
+}
+
 
 @media screen and (max-width: 795px){
     .btn {
