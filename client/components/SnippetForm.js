@@ -7,7 +7,10 @@ import { browserHistory } from 'react-router';
 import * as userActions from '../actions/user';
 import * as snippetActions from '../actions/snippet';
 import throttle from 'lodash/throttle';
-import CodeMirror from 'codemirror';
+import CodeMirror from 'react-codemirror';
+require('codemirror/mode/javascript/javascript');
+require('codemirror/mode/xml/xml');
+require('codemirror/mode/markdown/markdown');
 
 class SnippetForm extends React.Component {
 
@@ -31,12 +34,19 @@ class SnippetForm extends React.Component {
     }
 
   handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    if(event.target === undefined) {
+        let codeValue = event;
+        this.props.dispatch(snippetActions.updateCurrentSnippetLocally({name: 'code', value: codeValue}));
+    } else {
+        let target = event.target;
+        let value = target.value;
+        let name = target.name;
 
-    this.props.dispatch(snippetActions.updateCurrentSnippetLocally({name, value}));
-    this.throttledFunc();
+        this.props.dispatch(snippetActions.updateCurrentSnippetLocally({name, value}));
+    }
+
+    this.throttledFunc(); 
+    
   }
 
   render() {
@@ -56,8 +66,12 @@ class SnippetForm extends React.Component {
 
                         <input type="text" name="description" value={this.props.currentSnippet.description} placeholder="A short description" onChange={this.handleChange}/>
                        
-                        <textarea rows="4" cols="50" name="code" className="text-box language-javascript" value={this.props.currentSnippet.code} onChange={this.handleChange} placeholder="function() {
-                         example }" id="myTextArea"></textarea>
+                        
+                         <CodeMirror className="text-box" value={this.props.currentSnippet.code} options={{
+                            mode: 'javascript',
+                            lineNumbers: true
+                         }} onChange={this.handleChange} placeholder="function() {
+                         example }" id="myTextArea" name="code"/>
                     </form>  
                 </div>
                 

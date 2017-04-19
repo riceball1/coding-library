@@ -8,8 +8,8 @@ import store from './store';
 require('./css/normalize.css');
 require('./css/style.scss');
 require('./css/grid.scss');
+require('codemirror/lib/codemirror.css');
 
 
-require('./js/codemirror-editor.js');
 
 ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
