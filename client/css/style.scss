@@ -527,14 +527,6 @@ div.menu-btn {
   transform: rotate(-135deg);
 }
 
-textarea, #myTextArea {
-    background-color: #fdfdfd;
-    font-family: monospace;
-    color: $teal;
-    padding: 5px;
-    margin: 5px;
-}
-
 
 /** Extra css styling added from suggestions **/
 
@@ -547,13 +539,18 @@ textarea, #myTextArea {
 /** CodeMirror **/
 
 .CodeMirror {
-  border: 1px solid #eee;
-  height: auto;
-  margin: 20px auto;
-  text-align: left;
+    font-family: serif;
 }
 
-
+.ReactCodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+    margin: 20px auto;
+    font-family: monospace;
+    div {
+        text-align: left;
+    }
+}
 @media screen and (max-width: 795px){
     .btn {
         max-width: 50%;
