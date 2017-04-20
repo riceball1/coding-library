@@ -32,6 +32,9 @@ form {
         margin: 5px auto;
         display: block;
     }
+    label {
+        text-align: center;
+    }
     input {
         max-width: 80%;
         line-height: 50px;
@@ -82,7 +85,7 @@ main {
 
 p,
 div {
-    text-align: center;
+    // text-align: center;
     .slogan {
         font-size: 1.5em;
         margin: 10px auto;
@@ -417,6 +420,7 @@ div.main-slogan {
 
 .bottom-slogan {
     @extend .main-slogan;
+    text-align: center;
     font-size: 2em;
     color: $teal;
     width: 80%;
@@ -538,19 +542,19 @@ div.menu-btn {
 
 /** CodeMirror **/
 
-.CodeMirror {
-    font-family: serif;
-}
+// .CodeMirror {
+//     font-family: serif;
+// }
 
-.ReactCodeMirror {
-    border: 1px solid #eee;
-    height: auto;
-    margin: 20px auto;
-    font-family: monospace;
-    div {
-        text-align: left;
-    }
-}
+// .ReactCodeMirror {
+//     border: 1px solid #eee;
+//     height: auto;
+//     margin: 20px auto;
+//     font-family: monospace;
+//     div {
+//         text-align: left;
+//     }
+// }
 @media screen and (max-width: 795px){
     .btn {
         max-width: 50%;
