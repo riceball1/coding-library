@@ -26,6 +26,12 @@
     - search-1.png
     - cloud-computing-2.png
 
+## Screenshots:
+
+![Simple Code Screen Shots](https://github.com/riceball1/simple-code/blob/master/public/simple-code-screenshots.png)
+
+
+
 
 ## Links:
 - [TODO list](/TODO.md)

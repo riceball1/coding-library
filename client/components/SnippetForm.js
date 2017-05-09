@@ -20,14 +20,12 @@ class SnippetForm extends React.Component {
         this.deleteSnippet = this.deleteSnippet.bind(this);
     
         this.throttledFunc = throttle(() => {
-            console.log(this.props.currentSnippet)
          this.props.dispatch(snippetActions.updateCurrentSnippet(this.props.currentSnippet, this.props.user._id));
      }, 1000, { 'leading': false })
     }
 
     deleteSnippet(e) {
         e.preventDefault();
-        console.log('Delete snippet');
         this.props.dispatch(snippetActions.deleteSnippet(this.props.currentSnippet._id, this.props.user._id));
         // after deleting - clear the dashboard or move it to a new snippet
         browserHistory.push('/dashboard');       
