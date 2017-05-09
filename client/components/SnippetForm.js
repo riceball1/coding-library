@@ -58,10 +58,10 @@ class SnippetForm extends React.Component {
             return (
                 <div className={(this.props.visible? "left" : "") + " main"}>
                     <div>
+                    <form className="snippet-form">
                     <div className="snippet-menu">
                         <div onClick={this.deleteSnippet} className="snippet-button"><img src="https://github.com/riceball1/simple-code/blob/master/public/icons-for-simple-code/garbage-2.png?raw=true"/></div>
                     </div>
-                    <form className="snippet-form">
                         <input type="text" name="title" placeholder="untitled" value={this.props.currentSnippet.title}  onChange={this.handleChange}/>
 
                         <input type="text" name="description" value={this.props.currentSnippet.description} placeholder="A short description" onChange={this.handleChange}/>

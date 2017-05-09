@@ -300,7 +300,7 @@ div {
     height: 50%;
     color: black;
     position: fixed;
-    right: 0;
+    right: 10%;
     .snippet-button {
         cursor: pointer;
         opacity: 0.5;
@@ -369,8 +369,8 @@ div .bottom-main-nav {
     width: 100%;
     text-align: center;
     p {
-        margin: 20px auto;
-        padding: 20px;
+        // margin: 20px auto;
+        padding: 40px;
     }
 }
 
@@ -570,6 +570,16 @@ div.menu-btn {
     div.main-slogan {
         height: 450px;
         line-height: 1.5em;
+        transition-duration: 0.4s;
+    }
+    .visible {
+        width: 50%;
+        opacity: 1;
+        z-index: 100;
+        transition-duration: 0.4s;
+    }
+    .open.sidebar-button {
+        left: 50%;
         transition-duration: 0.4s;
     }
 }
