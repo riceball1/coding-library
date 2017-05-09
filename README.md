@@ -1,6 +1,6 @@
 # Simple Code
 
-[SIMPLE CODE DEMO](https://simple-code-app.herokuapp.com/)
+## [SIMPLE CODE DEMO](https://simple-code-app.herokuapp.com/)
 
 <b>Description:</b>
 <br/> A place to store, search, and aggregate all your coding snippets into your own library.
