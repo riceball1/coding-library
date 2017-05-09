@@ -6,20 +6,17 @@ const initialState = { user: null, authenticated: false, loading: null, error: n
 export default (state = initialState, action) => {
     /** LOGIN **/
     if (action.type === actions.LOGIN_SUCCESS) {
-        console.log('login success');
         // add user to the initialState
         return Object.assign({}, state, { user: action.payload });
     }
 
     if (action.type === actions.ACCESS_ERROR) {
-        console.log('login/signup error');
         return Object.assign({}, state, { error: action.payload });
     }
 
     /** SIGNUP **/
     
     if (action.type === actions.LOGOUT) {
-        console.log('logging out');
         const updated = {
             user: null,
             error: null,

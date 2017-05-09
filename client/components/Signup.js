@@ -14,7 +14,6 @@ class Signup extends React.Component {
 	isValid() {
 		// redirect
 		if(this.props.user) {
-			console.log('redirect');
 			browserHistory.push('/dashboard');
 		} 
 	}

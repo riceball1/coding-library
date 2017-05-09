@@ -19,7 +19,6 @@ class App extends React.Component {
 
         loadUserFromToken() {
             let token = localStorage.getItem('jwtToken');
-            console.log(token ? 'Token exists' : 'No token');
             if (!token || token === '') {
                 //if there is no token, dont bother
                 return;
