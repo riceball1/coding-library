@@ -2,6 +2,8 @@
 
 ## [SIMPLE CODE DEMO](https://simple-code-app.herokuapp.com/)
 
+### Known issue with JWT token - if you cannot go to the root page, just remove 'jwt' from your localStorage or clear your browser history - issue still being worked on
+
 <b>Description:</b>
 <br/> A place to store, search, and aggregate all your coding snippets into your own library.
 
