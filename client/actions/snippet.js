@@ -3,7 +3,7 @@
 import 'babel-polyfill';
 import fetch from 'isomorphic-fetch';
 
-const ROOT_URL = location.origin;
+const ROOT_URL = '/api/';
 export const SNIPPETS_ERROR = 'SNIPPETS_ERROR';
 export const FETCH_SNIPPETS_SUCCESS = 'FETCH_SNIPPETS_SUCCESS';
 export const ADD_SNIPPET_SUCCESS = 'ADD_SNIPPET_SUCCESS';

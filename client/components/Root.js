@@ -3,7 +3,7 @@ import {IndexRoute, Router, Route, browserHistory } from 'react-router';
 import {Provider} from 'react-redux';
 import App from './App';
 import Main from './Main';
-import Login from './Login';
+import Login from '../auth/Login';
 import Signup from './Signup';
 import SnippetForm from './SnippetForm';
 import Dashboard from './Dashboard';
