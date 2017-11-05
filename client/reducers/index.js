@@ -1,7 +1,12 @@
-import { combineReducers } from 'redux';
-import userReducer from './userReducer';
-import snippetReducer from './snippetReducer';
+import {combineReducers} from 'redux';
+import {userReducer} from '../auth/reducers'
+import {snippetReducer} from '../snippet/reducers'
+import {AuthReducer} from '../auth/reducers'
 
-const reducer = combineReducers({ userReducer, snippetReducer });
 
-export default reducer;
+export default combineReducers({
+    AuthReducer,
+    userReducer,
+    snippetReducer
+});
+

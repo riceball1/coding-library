@@ -10,7 +10,7 @@ const should = chai.should();
 
 /** components **/
 // import Login from '../client/components/Login';
-import Main from '../client/components/Main';
+import Main from '../client/mainContainers/Main';
 // import Nav from '../client/components/Nav';
 // import Sidebar from '../client/components/Sidebar';
 // import Signup from '../client/components/Signup';
