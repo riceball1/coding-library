@@ -25,7 +25,7 @@ const auth = require('./server/routes/auth.js');
 const api = require('./server/routes/api.js');
 
 // config 
-const { PORT, DATABASE_URL } = require('./server/config.js');
+const { PORT, DATABASE_URL } = require('./server/config')
 
 // parse json and params in urls
 app.use(bodyParser.json());
